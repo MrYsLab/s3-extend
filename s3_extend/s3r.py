@@ -77,7 +77,10 @@ class S3R:
         # webbrowser.open('https://mryslab.github.io/s3onegpio/')
 
         while True:
-            time.sleep(1)
+            try:
+                time.sleep(1)
+            except KeyboardInterrupt:
+                sys.exit(0)
 
 
 def signal_handler(sig, frame):
