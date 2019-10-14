@@ -166,7 +166,6 @@ class WsGateway(BanyanBaseAIO):
             payload['timestamp'] = timestamp
 
         ws_data = json.dumps(payload)
-        print(ws_data)
 
         # find the websocket of interest by looking for the topic in
         # active_sockets
