@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>A Word About Browser Compatibility - Scratch 3 OneGPIO Extensions</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Recommended Browser", url: "#_top", children: [
+              {title: "If You Wish To Use Firefox", url: "#if-you-wish-to-use-firefox" },
+              {title: "Trouble Shooting", url: "#trouble-shooting" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../s3-web/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../s3-web/" class="btn btn-xs btn-link">
+        Starting Scratch3 Online
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../ext_rpi/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../ext_rpi/" class="btn btn-xs btn-link">
+        Raspberry Pi
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h2 id="recommended-browser">Recommended Browser</h2>
+<p>The recommended browser for Scratch3 OneGPIO extensions is <strong>Google Chrome</strong>.</p>
+<h3 id="if-you-wish-to-use-firefox">If You Wish To Use Firefox</h3>
+<p>You may use FireFox, but you will need to configure it to do so.</p>
+<p>The OneGPIO extensions use a WebSocket connection between the browser
+and the WebSocket Gateway that is part of each extension server.</p>
+<p>By default, Firefox does not allow connections to a WebSocket server. To
+enable Firefox to allow WebSocket connections, open the following URL</p>
+<pre><code>about:config
+</code></pre>
+
+<p>You should see a warning screen similar to that below.</p>
+<p><img src="../images/ff_warning.png" > </br></p>
+<p>Click on the <em>I accept the risk!</em> button.</p>
+<p>Scroll down until you find the
+<em>network.websocket.allowInsecureFromHTTPS</em> entry and double click false
+to change its state to true.</p>
+<p>Close FireFox and reopen. Scratch 3 OneGPIO should now function
+properly.</p>
+<h3 id="trouble-shooting">Trouble Shooting</h3>
+<p>If, after loading an extension, it is not behaving as expected, while
+the browser is open, press the F12 key on your keyboard to expose the
+browser console. If you see any errors reported, and are still not sure
+how to solve the issue,
+<a href="https://github.com/MrYsLab/s3-extend/issues">create an issue against the s3-extend distribution</a>
+pasting any error output into the issue comment.</p>
+<p><br> <br> <br></p>
+<p>Copyright (C) 2019 Alan Yorinks All Rights Reserved</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../s3-web/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../s3-web/" class="btn btn-xs btn-link">
+        Starting Scratch3 Online
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../ext_rpi/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../ext_rpi/" class="btn btn-xs btn-link">
+        Raspberry Pi
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

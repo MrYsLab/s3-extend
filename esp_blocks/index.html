@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>ESP-8266 - Scratch 3 OneGPIO Extensions</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "The ESP-8266 Blocks", url: "#_top", children: [
+              {title: "Command Blocks", url: "#command-blocks" },
+              {title: "Reporter Blocks", url: "#reporter-blocks" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../rpi_blocks/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../rpi_blocks/" class="btn btn-xs btn-link">
+        Raspberry Pi
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../ard_blocks/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../ard_blocks/" class="btn btn-xs btn-link">
+        Arduino
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h2 id="the-esp-8266-blocks">The ESP-8266 Blocks</h2>
+<p><img src="../images/esp_blocks.png" ></p>
+<p>The blocks consist of a set of command blocks that are rectangular in
+shape and reporter blocks rounded in shape.</p>
+<p>NOTE: If you select the ESP-8266 OneGPIO, a Warning Dialog will pop up,
+reminding you to enter and use the ESP-8266 IP address block. </p>
+<p><img src="../images/warning.png" ></p>
+<h3 id="command-blocks">Command Blocks</h3>
+<h4 id="esp-8266-ip-address">ESP-8266 IP Address</h4>
+<p>You must enter the WiFi IP address of the ESP-8266 into this block. This
+block must precede any of the other ESP-8266 blocks, and should only be
+used once.</p>
+<p><img src="../images/esp_ip.png" ></p>
+<h4 id="write-digital">Write Digital</h4>
+<p>This block allows you to select a pin and set its output to either a one
+or zero. It has two parameters. The first is a drop-down list of valid
+PINs. The second parameter is the output value.
+It also is a drop-down list and contains the values zero and one.</p>
+<h4 id="write-pwm">Write PWM</h4>
+<p>This block allows you to select a pin and set its PWM output to be a
+value between 0 and 100%. It has two parameters. The first is a
+drop-down list of valid PINs. The second parameter allows you to fill in
+a PWM value. If you use a PWM value of less than zero, it will be set to
+0 internally. If you set the value to greater than 100, it will be set
+to 100.</p>
+<h4 id="tone">Tone</h4>
+<p>If you connect a Piezo type buzzer to a pin, this block will generate a
+tone on the pin for the frequency and duration specified. It contains
+three parameters. The first is a drop-down list of valid PINs. The
+second allows you to specify the frequency of the tone in Herz. The
+third parameter specifies the tone duration in milliseconds. If a
+value greater than 5000 is entered, the value will be set to 5000
+internally, limiting the maximum playing time to 5 seconds.</p>
+<h4 id="write-servo">Write Servo</h4>
+<p>This block allows you to control the angle of a servo motor. It contains
+two parameters. The first is a
+drop-down list of valid PINs. The second specifies
+the angle in degrees. The value is limited to be between 0 and 180.</p>
+<h3 id="reporter-blocks">Reporter Blocks</h3>
+<h4 id="read-digital">Read Digital</h4>
+<p>This block allows you to read the current state of a digital input pin.
+It has one parameter, a drop-down list containing all the valid PINs. It
+reports a value of zero or one.</p>
+<h4 id="read-analog">Read Analog</h4>
+<p>This block allows you to read the current state of an analog input pin.
+It has one parameter, a drop-down list containing all the valid Pins. It
+reports a value between 0 and 100.</p>
+<h4 id="read-sonar">Read Sonar</h4>
+<p>This block allows you to connect an HC-SR04 type device. It has two
+parameters, both containing a drop-down list of valid PINs. The
+first parameter allows you to select a trigger pin and the second an
+echo pin. It returns the measured distance in centimeters.</p>
+<p><br> <br> <br></p>
+<p>Copyright (C) 2019 Alan Yorinks All Rights Reserved</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../rpi_blocks/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../rpi_blocks/" class="btn btn-xs btn-link">
+        Raspberry Pi
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../ard_blocks/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../ard_blocks/" class="btn btn-xs btn-link">
+        Arduino
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="None">
+    
+    
+    <link rel="shortcut icon" href="./img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Scratch 3 OneGPIO Extensions</title>
+    <link href="./css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="./css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="./css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/bootstrap-3.3.7.min.js"></script>
+    <script src="./js/highlight.pack.js"></script>
+    
+      <script src="./js/elasticlunr.min.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '.';
+      var is_top_frame = (window === window.parent);
+        
+        var pageToc = [
+        ];
+
+    </script>
+    <script src="./js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<nav class="navbar wm-page-top-frame">
+  <div class="container-fluid wm-top-container">
+    
+    <div class="wm-top-tool pull-right wm-vcenter">
+      <form class="dropdown wm-vcentered" id="wm-search-form" action="./search.html">
+        
+        <button id="wm-search-show" class="btn btn-sm btn-default" type="submit"
+          ><i class="fa fa-search" aria-hidden="true"></i></button>
+
+        <div class="input-group input-group-sm wm-top-search">
+          <input type="text" name="q" class="form-control" id="mkdocs-search-query" placeholder="Search" autocomplete="off">
+          <span class="input-group-btn" role="search">
+            
+            <button class="btn btn-default dropdown-toggle collapse" data-toggle="dropdown" type="button"><span class="caret"></span></button>
+            <ul id="mkdocs-search-results" class="dropdown-menu dropdown-menu-right"></ul>
+            <button id="wm-search-go" class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </span>
+        </div>
+      </form>
+    </div>
+
+    
+    <div class="wm-top-tool wm-vcenter pull-right wm-small-left">
+      <button id="wm-toc-button" type="button" class="btn btn-sm btn-default wm-vcentered"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+    </div>
+
+    
+    
+
+    
+    <a href="" class="wm-top-brand wm-top-link wm-vcenter">
+      
+      <div class="wm-top-title">
+        Scratch 3 OneGPIO Extensions<br>
+        
+      </div>
+    </a>
+  </div>
+</nav>
+
+  <div id="main-content" class="wm-page-top-frame">
+    
+<nav class="wm-toc-pane">
+  
+  <ul class="wm-toctree">
+        <li class="wm-toc-li wm-toc-lev1 "><a href="" class="wm-article-link wm-toc-text">Welcome</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Preparing Your Computer</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="python_3_7_install/" class="wm-article-link wm-toc-text">Verify/Install Python 3.7</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="pip_update/" class="wm-article-link wm-toc-text">Verifying/Install pip3</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="xterm/" class="wm-article-link wm-toc-text">Installing xterm</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="s3-extend/" class="wm-article-link wm-toc-text">Install s3-extend</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Preparing Your Micro-Controller</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="arduino/" class="wm-article-link wm-toc-text">Arduino</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="esp-8266/" class="wm-article-link wm-toc-text">ESP-8266</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="rpi/" class="wm-article-link wm-toc-text">Raspberry Pi</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Ready, Set, Go</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="usage/" class="wm-article-link wm-toc-text">How To Use The OneGPIO Extensions</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Starting the Python Extension Servers</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="ext_ard/" class="wm-article-link wm-toc-text">Arduino</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="ext_esp/" class="wm-article-link wm-toc-text">ESP-8266</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="ext_rpi/" class="wm-article-link wm-toc-text">Raspberry Pi</a>
+</li>
+  </ul>
+</li>
+
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Launching TheScratch 3 Editor</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="browsers/" class="wm-article-link wm-toc-text">A Word About Browser Compatibility</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="s3-web/" class="wm-article-link wm-toc-text">Starting Scratch3 Online</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="s3-local/" class="wm-article-link wm-toc-text">Starting Scratch3 Offline</a>
+</li>
+  </ul>
+</li>
+
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Using OneGPIO Extension Blocks</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="ard_blocks/" class="wm-article-link wm-toc-text">Arduino</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="esp_blocks/" class="wm-article-link wm-toc-text">ESP-8266</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="rpi_blocks/" class="wm-article-link wm-toc-text">Raspberry Pi</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Tips And Techinques</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="delay/" class="wm-article-link wm-toc-text">When In Doubt, Add A Small Delay</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="multi/" class="wm-article-link wm-toc-text">Running Multiple OneGPIO Extensions Simultaneously</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">A Peek Under The Hood</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="under_the_hood/" class="wm-article-link wm-toc-text">The OneGPIO Gateways and Launchers</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Want To Contribute A Language Translation?</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="translate/" class="wm-article-link wm-toc-text">Contributing Block Translations</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Acknowledgements</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="acks/" class="wm-article-link wm-toc-text">Thank You</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Need Help?</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="issues/" class="wm-article-link wm-toc-text">Reporting Issues</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</nav>
+
+    <div class="wm-content-pane">
+      <iframe class="wm-article" name="article"></iframe>
+    </div>
+  </div>
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="python_3_7_install/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="python_3_7_install/" class="btn btn-xs btn-link">
+        Verify/Install Python 3.7
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">OneGPIO Scratch 3 Extensions For</div>
+
+<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">Arduino, Raspbery Pi And ESP-8266</div>
+
+<p><br>
+<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">Installation And Usage</div></p>
+<p><br>
+<img src="../images/extensions.png" alt="extensions" align=bottom </br>
+<p align="center"></p>
+<br></p>
+<div style="text-align:center;color:#990033; font-family:times, serif; font-size:1.75em">Control Your Favorite Physical Computing Device Using Scratch 3.</div>
+
+<p><br></p>
+<ul>
+<li>
+<p><strong>Windows, Mac, <strong><em>and Linux</em></strong>, including Raspberry Pi are
+  supported.</strong></p>
+</li>
+<li>
+<p><strong>Launch Scratch 3 via the internet or locally on your computer.</strong></p>
+</li>
+<li>
+<p><strong>Control your Raspberry Pi either locally or from your PC.</strong></p>
+</li>
+<li>
+<p><strong>Control one of the micro-controllers or all three!</strong></p>
+</li>
+</ul>
+<p><br>
+<br>
+<br></p>
+<p>Last Updated: 17 October 2019</p>
+<p>Copyright (C) 2019 Alan Yorinks All Rights Reserved</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="python_3_7_install/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="python_3_7_install/" class="btn btn-xs btn-link">
+        Verify/Install Python 3.7
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2019-10-17 18:12:24
+-->

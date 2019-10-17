@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Contributing Block Translations - Scratch 3 OneGPIO Extensions</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Block Text And Alert Translations", url: "#_top", children: [
+              {title: "Providing A Translation", url: "#providing-a-translation" },
+              {title: "Translations.txt", url: "#translationstxt" },
+              {title: "Alert Translation", url: "#alert-translation" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../acks/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../acks/" class="btn btn-xs btn-link">
+        Thank You
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../under_the_hood/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../under_the_hood/" class="btn btn-xs btn-link">
+        The OneGPIO Gateways and Launchers
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h2 id="block-text-and-alert-translations">Block Text And Alert Translations</h2>
+<p>When you select a language by clicking on the <em>globe</em> icon in the
+Scratch editor, if a translation is available for the selected language,
+the OneGPIO Scratch block text appears in that language.</p>
+<p><img src="../images/languages.png" ></p>
+<p>If translation for your selected language is not available, then the
+text will be in English</p>
+<p>If your language is not currently supported and you wish to provide a
+translation, I encourage you to do so. Not only will you be listed as a
+contributor, but others who are speakers of your language will thank you
+as well.</p>
+<h3 id="providing-a-translation">Providing A Translation</h3>
+<p>To provide a translation, you simply update the
+<a href="https://github.com/MrYsLab/s3onegpio/blob/master/translations/translations.txt">translate.txt file,</a>
+and either generate a GitHub pull request, or if you are unfamiliar with
+Git and pull requests, submit it as an issue to
+<a href="https://github.com/MrYsLab/s3onegpio/issues">https://github.com/MrYsLab/s3onegpio/issues.</a>
+If you submit the translation as an issue, please call the issue:</p>
+<p>Translation For <strong><em>LANGUAGE BEING ADDED</em></strong></p>
+<p>where <strong><em>LANGUAGE BEING ADDED</em></strong> is the name of your language.</p>
+<p>I will then incorporate your translation into the source code and update
+the Scratch 3 Editor to contain your translation.</p>
+<h3 id="translationstxt">Translations.txt</h3>
+<p>The translations.txt file contains the text for all of the blocks and
+ alerts for all of the OneGPIO extensions. </p>
+<p>Let's look at the Sonar block to understand what needs to be added to
+the translations.txt file.</p>
+<p>Here we see the English and Brazilian Portuguese blocks for the Sonar
+ block.</p>
+<p><img src="../images/sonar_english.png" ></p>
+<p><img src="../images/sonar_pt-br.png" ></p>
+<p>Here is the language specification for the block in translation.txt.</p>
+<pre><code>const FormSonarRead = {
+    'pt-br': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
+    'pt': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
+    'en': 'Read SONAR  T [TRIGGER_PIN]  E [ECHO_PIN]'
+};
+</code></pre>
+
+<p>Each language has its own line in the list of translations, and each
+line begins with the language's identifier. In this case, <strong>pt-br</strong> for
+Brazilian Portuguese, <strong>pt</strong> for Portuguese, and <strong>en</strong> for English.</p>
+<p>Any text between square brackets is a place holder for a parameter field
+in the block. Do not translate the text within the square brackets, and
+please use them as is, no matter the alphabet being used. All other text
+should be translated.</p>
+<p>You are free to use as many words as you need.  The parameters (text 
+in square brackets) may be placed anywhere within the translation 
+that makes sense for your language.</p>
+<h3 id="alert-translation">Alert Translation</h3>
+<p>Alerts do not contain any parameters.</p>
+<p>The alert for the ESP-8266 is formatted a little differently. </p>
+<pre><code>// ESP-8266 Alert
+const FormAlrt = {
+    'pt-br': {
+        title: &quot;Atenção&quot;,
+        text: &quot;Informe o endereço IP da placa ESP-8266 no bloco apropriado&quot;,
+        icon: &quot;info&quot;,
+    },
+    'pt': {
+        title: &quot;Atenção&quot;,
+        text: &quot;Informe o endereço IP da placa ESP-8266 no bloco apropriado&quot;,
+        icon: &quot;info&quot;,
+    },
+    'en': {
+        title: &quot;Reminder&quot;,
+        text: &quot;Enter the IP Address of the ESP-8266 Into The IP Address Block&quot;,
+        icon: &quot;info&quot;,
+    }
+};
+</code></pre>
+
+<p>For this translation, translate the text in the "title" and "text"
+fields, but do not translate the "icon" field. Please retain the words
+title, text, and icon in English.</p>
+<p>If you have any questions, please feel free to email me at:
+<a href="mailto:MisterYsLab@gmail.com">MisterYsLab@gmail.com</a></p>
+<p><br>
+<br>
+<br></p>
+<p>Copyright (C) 2019 Alan Yorinks All Rights Reserved</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../acks/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../acks/" class="btn btn-xs btn-link">
+        Thank You
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../under_the_hood/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../under_the_hood/" class="btn btn-xs btn-link">
+        The OneGPIO Gateways and Launchers
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>ESP-8266 - Scratch 3 OneGPIO Extensions</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "ESP-8266 NodeMCU Installation Instructions", url: "#_top", children: [
+              {title: "1. Install MicroPython On The ESP-8266", url: "#1-install-micropython-on-the-esp-8266" },
+              {title: "2. Verify The REPL Prompt", url: "#2-verify-the-repl-prompt" },
+              {title: "3. Setup WiFi Networking", url: "#3-setup-wifi-networking" },
+              {title: "4. Installing The ampy Tool", url: "#4-installing-the-ampy-tool" },
+              {title: "5. Getting The MicroPython Files To Install On To The ESP-8266", url: "#5-getting-the-micropython-files-to-install-on-to-the-esp-8266" },
+              {title: "6. Using ampy To Install The Files", url: "#6-using-ampy-to-install-the-files" },
+              {title: "7. Powering Up", url: "#7-powering-up" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../rpi/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../rpi/" class="btn btn-xs btn-link">
+        Raspberry Pi
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../arduino/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../arduino/" class="btn btn-xs btn-link">
+        Arduino
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="esp-8266-nodemcu-installation-instructions">ESP-8266 NodeMCU Installation Instructions</h1>
+<h2 id="1-install-micropython-on-the-esp-8266">1. Install MicroPython On The ESP-8266</h2>
+<p>Full instructions for loading MicroPython can be found
+<a href="https://docs.micropython.org/en/latest/esp8266/tutorial/intro.html">here</a>
+here.</p>
+<p>In the
+<a href="https://docs.micropython.org/en/latest/esp8266/tutorial/intro.html#deploying-the-firmware">Deploying The Firmware section</a>
+of the document, notice that there two commands to install the firmware.
+The latter one contains a DIO option. I needed to use this command for
+the get the REPL prompt.</p>
+<h2 id="2-verify-the-repl-prompt">2. Verify The REPL Prompt</h2>
+<p>Follow
+<a href="https://docs.micropython.org/en/latest/esp8266/tutorial/repl.html#getting-a-micropython-repl-prompt">these instructions</a>
+to make sure that the installation was a success.</p>
+<h2 id="3-setup-wifi-networking">3. Setup WiFi Networking</h2>
+<p>Follow the procedure as described
+<a href="https://docs.micropython.org/en/latest/esp8266/tutorial/network_basics.html#network-basics">here.</a>
+Once you have configured the device for WiFi, it will automatically
+connect to your router.</p>
+<h2 id="4-installing-the-ampy-tool">4. Installing The <em>ampy</em> Tool</h2>
+<p>We need to install some files on to the ESP-8266 to communicate with the
+Scratch extension. We will be using the <em>ampy</em> tool for file
+manipulation on the ESP-8266. To install ampy, follow the instructions
+<a href="https://learn.adafruit.com/micropython-basics-load-files-and-run-code/install-ampy">at this link.</a>
+There is a warning about not using the examples provided with the ampy 
+tutorial. You can safely ignore 
+the warning notice since we only need to install the tool. </p>
+<h2 id="5-getting-the-micropython-files-to-install-on-to-the-esp-8266">5. Getting The MicroPython Files To Install On To The ESP-8266</h2>
+<p>The files we need to install are
+<a href="https://github.com/MrYsLab/s3-extend/blob/master/esp_8266_micropython/main.py">main.py</a>
+and
+<a href="https://github.com/MrYsLab/s3-extend/blob/master/esp_8266_micropython/esp_8266_min.py">esp_8266_min.py.</a>
+The esp_8266_min.py file is a file with all unnecessary white space
+removed. Here is a
+<a href="https://github.com/MrYsLab/s3-extend/blob/master/esp_8266_micropython/esp_8266_max.py">fully white-spaced enabled</a>
+version of the source code.</p>
+<p>The file needed to be "minified" so that it would fit on the 
+ESP-8266 NodeMCU.</p>
+<p>To get the files, go to the
+<a href="https://github.com/MrYsLab/s3-extend">s3-extend web page, </a> and click
+on the green <strong><em>Clone or download</em></strong> button in the upper right of the page.</p>
+<p><img src="../images/s3-extend_git1.png" > </br></p>
+<p>A .zip file is downloaded to your computer.</p>
+<p>Unzip the file, and a directory called s3-extend-master is created and
+populated with the files we need.</p>
+<p>Here is the directory tree for s3-extend-master:</p>
+<pre><code>s3-extend-master
+├── esp_8266_micropython
+│   ├── esp_8266_max.py
+│   ├── esp_8266_min.py
+│   ├── __init__.py
+│   └── main.py
+├── LICENSE
+├── pypi_desc.md
+├── README.md
+├── s3_extend
+│   ├── gateways
+│   │   ├── arduino_gateway.py
+│   │   ├── esp8266_gateway.py
+│   │   ├── __init__.py
+│   │   ├── rpi_gateway.py
+│   │   ├── servo.py
+│   │   ├── sonar.py
+│   │   ├── stepper.py
+│   │   └── ws_gateway.py
+│   ├── __init__.py
+│   ├── s3a.py
+│   ├── s3e.py
+│   └── s3r.py
+└── setup.py
+
+</code></pre>
+
+<p>Both files are located in the <strong><em>esp_8266_micropython</em></strong> directory.</p>
+<h2 id="6-using-ampy-to-install-the-files">6. Using <em>ampy</em> To Install The Files</h2>
+<p>Open a terminal window, and go into the <strong><em>esp_8266_micropython</em></strong>
+directory. </p>
+<p>To upload main.py to the ESP-8266, type in the following command:</p>
+<pre><code>ampy --port /dev/ttyUSB0 put main.py
+</code></pre>
+
+<p><strong>NOTE: </strong> You may need to change the port to match your system. Instead
+of /dev/ttyUSB0, you may need to use something like COM5. Use the same
+com port you used when testing the REPL.</p>
+<p>Now upload esp_8266_min.py:</p>
+<pre><code>ampy --port /dev/ttyUSB0 put esp_8266_min.py
+</code></pre>
+
+<h2 id="7-powering-up">7. Powering Up</h2>
+<p>When you power up the board, you should see the red LED on the ESP-8266
+NodeMCU flash a few times and then stay on. The LED will be extinguished
+when the Scratch 3 extension successfully connects to the board. See the
+<em>Ready, Set, Go</em> section of this document.</p>
+<p><br> <br> <br></p>
+<p>Copyright (C) 2019 Alan Yorinks All Rights Reserved</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../rpi/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../rpi/" class="btn btn-xs btn-link">
+        Raspberry Pi
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../arduino/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../arduino/" class="btn btn-xs btn-link">
+        Arduino
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

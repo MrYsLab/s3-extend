@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>The OneGPIO Gateways and Launchers - Scratch 3 OneGPIO Extensions</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Scratch 3 OneGPIO Software Components", url: "#_top", children: [
+              {title: "The Modified Scratch 3 Editor", url: "#the-modified-scratch-3-editor" },
+              {title: "The OneGPIO Extension Servers", url: "#the-onegpio-extension-servers" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../translate/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../translate/" class="btn btn-xs btn-link">
+        Contributing Block Translations
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../multi/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../multi/" class="btn btn-xs btn-link">
+        Running Multiple OneGPIO Extensions Simultaneously
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h2 id="scratch-3-onegpio-software-components">Scratch 3 OneGPIO Software Components</h2>
+<p><img src="../images/s3onegpio.png"></p>
+<p>The Scratch 3 OneGPIO extensions consist of two major components. </p>
+<h3 id="the-modified-scratch-3-editor">The Modified Scratch 3 Editor</h3>
+<p>The first of the major components is the
+<a href="https://github.com/MrYsLab/s3onegpio">modified Scratch 3 editor.</a> The
+modified editor uses all of the code provided by the Scratch 3 team but
+adds the additional code to create the custom Scratch blocks to support
+the OneGPIO extensions. This is depicted as the terminal on the left
+side of the illustration above.</p>
+<p>If you would like additional information about how the OneGPIO
+extensions were created and added to the Scratch 3 editor, please refer
+to the
+<a href="https://mryslab.github.io/bots-in-pieces/scratch3/gpio/2019/09/15/scratch3-1.html">Bots In Pieces blog.</a></p>
+<h3 id="the-onegpio-extension-servers">The OneGPIO Extension Servers</h3>
+<p>The second major component for each of the OneGPIO extensions is the
+ Extension Server, depicted in the center of the illustration.</p>
+<p>Each board type has its own Extension Server.</p>
+<p>An extension server is built as a
+ <a href="https://mryslab.github.io/python_banyan/#users_guide/#_top">Python Banyan Framework</a>
+ application that implements the
+ <a href="https://mryslab.github.io/python_banyan/#gpio_intro/">OneGPIO messaging protocol.</a></p>
+<p>This is all done transparently, to assure excellent performance and to
+ simplify the design and implementation.</p>
+<p>Each server utilizes three Python Banyan components. The first is the
+ <a href="https://mryslab.github.io/python_banyan/#examples_intro/#the-banyan-backplane">Backplane, </a>
+ a shared message distributor used by all of the extension servers. Each
+ Extension Server has its own
+ <a href="https://mryslab.github.io/python_banyan/#additional_gateways/#websocket-gateway">WebSocket Gateway</a>
+ that communicates with the Scratch 3 editor running in the browser. A
+ unique IP port number is assigned to each WebSocket Gateway.</p>
+<p>Finally, each Extension Server has its own unique
+ <a href="https://mryslab.github.io/python_banyan/#banyan_gateways/#introduction-to-onegpio-gateways">Hardware Gateway</a>
+ to translate the platform-independent OneGPIO control and report
+ messages to hardware-specific messages.</p>
+<p>The transport mechanism used between the Hardware Gateway and its
+ associated micro-controller varies, depending upon the micro-controller
+ in use. For example, the Arduino uses a hardwired, USB-Serial interface
+ is used. The Raspberry Pi and ESP-8266, use a WiFi connection.</p>
+<p><br>
+<br>
+<br></p>
+<p>Copyright (C) 2019 Alan Yorinks All Rights Reserved</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../translate/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../translate/" class="btn btn-xs btn-link">
+        Contributing Block Translations
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../multi/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../multi/" class="btn btn-xs btn-link">
+        Running Multiple OneGPIO Extensions Simultaneously
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

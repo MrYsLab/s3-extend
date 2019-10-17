@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>How To Use The OneGPIO Extensions - Scratch 3 OneGPIO Extensions</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "An Overview Of Using The OneGPIO Extensions", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../ext_ard/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../ext_ard/" class="btn btn-xs btn-link">
+        Arduino
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../rpi/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../rpi/" class="btn btn-xs btn-link">
+        Raspberry Pi
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h2 id="an-overview-of-using-the-onegpio-extensions">An Overview Of Using The OneGPIO Extensions</h2>
+<p>Now that all the necessary software is installed both on your computer
+and your physical computing device, it is time to try things out.</p>
+<p>Here is a brief recommended procedure for using Scratch 3 with your
+physical computing projects:</p>
+<p><strong>Step 1:</strong> With the power disconnected from your micro-controller, attach
+the sensors and actuators to the micro-controller. <strong><em>Never</em></strong> add or
+remove sensors or actuators with power applied - you may permanently
+damage your micro-controller.</p>
+<p><strong>Step 2:</strong> Apply power to the micro-controller.</p>
+<p><strong>Step 3:</strong> Start the OneGPIO server code by opening a terminal window
+for each microcontroller you wish to use and then enter the command for
+the specific micro-controller:</p>
+<ul>
+<li><strong>s3a</strong> - for the Arduino</li>
+<li><strong>s3e</strong> - for the ESP-8266</li>
+<li><strong>s3r</strong> - for the Raspberry Pi</li>
+</ul>
+<p>You should see two additional terminal windows appear on your
+   computer's screen for each micro-controller you are using.</p>
+<p>Note: You may run a single micro-controller or all three
+   simultaneously, but only one instance of a micro-controller at a
+   time. For example, you may run a Raspberry Pi and an Arduino, and use
+   one to control the other, but you cannot run two of the same type of
+   controller.</p>
+<p><strong>Step 4:</strong> Start Scratch 3 and create and run your Scratch scripts. If
+you are using the ESP-8266 Extension, when Scratch is connected to the
+ESP-8266, the red LED on the ESP-8266 NodeMCU is extinguished,
+indicating a successful connection.</p>
+<p><strong>Step 5:</strong> To power down, dismiss the OneGPIO server by going to the
+window opened in step 3 and pressing Control-C. You may need to do this
+twice. For some operating systems, you may also need to enter Control-C
+in the two windows automatically opened in step 3. Remove power from the
+micro-controller, and finally dismiss the Web Browser tab running
+Scratch 3.</p>
+<p>There is more detail about these steps in the following sections. Please
+read those sections before proceeding.</p>
+<p><br> <br> <br></p>
+<p>Copyright (C) 2019 Alan Yorinks All Rights Reserved</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../ext_ard/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../ext_ard/" class="btn btn-xs btn-link">
+        Arduino
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../rpi/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../rpi/" class="btn btn-xs btn-link">
+        Raspberry Pi
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Verifying/Install pip3 - Scratch 3 OneGPIO Extensions</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "What Is pip?", url: "#_top", children: [
+              {title: "Installing pip3 For Ubuntu 19.04", url: "#installing-pip3-for-ubuntu-1904" },
+              {title: "Installing pip3 Mac", url: "#installing-pip3-mac" },
+          ]},
+          {title: "Verifying The pip3 Version", url: "#verifying-the-pip3-version", children: [
+              {title: "Windows", url: "#windows" },
+              {title: "Mac and Linux (Including Raspberry Pi)", url: "#mac-and-linux-including-raspberry-pi" },
+          ]},
+          {title: "Updating pip3", url: "#updating-pip3", children: [
+              {title: "Windows", url: "#windows_1" },
+              {title: "Mac and Linux (Including Raspberry Pi)", url: "#mac-and-linux-including-raspberry-pi_1" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../xterm/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../xterm/" class="btn btn-xs btn-link">
+        Installing xterm
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../python_3_7_install/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../python_3_7_install/" class="btn btn-xs btn-link">
+        Verify/Install Python 3.7
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h2 id="what-is-pip">What Is pip?</h2>
+<p><strong><em>pip</em></strong> is the package installer for Python. You can use pip to
+install packages from the
+<a href="https://pypi.org/">Python Package Index (aka pypi)</a> and other indexes.
+<strong><em>pip</em></strong> is the tool used to download and install the s3-extend Python
+packages from pypi.</p>
+<p><strong><em>pip</em></strong> is typically installed when Python is installed. However, that
+is not the case for Ubuntu 19.04. For the Mac, you may also need to
+install it separately.</p>
+<p>For Windows and Raspbian, pip is installed, so you can skip to the next
+section verifying the pip version.</p>
+<h3 id="installing-pip3-for-ubuntu-1904">Installing pip3 For Ubuntu 19.04</h3>
+<p>Make sure your package list is up to date. </p>
+<p>Open a terminal and enter:</p>
+<pre><code class="bash">sudo apt update
+</code></pre>
+
+<p>Next, install pip3 by entering the following command in your terminal:</p>
+<pre><code class="bash">sudo apt install python3-pip
+</code></pre>
+
+<h3 id="installing-pip3-mac">Installing pip3 Mac</h3>
+<p>Refer to <a href="https://evansdianga.com/install-pip-osx/">this article</a> for
+instructions.</p>
+<h2 id="verifying-the-pip3-version">Verifying The pip3 Version</h2>
+<p>To properly install the s3-extend package, the latest version of pip
+must be used. At the time of this writing, that version is 19.2.3.</p>
+<p>To check the pip3 version installed on your computer, open a command or
+terminal window, and type the following:</p>
+<h3 id="windows">Windows</h3>
+<pre><code>pip --version
+</code></pre>
+
+<h3 id="mac-and-linux-including-raspberry-pi">Mac and Linux (Including Raspberry Pi)</h3>
+<pre><code>pip3 --version
+</code></pre>
+
+<h2 id="updating-pip3">Updating pip3</h2>
+<p>If your pip version is earlier than 19.2.3, here is how to update it to
+the latest version. Open a command or terminal windows and type the
+following:</p>
+<h3 id="windows_1">Windows</h3>
+<pre><code>python -m pip install --upgrade pip
+</code></pre>
+
+<h3 id="mac-and-linux-including-raspberry-pi_1">Mac and Linux (Including Raspberry Pi)</h3>
+<pre><code>sudo pip install --upgrade pip
+</code></pre>
+
+<p><br>
+<br>
+<br></p>
+<p>Copyright (C) 2019 Alan Yorinks All Rights Reserved</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../xterm/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../xterm/" class="btn btn-xs btn-link">
+        Installing xterm
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../python_3_7_install/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../python_3_7_install/" class="btn btn-xs btn-link">
+        Verify/Install Python 3.7
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
