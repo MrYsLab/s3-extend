@@ -75,6 +75,8 @@ class ArduinoGateway(GatewayBaseAIO):
                                              publisher_port=publisher_port,
                                              process_name=process_name,
                                              )
+
+        self.first_analog_pin = self.arduino.first_analog_pin
         self.keep_alive = keep_alive
 
     def init_pins_dictionary(self):
@@ -240,7 +242,8 @@ class ArduinoGateway(GatewayBaseAIO):
         :param payload: {"command": "set_mode_analog_input", "pin": “PIN”, "tag":”TAG” }
         """
         pin = payload["pin"]
-        self.pins_dictionary[pin][GatewayBaseAIO.PIN_MODE] = GatewayBaseAIO.ANALOG_INPUT_MODE
+        self.pins_dictionary[pin + self.first_analog_pin][GatewayBaseAIO.PIN_MODE] = \
+            GatewayBaseAIO.ANALOG_INPUT_MODE
         await self.arduino.set_pin_mode_analog_input(pin, self.analog_input_callback)
 
     async def set_mode_digital_input(self, topic, payload):
@@ -365,7 +368,7 @@ class ArduinoGateway(GatewayBaseAIO):
 
     async def analog_input_callback(self, data):
         # data = [pin, current reported value, pin_mode, timestamp]
-        self.pins_dictionary[data[0] + self.first_analog_pin][GatewayBaseAIO.LAST_VALUE] = data[1]
+        self.pins_dictionary[data[0] + self.arduino.first_analog_pin][GatewayBaseAIO.LAST_VALUE] = data[1]
         payload = {'report': 'analog_input', 'pin': data[0],
                    'value': data[1], 'timestamp': data[3]}
         await self.publish_payload(payload, 'from_arduino_gateway')
