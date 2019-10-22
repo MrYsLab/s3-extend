@@ -17,9 +17,11 @@
 
 import argparse
 import asyncio
+import logging
+import pathlib
 import signal
 import sys
-import time
+
 
 from pymata_express.private_constants import PrivateConstants
 from pymata_express.pymata_express import PymataExpress
@@ -27,19 +29,20 @@ from pymata_express.pymata_express import PymataExpress
 from python_banyan.gateway_base_aio import GatewayBaseAIO
 
 
-# noinspection PyAbstractClass,PyMethodMayBeStatic,PyRedundantParentheses
+# noinspection PyAbstractClass,PyMethodMayBeStatic,PyRedundantParentheses,DuplicatedCode
 class ArduinoGateway(GatewayBaseAIO):
     # This class implements the GatewayBase interface adapted for asyncio.
     # It supports Arduino boards, tested with Uno.
 
     # NOTE: This class requires the use of Python 3.7 or above
 
-    serial_port = None
+    # serial_port = None
 
     def __init__(self, *subscriber_list, back_plane_ip_address=None,
                  subscriber_port='43125',
                  publisher_port='43124', process_name='ArduinoGateway',
-                 event_loop=None, keep_alive=False):
+                 event_loop=None, keep_alive=False, com_port=None,
+                 arduino_instance_id=None, log=False):
         """
         Set up the gateway for operation
 
@@ -50,7 +53,21 @@ class ArduinoGateway(GatewayBaseAIO):
         :param process_name: name to display on the console
         :param event_loop: optional parameter to pass in an asyncio
                            event loop
+        :param keep_alive: if True, enable FirmataExpress keep-alives
+        :param com_port: force pymata-express to use this comport
+        :param arduino_instance: set an arduino instance id that must
+                                 be programmed into the FirmataExpress
+                                 sketch.
+        :param log: enable logging
         """
+
+        # set up logging if requested
+        self.log = log
+        if self.log:
+            fn = str(pathlib.Path.home()) + "/ardgw.log"
+            self.logger = logging.getLogger(__name__)
+            logging.basicConfig(filename=fn, filemode='w', level=logging.DEBUG)
+            sys.excepthook = self.my_handler
 
         # set the event loop to be used. accept user's if provided
         if event_loop:
@@ -58,9 +75,24 @@ class ArduinoGateway(GatewayBaseAIO):
         else:
             self.event_loop = asyncio.get_event_loop()
 
+        the_loop = self.event_loop
+
         # instantiate pymata express to control the arduino
-        self.arduino = PymataExpress(loop=self.event_loop)
-        serial_port = self.arduino
+        # if user want to pass in a com port, then pass it in
+        try:
+            if com_port:
+                self.arduino = PymataExpress(loop=the_loop, com_port=com_port)
+            # if user wants to set an instance id, then pass it in
+            elif arduino_instance_id:
+                self.arduino = PymataExpress(loop=the_loop,
+                                             arduino_instance_id=arduino_instance_id)
+            # default settings
+            else:
+                self.arduino = PymataExpress(loop=the_loop)
+        except RuntimeError:
+            if self.log:
+                logging.exception("Exception occurred", exc_info=True)
+            raise
 
         # extract pin info from self.arduino
         self.number_of_digital_pins = len(self.arduino.digital_pins)
@@ -397,7 +429,18 @@ class ArduinoGateway(GatewayBaseAIO):
         payload = {'report': 'sonar_data', 'value': data[1]}
         await self.publish_payload(payload, 'from_arduino_gateway')
 
+    def my_handler(self, type, value, tb):
+        """
+        for logging uncaught exceptions
+        :param type:
+        :param value:
+        :param tb:
+        :return:
+        """
+        self.logger.exception("Uncaught exception: {0}".format(str(value)))
 
+
+# noinspection DuplicatedCode
 def arduino_gateway():
     # allow user to bypass the IP address auto-discovery. This is necessary if the component resides on a computer
     # other than the computing running the backplane.
@@ -405,8 +448,14 @@ def arduino_gateway():
     parser = argparse.ArgumentParser()
     parser.add_argument("-b", dest="back_plane_ip_address", default="None",
                         help="None or IP address used by Back Plane")
+    parser.add_argument("-c", dest="com_port", default="None",
+                        help="Use this COM port instead of auto discovery")
     parser.add_argument("-k", dest="keep_alive", default="False",
                         help="Enable firmata-express keep-alive - set to True or False - default=False")
+    parser.add_argument("-i", dest="arduino_instance_id", default="None",
+                        help="Set an Arduino Instance ID and match it in FirmataExpress")
+    parser.add_argument("-l", dest="log", default="False",
+                        help="Set to True to turn logging on.")
     parser.add_argument("-m", dest="subscriber_list",
                         default="to_arduino_gateway", nargs='+',
                         help="Banyan topics space delimited: topic1 topic2 topic3")
@@ -438,8 +487,22 @@ def arduino_gateway():
 
     kw_options['keep_alive'] = keep_alive
 
+    log = args.log.lower()
+    if log == 'false':
+        log = False
+    else:
+        log = True
+
+    kw_options['log'] = log
+
     if args.back_plane_ip_address != 'None':
         kw_options['back_plane_ip_address'] = args.back_plane_ip_address
+
+    if args.com_port != 'None':
+        kw_options['com_port'] = args.com_port
+
+    if args.arduino_instance_id != 'None':
+        kw_options['arduino_instance_id'] = int(args.arduino_instance_id)
 
     # get the event loop
     loop = asyncio.get_event_loop()
@@ -449,6 +512,8 @@ def arduino_gateway():
     try:
         loop.run_until_complete(app.main())
     except (KeyboardInterrupt, asyncio.CancelledError, RuntimeError):
+        if app.log:
+            logging.exception("Exception occurred", exc_info=True)
         loop.run_until_complete(app.arduino.shutdown())
         sys.exit(0)
 
@@ -466,4 +531,3 @@ signal.signal(signal.SIGTERM, signal_handler)
 
 if __name__ == '__main__':
     arduino_gateway()
-

@@ -25,6 +25,8 @@ import argparse
 import asyncio
 import datetime
 import json
+import logging
+import pathlib
 import signal
 import sys
 import websockets
@@ -49,7 +51,7 @@ class WsGateway(BanyanBaseAIO):
     def __init__(self, subscription_list, back_plane_ip_address=None,
                  subscriber_port='43125',
                  publisher_port='43124', process_name='WebSocketGateway',
-                 event_loop=None, server_ip_port=9000):
+                 event_loop=None, server_ip_port=9000, log=False):
         """
         These are all the normal base class parameters
         :param subscription_list:
@@ -59,6 +61,14 @@ class WsGateway(BanyanBaseAIO):
         :param process_name:
         :param event_loop:
         """
+
+        # set up logging if requested
+        self.log = log
+        if self.log:
+            fn = str(pathlib.Path.home()) + "/wsgw.log"
+            self.logger = logging.getLogger(__name__)
+            logging.basicConfig(filename=fn, filemode='w', level=logging.DEBUG)
+            sys.excepthook = self.my_handler
 
         # initialize the base class
         super(WsGateway, self).__init__(subscriber_list=subscription_list,
@@ -87,6 +97,8 @@ class WsGateway(BanyanBaseAIO):
         except (websockets.exceptions.ConnectionClosed,
                 RuntimeError,
                 KeyboardInterrupt):
+            if self.log:
+                    logging.exception("Exception occurred", exc_info=True)
             sys.exit()
 
     async def wsg(self, websocket, path):
@@ -174,6 +186,16 @@ class WsGateway(BanyanBaseAIO):
                 pub_socket = socket[topic]
                 await pub_socket.send(ws_data)
 
+    def my_handler(self, type, value, tb):
+        """
+        For logging uncaught exceptions
+        :param type:
+        :param value:
+        :param tb:
+        :return:
+        """
+        self.logger.exception("Uncaught exception: {0}".format(str(value)))
+
 
 def ws_gateway():
     # allow user to bypass the IP address auto-discovery. This is necessary if the component resides on a computer
@@ -192,6 +214,8 @@ def ws_gateway():
                         help="A space delimited list of topics")
     parser.add_argument("-i", dest="server_ip_port", default="9000",
                         help="Set the WebSocket Server IP Port number")
+    parser.add_argument("-l", dest="log", default="False",
+                        help="Set to True to turn logging on.")
     parser.add_argument("-n", dest="process_name", default="WebSocket Gateway",
                         help="Set process name in banner")
     parser.add_argument("-p", dest="publisher_port", default='43124',
@@ -212,6 +236,12 @@ def ws_gateway():
         'process_name': args.process_name,
         'server_ip_port': args.server_ip_port,
     }
+
+    log = args.log.lower()
+    if log == 'false':
+        log = False
+    else:
+        log = True
 
     if args.back_plane_ip_address != 'None':
         kw_options['back_plane_ip_address'] = args.back_plane_ip_address

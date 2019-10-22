@@ -14,7 +14,7 @@
  along with this library; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
-
+import argparse
 import psutil
 import signal
 import subprocess
@@ -31,7 +31,7 @@ class S3A:
     It will start the backplane, arduino gateway and websocket gateway.
     """
 
-    def __init__(self):
+    def __init__(self, com_port=None, arduino_instance_id=None, log=None):
         self.backplane_exists = False
         self.proc_bp = None
         self.proc_agw = None
@@ -56,20 +56,45 @@ class S3A:
             # new_entry['process_id'] = self.proc.pid
             self.backplane_exists = True
             print('Backplane is now running')
-        if sys.platform.startswith('win32'):
 
-            self.proc_agw = subprocess.Popen(['wsgw'],
+        if sys.platform.startswith('win32'):
+            wsgw_start = ['wsgw']
+            ardgw_start = ['ardgw']
+        else:
+            wsgw_start = ['xterm', '-e', 'wsgw']
+            ardgw_start = ['xterm', '-e', 'ardgw']
+
+        if log:
+            wsgw_start.append('-l')
+            wsgw_start.append('True')
+            ardgw_start.append('-l')
+            ardgw_start.append('True')
+        if com_port:
+            ardgw_start.append('-c')
+            ardgw_start.append(com_port)
+        if arduino_instance_id:
+            ardgw_start.append('-i')
+            ardgw_start.append(arduino_instance_id)
+
+
+
+
+
+        if sys.platform.startswith('win32'):
+            self.proc_agw = subprocess.Popen(wsgw_start,
                                              creationflags=subprocess.CREATE_NEW_CONSOLE)
-            self.proc_hwg = subprocess.Popen(['ardgw'],
+            self.proc_hwg = subprocess.Popen(ardgw_start,
                                              creationflags=subprocess.CREATE_NEW_CONSOLE)
 
         else:
-            self.proc_awg = subprocess.Popen(['xterm','-e', 'wsgw'],
+            self.proc_awg = subprocess.Popen(wsgw_start,
+                                                 stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                                 stdout=subprocess.PIPE)
+
+            self.proc_hwg = subprocess.Popen(ardgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE)
-            self.proc_hwg = subprocess.Popen(['xterm', '-e', 'ardgw'],
-                                             stdin=subprocess.PIPE, stderr=subprocess.PIPE,
-                                             stdout=subprocess.PIPE)
+
         # webbrowser.open('https://mryslab.github.io/s3onegpio/', new=1)
 
         while True:
@@ -86,7 +111,36 @@ def signal_handler(sig, frame):
 
 
 def s3ax():
-    S3A()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", dest="com_port", default="None",
+                        help="Use this COM port instead of auto discovery")
+    parser.add_argument("-i", dest="arduino_instance_id", default="None",
+                        help="Set an Arduino Instance ID and match it in FirmataExpress")
+    parser.add_argument("-l", dest="log", default="False",
+                        help="Set to True to turn logging on.")
+
+    args = parser.parse_args()
+
+    log = args.log.lower()
+    if log == 'false':
+        log = False
+    else:
+        log = True
+
+    if args.com_port == "None":
+        com_port = None
+    else:
+        com_port=args.com_port
+
+    if args.arduino_instance_id == "None":
+        arduino_instance_id = None
+    else:
+        arduino_instance_id = int(args.arduino_instance_id)
+
+    if com_port and arduino_instance_id:
+        raise RuntimeError('Both com_port arduino_instance_id were set. Only one is allowed')
+
+    S3A(com_port=com_port, arduino_instance_id=args.arduino_instance_id, log=log)
 
 
 # listen for SIGINT
