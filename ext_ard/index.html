@@ -105,6 +105,21 @@ seconds for the Arduino Gateway to perform board discovery.</p>
 WebSocket IP address and port number in use.</p>
 <p>You may now start Scratch 3 in your Web browser, as explained in the
 "Launching Scratch 3" section of this document.</p>
+<p>If you wish to specify a COM port manually, then start s3a with a 
+-c command-line option:</p>
+<pre><code>s3a -c COM6
+</code></pre>
+
+<p>If you wish to use the
+<a href="https://mryslab.github.io/pymata-express/firmata_express/">pymata-express Arduino Instance Id Feature,</a>
+you may do so using the -i command-line option:</p>
+<pre><code>s3a -i 2
+</code></pre>
+
+<p>If you wish to turn on logging, use the -l command-line option</p>
+<pre><code>s3a -l True
+</code></pre>
+
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>Only use a high-quality USB cable. Make sure that the USB cable you are
 using is fully plugged into your computer and the Arduino. If only one
