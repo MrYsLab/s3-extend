@@ -37,7 +37,6 @@ from python_banyan.banyan_base import BanyanBase
 # noinspection PyMethodMayBeStatic
 # class PicoboardGateway(BanyanBase, threading.Thread):
 class PicoboardGateway(threading.Thread):
-
     """
     This class is the interface class for the picoboard supporting
     Scratch 3.
@@ -91,7 +90,7 @@ class PicoboardGateway(threading.Thread):
         # payload used to publish picoboard values
         self.payload = {0: 0, 1: 0, 2: 0, 3: 0,
                         4: 0, 5: 0,
-                        6: 0, 7: 0, 8:0}
+                        6: 0, 7: 0, 8: 0}
 
         # poll request for picoboard data
         self.poll_byte = b'\x01'
@@ -196,7 +195,7 @@ class PicoboardGateway(threading.Thread):
                 for i in range(9):
                     # pico_channel = self.channels[(int(self.data_packet[2 * i]) - 128) >> 3]
                     raw_sensor_value = ((int(self.data_packet[2 * i]) & 7) << 7) + int(self.data_packet[2 * i + 1])
-                    if i == 0: # id
+                    if i == 0:  # id
                         self.payload[0] = raw_sensor_value
                     if i in self.analog_sensor_list:
                         # scale for standard analog:
