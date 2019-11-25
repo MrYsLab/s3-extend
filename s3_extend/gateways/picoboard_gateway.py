@@ -85,7 +85,9 @@ class PicoboardGateway(threading.Thread):
         self.analog_sensor_list = [1, 2, 3, 5, 6, 7, 8]
 
         self.button_channel = 4
-        self.light_channel = 6
+
+        # inverted analog channels
+        self.inverted_analog_channels = [1, 2, 3, 5, 6]
 
         # payload used to publish picoboard values
         self.payload = {0: 0, 1: 0, 2: 0, 3: 0,
@@ -157,7 +159,7 @@ class PicoboardGateway(threading.Thread):
         :param channel: sensor channel
         :return: A value scaled between 0 and 100
         """
-        if channel == self.light_channel:  # the light channel
+        if channel in self.inverted_analog_channels:  # the light channel
             input_low = 1023
             input_high = 0
         else:
