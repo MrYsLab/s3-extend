@@ -103,8 +103,12 @@ class PicoboardGateway(threading.Thread):
                                            timeout=1, writeTimeout=0)
         # otherwise try to find a picoboard
         else:
-            self.find_the_picoboard()
-            print('picoboard found on:', self.picoboard.port)
+            if self.find_the_picoboard():
+                print('picoboard found on:', self.picoboard.port)
+            else:
+                print('Cannot find Picoboard')
+            self.picoboard.reset_input_buffer()
+            self.picoboard.reset_output_buffer()
 
         # start the thread to receive data from the picoboard
         threading.Thread.__init__(self)
@@ -121,6 +125,8 @@ class PicoboardGateway(threading.Thread):
                 # request data
                 self.picoboard.write(self.poll_byte)
             except KeyboardInterrupt:
+                self.picoboard.reset_input_buffer()
+                self.picoboard.reset_output_buffer()
                 self.picoboard.close()
                 sys.exit(0)
 
@@ -137,6 +143,9 @@ class PicoboardGateway(threading.Thread):
                 print('Looking for picoboard on: ', port.device)
                 self.picoboard = serial.Serial(port.device, self.baud_rate,
                                                timeout=1, writeTimeout=0)
+
+                self.picoboard.close()
+                self.picoboard.open()
                 # send multiple polls to allow for serial port to open
                 for send in range(10):
                     self.picoboard.write(self.poll_byte)
@@ -145,12 +154,11 @@ class PicoboardGateway(threading.Thread):
                     if num_bytes == 18:
                         self.picoboard.reset_input_buffer()
                         self.picoboard.reset_output_buffer()
-                        return
+                        return True
                     else:
                         continue
             continue
-        print('Could not find a picoboard')
-        sys.exit(0)
+        return False
 
     def analog_scaling(self, value, channel):
         """
@@ -202,12 +210,10 @@ class PicoboardGateway(threading.Thread):
                     if i in self.analog_sensor_list:
                         # scale for standard analog:
                         cooked = self.analog_scaling(raw_sensor_value, i)
-                        # self.payload[pico_channel] = cooked
                         self.payload[i] = cooked
 
                     elif i == self.button_channel:  # invert digital input
                         cooked = int(not raw_sensor_value)
-                        # self.payload[pico_channel] = cooked
                         self.payload[i] = cooked
 
                 # self.publish_payload(self.payload, self.publisher_topic)
