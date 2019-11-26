@@ -35,8 +35,7 @@ from python_banyan.banyan_base import BanyanBase
 
 
 # noinspection PyMethodMayBeStatic
-# class PicoboardGateway(BanyanBase, threading.Thread):
-class PicoboardGateway(threading.Thread):
+class PicoboardGateway(BanyanBase, threading.Thread):
     """
     This class is the interface class for the picoboard supporting
     Scratch 3.
@@ -56,8 +55,8 @@ class PicoboardGateway(threading.Thread):
         :param com_port: picoboard com_port
         """
 
-        # super(PicoboardGateway, self).__init__(back_plane_ip_address, subscriber_port,
-        #                                        publisher_port, process_name=process_name)
+        super(PicoboardGateway, self).__init__(back_plane_ip_address, subscriber_port,
+                                               publisher_port, process_name=process_name)
 
         self.log = log
         if self.log:
@@ -216,8 +215,8 @@ class PicoboardGateway(threading.Thread):
                         cooked = int(not raw_sensor_value)
                         self.payload[i] = cooked
 
-                # self.publish_payload(self.payload, self.publisher_topic)
-                print(self.payload)
+                self.publish_payload(self.payload, self.publisher_topic)
+                # print(self.payload)
             else:
                 # no data available, just kill some time
                 try:
