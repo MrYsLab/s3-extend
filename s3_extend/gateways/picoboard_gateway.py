@@ -72,11 +72,11 @@ class PicoboardGateway(BanyanBase, threading.Thread):
         self.data_packet = None
 
         # channel 0 = board id
-        # channel 1 = D  analog
-        # channel 2 = C  analog
-        # channel 3 = B  analog
+        # channel 1 = D  analog inverted logic
+        # channel 2 = C  analog inverted logic
+        # channel 3 = B  analog inverted logic
         # channel 4 = Button  digital inverted logic
-        # channel 5 = A  analog
+        # channel 5 = A  analog inverted logic
         # channel 6 = Light  analog inverted logic
         # channel 7 = sound  analog
         # channel 8 = slider analog
