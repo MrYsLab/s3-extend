@@ -31,11 +31,13 @@ import signal
 import sys
 import threading
 import time
-from python_banyan.banyan_base import BanyanBase
+# from python_banyan.banyan_base import BanyanBase
 
 
 # noinspection PyMethodMayBeStatic
-class PicoboardGateway(BanyanBase, threading.Thread):
+# class PicoboardGateway(BanyanBase, threading.Thread):
+class PicoboardGateway(threading.Thread):
+
     """
     This class is the interface class for the picoboard supporting
     Scratch 3.
@@ -55,8 +57,8 @@ class PicoboardGateway(BanyanBase, threading.Thread):
         :param com_port: picoboard com_port
         """
 
-        super(PicoboardGateway, self).__init__(back_plane_ip_address, subscriber_port,
-                                               publisher_port, process_name=process_name)
+        # super(PicoboardGateway, self).__init__(back_plane_ip_address, subscriber_port,
+        #                                        publisher_port, process_name=process_name)
 
         self.log = log
         if self.log:
@@ -89,8 +91,12 @@ class PicoboardGateway(BanyanBase, threading.Thread):
 
         self.button_index = 4
 
+        self.light_index = 6
+
+        self.sound_index = 7
+
         # indices that require data inversion
-        self.inverted_analog_list = [1, 2, 3, 5, 6]
+        self.inverted_analog_list = [1, 2, 3, 5]
 
         # payload used to publish picoboard values
         # The keys map to the data value positions
@@ -199,11 +205,15 @@ class PicoboardGateway(BanyanBase, threading.Thread):
         """
         This method run continually, receiving responses
         to the poll request.
+
+        Formulas for adjusting light and sound are from this URL:
+        https://twiki.cern.ch/twiki/pub/Sandbox/DaqSchoolExercise14/A_pico.py.txt
         """
         while True:
             self.data_packet = None
             # if there is data available from the picoboard
             # retrieve 18 bytes - a full picoboard packet
+            cooked = None
             if self.picoboard.inWaiting():
                 self.data_packet = self.picoboard.read(18)
                 # get the channel number and data for the channel
@@ -211,18 +221,29 @@ class PicoboardGateway(BanyanBase, threading.Thread):
                     # pico_channel = self.channels[(int(self.data_packet[2 * i]) - 128) >> 3]
                     raw_sensor_value = ((int(self.data_packet[2 * i]) & 7) << 7) + int(self.data_packet[2 * i + 1])
                     if i == 0:  # id
-                        self.payload[0] = raw_sensor_value
+                        cooked = raw_sensor_value
+                    elif i == self.light_index:
+                        if raw_sensor_value < 25:
+                            cooked = 100 - raw_sensor_value
+                        else:
+                            cooked = round((1023-raw_sensor_value) * (75/998))
+                    elif i == self.sound_index:
+                        n = max(0, raw_sensor_value - 18)
+                        if n < 50:
+                            cooked = int(n / 2)
+                        else:
+                            cooked = 25 + min(75, int((n - 50) * (75 / 580)))
+                    elif i == self.button_index:  # invert digital input
+                        cooked = int(not raw_sensor_value)
+
                     if i in self.analog_sensor_list:
                         # scale for standard analog:
                         cooked = self.analog_scaling(raw_sensor_value, i)
-                        self.payload[i] = cooked
 
-                    elif i == self.button_index:  # invert digital input
-                        cooked = int(not raw_sensor_value)
-                        self.payload[i] = cooked
+                    self.payload[i] = cooked
 
-                self.publish_payload(self.payload, self.publisher_topic)
-                # print(self.payload)
+                # self.publish_payload(self.payload, self.publisher_topic)
+                print(self.payload)
             else:
                 # no data available, just kill some time
                 try:
