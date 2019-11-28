@@ -31,12 +31,11 @@ import signal
 import sys
 import threading
 import time
-# from python_banyan.banyan_base import BanyanBase
+from python_banyan.banyan_base import BanyanBase
 
 
 # noinspection PyMethodMayBeStatic
-# class PicoboardGateway(BanyanBase, threading.Thread):
-class PicoboardGateway(threading.Thread):
+class PicoboardGateway(BanyanBase, threading.Thread):
 
     """
     This class is the interface class for the picoboard supporting
@@ -57,8 +56,8 @@ class PicoboardGateway(threading.Thread):
         :param com_port: picoboard com_port
         """
 
-        # super(PicoboardGateway, self).__init__(back_plane_ip_address, subscriber_port,
-        #                                        publisher_port, process_name=process_name)
+        super(PicoboardGateway, self).__init__(back_plane_ip_address, subscriber_port,
+                                               publisher_port, process_name=process_name)
 
         self.log = log
         if self.log:
@@ -101,9 +100,11 @@ class PicoboardGateway(threading.Thread):
         # payload used to publish picoboard values
         # The keys map to the data value positions
         # listed above.
-        self.payload = {0: 0, 1: 0, 2: 0, 3: 0,
-                        4: 0, 5: 0,
-                        6: 0, 7: 0, 8: 0}
+        # self.payload = {'report': {0: 0, 1: 0, 2: 0, 3: 0,
+        #                 4: 0, 5: 0,
+        #                 6: 0, 7: 0, 8: 0}}
+
+        self.payload = {'report': []}
 
         # poll request for picoboard data
         self.poll_byte = b'\x01'
@@ -240,10 +241,14 @@ class PicoboardGateway(threading.Thread):
                         # scale for standard analog:
                         cooked = self.analog_scaling(raw_sensor_value, i)
 
-                    self.payload[i] = cooked
+                    # don't add the firmware id to the payload -
+                    # the extension does not need it.
+                    if i != 0:
+                        self.payload['report'].append(cooked)
 
-                # self.publish_payload(self.payload, self.publisher_topic)
-                print(self.payload)
+                self.publish_payload(self.payload, self.publisher_topic)
+                # print(self.payload)
+                self.payload = {'report': []}
             else:
                 # no data available, just kill some time
                 try:
