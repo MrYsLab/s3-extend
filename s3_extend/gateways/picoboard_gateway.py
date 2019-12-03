@@ -281,7 +281,7 @@ def picoboard_gateway():
     parser.add_argument("-p", dest="publisher_port", default='43124',
                         help="Publisher IP port")
     parser.add_argument("-r", dest="publisher_topic",
-                        default="from_picoboard", help="Report topic")
+                        default="from_picoboard_gateway", help="Report topic")
     parser.add_argument("-s", dest="subscriber_port", default='43125',
                         help="Subscriber IP port")
 

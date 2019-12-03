@@ -98,7 +98,7 @@ class WsGateway(BanyanBaseAIO):
                 RuntimeError,
                 KeyboardInterrupt):
             if self.log:
-                    logging.exception("Exception occurred", exc_info=True)
+                logging.exception("Exception occurred", exc_info=True)
             sys.exit()
 
     async def wsg(self, websocket, path):
@@ -186,10 +186,10 @@ class WsGateway(BanyanBaseAIO):
                 pub_socket = socket[topic]
                 await pub_socket.send(ws_data)
 
-    def my_handler(self, type, value, tb):
+    def my_handler(self, the_type, value, tb):
         """
         For logging uncaught exceptions
-        :param type:
+        :param the_type:
         :param value:
         :param tb:
         :return:
@@ -210,7 +210,8 @@ def ws_gateway():
     parser.add_argument("-m", dest="subscription_list", default="from_arduino_gateway, "
                                                                 "from_esp8266_gateway, "
                                                                 "from_rpi_gateway, "
-                                                                "from_microbit_gateway", nargs='+',
+                                                                "from_microbit_gateway"
+                                                                "from_picoboard_gateway", nargs='+',
                         help="A space delimited list of topics")
     parser.add_argument("-i", dest="server_ip_port", default="9000",
                         help="Set the WebSocket Server IP Port number")

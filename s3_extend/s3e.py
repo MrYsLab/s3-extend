@@ -57,7 +57,7 @@ class S3E:
             print('Backplane started')
         if sys.platform.startswith('win32'):
 
-            self.proc_agw = subprocess.Popen(['wsgw', '-i', '9002'],
+            self.proc_awg = subprocess.Popen(['wsgw', '-i', '9002'],
                                              creationflags=subprocess.CREATE_NEW_CONSOLE)
             self.proc_hwg = subprocess.Popen(['espgw', '-w', 'True'],
                                              creationflags=subprocess.CREATE_NEW_CONSOLE)
