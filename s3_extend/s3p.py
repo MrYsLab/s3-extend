@@ -74,8 +74,10 @@ class S3P(threading.Thread):
             try:
                 time.sleep(.01)
             except KeyboardInterrupt:
-                self.killall()
-
+                try:
+                    self.killall()
+                except ProcessLookupError:
+                    continue
     def run(self):
         """
         The thread code to monitor if all processes are still alive.
