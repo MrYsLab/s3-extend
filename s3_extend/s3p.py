@@ -22,6 +22,7 @@ import sys
 import threading
 import time
 
+
 # import webbrowser
 
 
@@ -74,58 +75,96 @@ class S3P(threading.Thread):
             try:
                 time.sleep(.01)
             except KeyboardInterrupt:
-                try:
-                    self.killall()
-                except ProcessLookupError:
-                    continue
+                sys.exit(0)
+
     def run(self):
         """
         The thread code to monitor if all processes are still alive.
         """
         while not self.stop_event.is_set():
-            z = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
-                 if 'backplane' in p.info['name']]
+            bp = ws = pb = None
+            try:
+                bp = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
+                      if 'backplane' in p.info['name']]
+            except psutil.NoSuchProcess:
+                pass
+            try:
+                ws = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
+                      if 'wsgw' in p.info['name']]
+            except psutil.NoSuchProcess:
+                pass
+            try:
+                pb = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
+                      if 'pbgw' in p.info['name']]
+            except psutil.NoSuchProcess:
+                pass
 
-            if not z:
+            if not bp:
                 self.start_backplane()
+                print('start backplane')
 
-            if z[0]['status'] == 'zombie':
-                self.killall()
+            try:
+                if bp[0]['status'] == 'zombie':
+                    self.killall(bp, ws, pb)
+            except IndexError:
+                pass
 
             z = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
                  if 'wsgw' in p.info['name']]
 
             if not z:
-                # self.start_wsgw()
-                # self.stop_event.set()
-                self.killall()
-
-            if z[0]['status'] == 'zombie':
-                self.killall()
+                self.killall(bp, ws, pb)
+            try:
+                if z[0]['status'] == 'zombie':
+                    self.killall(bp, ws, pb)
+            except IndexError:
+                pass
 
             z = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
                  if 'pbgw' in p.info['name']]
 
             if not z:
-                self.killall()
+                self.killall(bp, ws, pb)
 
-            if z[0]['status'] == 'zombie':
-                self.killall()
+            try:
+                if z[0]['status'] == 'zombie':
+                    self.killall(bp, ws, pb)
+            except IndexError:
+                pass
 
             time.sleep(.1)
 
-    def killall(self):
+    def killall(self, b, w, p):
         """
-        Kill the processes
+        Kill all running or zombie processes
+        :param b: backplane
+        :param w: websocket gateway
+        :param p: picoboard gateway
         """
+
         self.stop_event.set()
-        p = psutil.Process(self.proc_hwg)
-        p.kill()
-        p = psutil.Process(self.proc_awg)
-        p.kill()
-        p = psutil.Process(self.proc_bp)
-        p.kill()
-        sys.exit(0)
+        # check for missing processes
+        if b:
+            try:
+                p = psutil.Process(self.proc_bp)
+            except psutil.NoSuchProcess:
+                pass
+            else:
+                p.kill()
+        if w:
+            try:
+                w = psutil.Process(self.proc_awg)
+            except psutil.NoSuchProcess:
+                pass
+            else:
+                p.kill()
+        if p:
+            try:
+                p = psutil.Process(self.proc_hwg)
+            except psutil.NoSuchProcess:
+                pass
+            else:
+                p.kill()
 
     def start_backplane(self):
         """
@@ -200,8 +239,6 @@ class S3P(threading.Thread):
             self.proc_hwg = subprocess.Popen(pbgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
-
-        # print(self.proc_hwg)
 
         print('Picoboard Gateway is started...')
 
