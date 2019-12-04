@@ -5,7 +5,7 @@ with open('pypi_desc.md') as f:
 
 setup(
     name='s3-extend',
-    version='1.2',
+    version='1.3',
     packages=[
       's3_extend',
       's3_extend.gateways'
@@ -19,9 +19,11 @@ setup(
         'console_scripts': [
             's3a = s3_extend.s3a:s3ax',
             's3e = s3_extend.s3e:s3ex',
+            's3p = s3_extend.s3p:s3px',
             's3r = s3_extend.s3r:s3rx',
             'ardgw = s3_extend.gateways.arduino_gateway:arduino_gateway',
             'espgw = s3_extend.gateways.esp8266_gateway:esp8266_gateway',
+            'pbgw = s3_extend.gateways.picoboard_gateway:picoboard_gateway',
             'rpigw = s3_extend.gateways.rpi_gateway:rpi_gateway',
             'wsgw = s3_extend.gateways.ws_gateway:ws_gateway',
         ]
