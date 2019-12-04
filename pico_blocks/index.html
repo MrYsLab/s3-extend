@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Picoboard - Scratch 3 OneGPIO Extensions</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "The Picoboard Blocks", url: "#_top", children: [
+          ]},
+          {title: "HAT Blocks", url: "#hat-blocks", children: [
+              {title: "When The Selected SENSOR Is Less Or Greater Than A Value", url: "#when-the-selected-sensor-is-less-or-greater-than-a-value" },
+              {title: "When Button Is Pressed", url: "#when-button-is-pressed" },
+              {title: "When The Selected SENSOR Value Is Within A Range", url: "#when-the-selected-sensor-value-is-within-a-range" },
+          ]},
+          {title: "Boolean Blocks", url: "#boolean-blocks", children: [
+              {title: "Is Button Pressed", url: "#is-button-pressed" },
+              {title: "Is SENSOR Less Or Greater Than A Value", url: "#is-sensor-less-or-greater-than-a-value" },
+          ]},
+          {title: "Reporter Blocks", url: "#reporter-blocks", children: [
+              {title: "SENSOR Current Value", url: "#sensor-current-value" },
+              {title: "Convert SENSOR To A Specified Range", url: "#convert-sensor-to-a-specified-range" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../delay/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../delay/" class="btn btn-xs btn-link">
+        When In Doubt, Add A Small Delay
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../rpi_blocks/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../rpi_blocks/" class="btn btn-xs btn-link">
+        Raspberry Pi
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h2 id="the-picoboard-blocks">The Picoboard Blocks</h2>
+<p><img src="../images/pico_blocks_en.png" ></p>
+<p>And the blocks translated to Taiwanese</p>
+<p><img src="../images/pico_blocks_tw.png" ></p>
+<h2 id="hat-blocks">HAT Blocks</h2>
+<h3 id="when-the-selected-sensor-is-less-or-greater-than-a-value">When The Selected SENSOR Is Less Or Greater Than A Value</h3>
+<p>This block allows you to select a sensor type, a comparison type, and a
+value for the comparison.</p>
+<p>For example, <strong><em>When Light &gt; 15</em></strong>.</p>
+<p>If the result of the comparison is TRUE, then all of the blocks below
+this block are executed once.</p>
+<h3 id="when-button-is-pressed">When Button Is Pressed</h3>
+<p>When the Picoboard button is pressed, all of the blocks below this block
+are executed once.</p>
+<h3 id="when-the-selected-sensor-value-is-within-a-range">When The Selected SENSOR Value Is Within A Range</h3>
+<p>This block uses the current value of the selected sensor to check if its
+value is within the specified range. If it is, then all of the blocks
+below this block are executed once.</p>
+<h2 id="boolean-blocks">Boolean Blocks</h2>
+<h3 id="is-button-pressed">Is Button Pressed</h3>
+<p>When the button is pressed, this blocks returns True. If the button is
+not pressed, it returns FALSE.</p>
+<h3 id="is-sensor-less-or-greater-than-a-value">Is SENSOR Less Or Greater Than A Value</h3>
+<p>This block allows you to select a sensor type, a comparison type, and a
+value for the comparison. It returns TRUE when the comparison is true
+and FALSE when the comparison is false.</p>
+<h2 id="reporter-blocks">Reporter Blocks</h2>
+<h3 id="sensor-current-value">SENSOR Current Value</h3>
+<p>This block reports the current value of the selected sensor.</p>
+<h3 id="convert-sensor-to-a-specified-range">Convert SENSOR To A Specified Range</h3>
+<p>This block scales the current value for the selected sensor and to be
+within the specified range. So, for example, if the Slider is set to 100
+and the range is set to -240 to 240, this block will return 240. If the
+Slider is set to 50, this block will return 0, and if the Slider is set
+to 0, this block will return -240.</p>
+<p><br> <br> <br></p>
+<p>Copyright (C) 2019 Alan Yorinks All Rights Reserved</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../delay/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../delay/" class="btn btn-xs btn-link">
+        When In Doubt, Add A Small Delay
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../rpi_blocks/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../rpi_blocks/" class="btn btn-xs btn-link">
+        Raspberry Pi
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
