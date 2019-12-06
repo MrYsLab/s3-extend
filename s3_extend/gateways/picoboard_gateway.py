@@ -59,6 +59,10 @@ class PicoboardGateway(BanyanBase, threading.Thread):
         super(PicoboardGateway, self).__init__(back_plane_ip_address, subscriber_port,
                                                publisher_port, process_name=process_name)
 
+        self.channels = {0: "D", 1: "C",
+                         2: "B", 3: "btn", 4: "A",
+                         5: "lt", 6: "snd", 7: "slide", 15: "id"}
+
         self.log = log
         if self.log:
             fn = str(pathlib.Path.home()) + "/pbgw.log"
@@ -127,10 +131,7 @@ class PicoboardGateway(BanyanBase, threading.Thread):
                 time.sleep(5)
                 if not self.find_the_picoboard():
                     print('Cannot find Picoboard')
-                    sys.exit(0)
-            # self.picoboard.reset_input_buffer()
-            # self.picoboard.reset_output_buffer()
-
+                    self.shutdown()
         # start the thread to receive data from the picoboard
         threading.Thread.__init__(self)
         self.daemon = True
@@ -143,43 +144,57 @@ class PicoboardGateway(BanyanBase, threading.Thread):
         while True:
             try:
                 time.sleep(.001)
-                # request data
-                self.picoboard.write(self.poll_byte)
             except (KeyboardInterrupt, serial.SerialException):
-                self.picoboard.reset_input_buffer()
-                self.picoboard.reset_output_buffer()
-                self.picoboard.close()
-                sys.exit(0)
+                self.shutdown()
 
     def find_the_picoboard(self):
         """
         Go through the ports looking for an active board
         """
 
-        the_ports_list = list_ports.comports()
+        try:
+            the_ports_list = list_ports.comports()
+        except (KeyboardInterrupt, serial.SerialException):
+            sys.exit(0)
+
         for port in the_ports_list:
             if port.pid is None:
                 continue
             else:
                 print('Looking for picoboard on: ', port.device)
-                self.picoboard = serial.Serial(port.device, self.baud_rate,
-                                               timeout=1, writeTimeout=0)
-
-                self.picoboard.close()
-                self.picoboard.open()
-                # send multiple polls to allow for serial port to open
-                for send in range(10):
+                try:
+                    self.picoboard = serial.Serial(port.device, self.baud_rate,
+                                                   timeout=1, writeTimeout=0)
+                except (KeyboardInterrupt, serial.SerialException):
+                    sys.exit(0)
+                try:
                     self.picoboard.write(self.poll_byte)
                     time.sleep(.2)
-                    num_bytes = self.picoboard.inWaiting()
-                    if num_bytes == 18:
-                        self.picoboard.reset_input_buffer()
-                        self.picoboard.reset_output_buffer()
-                        return True
+                except (KeyboardInterrupt, serial.SerialException):
+                    self.shutdown()
+
+                not_done = True
+                while not_done:
+                    num_bytes = self.picoboard.in_waiting
+                    if num_bytes < 18:
+                        try:
+                            self.picoboard.write(self.poll_byte)
+                            time.sleep(.5)
+                        except (KeyboardInterrupt, serial.SerialException):
+                            self.shutdown()
+                    # check the first 2 bytes for channel 0 or f
                     else:
-                        continue
-            continue
-        return False
+                        data_packet = self.picoboard.read(18)
+                        pico_channel = (int(data_packet[0]) - 128) >> 3
+                        if pico_channel != 15 and pico_channel != 0:
+                            continue
+                        # check if the channel data is a value of 4
+                        pico_data = int(data_packet[1])
+
+                        if pico_data != 4:
+                            return False
+                        else:
+                            return True
 
     def analog_scaling(self, value, index):
         """
@@ -222,54 +237,78 @@ class PicoboardGateway(BanyanBase, threading.Thread):
         Formulas for adjusting light and sound are from this URL:
         https://twiki.cern.ch/twiki/pub/Sandbox/DaqSchoolExercise14/A_pico.py.txt
         """
+        self.picoboard.write(self.poll_byte)
+
         while True:
             self.data_packet = None
             # if there is data available from the picoboard
             # retrieve 18 bytes - a full picoboard packet
             cooked = None
-            if self.picoboard.inWaiting():
-                self.data_packet = self.picoboard.read(18)
-                # get the channel number and data for the channel
-                for i in range(9):
-                    # pico_channel = self.channels[(int(self.data_packet[2 * i]) - 128) >> 3]
-                    raw_sensor_value = ((int(self.data_packet[2 * i]) & 7) << 7) + int(self.data_packet[2 * i + 1])
-                    if i == 0:  # id
-                        cooked = raw_sensor_value
-                    elif i == self.light_position:
-                        if raw_sensor_value < 25:
-                            cooked = 100 - raw_sensor_value
-                        else:
-                            cooked = round((1023-raw_sensor_value) * (75/998))
-                        cooked = self.analog_scaling(cooked, self.light_position)
+            try:
+                while self.picoboard.in_waiting != 18:
+                    # no data available, just kill some time
+                    try:
+                        time.sleep(.001)
+                    except (KeyboardInterrupt, serial.SerialException):
+                        self.shutdown()
+            except (KeyboardInterrupt, serial.SerialException):
+                self.shutdown()
+            # if self.picoboard.inWaiting():
+            self.data_packet = self.picoboard.read(18)
+            # get the channel number and data for the channel
+            for i in range(9):
+                # first channel reporting
+                if i == 0:
+                    pico_channel = (int(self.data_packet[0]) - 128) >> 3
+                    if pico_channel != 15 and pico_channel != 0:
+                        continue
+                    # check if the channel data is a value of 4
+                    pico_data = int(self.data_packet[1])
+                    if pico_data != 4:
+                        break
+                # pico_channel = self.channels[(int(self.data_packet[2 * i]) - 128) >> 3]
+                raw_sensor_value = ((int(self.data_packet[2 * i]) & 7) << 7) + int(self.data_packet[2 * i + 1])
+                if i == 0:  # id
+                    cooked = raw_sensor_value
+                elif i == self.light_position:
+                    if raw_sensor_value < 25:
+                        cooked = 100 - raw_sensor_value
+                    else:
+                        cooked = round((1023 - raw_sensor_value) * (75 / 998))
+                    cooked = self.analog_scaling(cooked, self.light_position)
 
-                    elif i == self.sound_position:
-                        n = max(0, raw_sensor_value - 18)
-                        if n < 50:
-                            cooked = int(n / 2)
-                        else:
-                            cooked = 25 + min(75, int((n - 50) * (75 / 580)))
-                    elif i == self.button_position:  # invert digital input
-                        cooked = int(not raw_sensor_value)
+                elif i == self.sound_position:
+                    n = max(0, raw_sensor_value - 18)
+                    if n < 50:
+                        cooked = int(n / 2)
+                    else:
+                        cooked = 25 + min(75, int((n - 50) * (75 / 580)))
+                elif i == self.button_position:  # invert digital input
+                    cooked = int(not raw_sensor_value)
 
-                    if i in self.analog_sensor_list:
-                        # scale for standard analog:
-                        cooked = self.analog_scaling(raw_sensor_value, i)
+                if i in self.analog_sensor_list:
+                    # scale for standard analog:
+                    cooked = self.analog_scaling(raw_sensor_value, i)
 
-                    # don't add the firmware id to the payload -
-                    # the extension does not need it.
-                    if i != 0:
-                        self.payload['report'].append(cooked)
+                # don't add the firmware id to the payload -
+                # the extension does not need it.
+                if i != 0:
+                    self.payload['report'].append(cooked)
 
-                self.publish_payload(self.payload, self.publisher_topic)
-                # print(self.payload)
-                self.payload = {'report': []}
-            else:
-                # no data available, just kill some time
-                try:
-                    time.sleep(.001)
-                except KeyboardInterrupt:
-                    sys.exit(0)
+            self.publish_payload(self.payload, self.publisher_topic)
+            # print(self.payload)
+            self.payload = {'report': []}
+            self.picoboard.write(self.poll_byte)
 
+    def shutdown(self):
+        """
+        Exit gracefully
+
+        """
+        self.picoboard.reset_input_buffer()
+        self.picoboard.reset_output_buffer()
+        self.picoboard.close()
+        sys.exit(0)
 
 def picoboard_gateway():
     parser = argparse.ArgumentParser()
