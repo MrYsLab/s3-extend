@@ -123,8 +123,11 @@ class PicoboardGateway(BanyanBase, threading.Thread):
             if self.find_the_picoboard():
                 print('picoboard found on:', self.picoboard.port)
             else:
-                print('Cannot find Picoboard')
-                sys.exit(0)
+                print('Please wait 5 seconds...')
+                time.sleep(5)
+                if not self.find_the_picoboard():
+                    print('Cannot find Picoboard')
+                    sys.exit(0)
             # self.picoboard.reset_input_buffer()
             # self.picoboard.reset_output_buffer()
 
