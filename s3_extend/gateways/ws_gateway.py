@@ -77,8 +77,14 @@ class WsGateway(BanyanBaseAIO):
                                         publisher_port=publisher_port,
                                         process_name=process_name,
                                         event_loop=event_loop)
+
+        if sys.platform == 'win32':
+            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+            self.event_loop = asyncio.get_event_loop()
         # save the event loop
-        self.event_loop = event_loop
+        else:
+            self.event_loop = event_loop
+
 
         # save the server port number
         self.server_ip_port = server_ip_port
