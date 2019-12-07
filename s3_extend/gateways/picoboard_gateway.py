@@ -21,6 +21,7 @@
 
 """
 import argparse
+import atexit
 # noinspection PyPackageRequirements
 import logging
 import pathlib
@@ -29,13 +30,13 @@ import serial
 from serial.tools import list_ports
 import signal
 import sys
-import threading
+# import threading
 import time
 from python_banyan.banyan_base import BanyanBase
 
 
 # noinspection PyMethodMayBeStatic
-class PicoboardGateway(BanyanBase, threading.Thread):
+class PicoboardGateway(BanyanBase):
     """
     This class is the interface class for the picoboard supporting
     Scratch 3.
@@ -58,11 +59,6 @@ class PicoboardGateway(BanyanBase, threading.Thread):
         # initialize parent
         super(PicoboardGateway, self).__init__(back_plane_ip_address, subscriber_port,
                                                publisher_port, process_name=process_name)
-
-        self.channels = {0: "D", 1: "C",
-                         2: "B", 3: "btn", 4: "A",
-                         5: "lt", 6: "snd", 7: "slide", 15: "id"}
-
         self.log = log
         if self.log:
             fn = str(pathlib.Path.home()) + "/pbgw.log"
@@ -72,6 +68,8 @@ class PicoboardGateway(BanyanBase, threading.Thread):
 
         self.baud_rate = 38400
         self.publisher_topic = publisher_topic
+
+        atexit.register(self.shutdown)
 
         # place to receive data from picoboard
         self.data_packet = None
@@ -131,21 +129,71 @@ class PicoboardGateway(BanyanBase, threading.Thread):
                 time.sleep(5)
                 if not self.find_the_picoboard():
                     print('Cannot find Picoboard')
-                    self.shutdown()
-        # start the thread to receive data from the picoboard
-        threading.Thread.__init__(self)
-        self.daemon = True
-        self.stop_event = threading.Event()
-        self.start()
+                    sys.exit()
 
         # allow thread time to start
         time.sleep(.2)
+        self.picoboard.write(self.poll_byte)
 
         while True:
+            self.data_packet = None
+            # if there is data available from the picoboard
+            # retrieve 18 bytes - a full picoboard packet
+            cooked = None
             try:
-                time.sleep(.001)
+                while self.picoboard.in_waiting != 18:
+                    # no data available, just kill some time
+                    try:
+                        time.sleep(.001)
+                    except (KeyboardInterrupt, serial.SerialException):
+                        sys.exit()
             except (KeyboardInterrupt, serial.SerialException):
-                self.shutdown()
+                sys.exit()
+            self.data_packet = self.picoboard.read(18)
+            # get the channel number and data for the channel
+            for i in range(9):
+                # first channel reporting
+                if i == 0:
+                    pico_channel = (int(self.data_packet[0]) - 128) >> 3
+                    if pico_channel != 15 and pico_channel != 0:
+                        continue
+                    # check if the channel data is a value of 4
+                    pico_data = int(self.data_packet[1])
+                    if pico_data != 4:
+                        break
+                # pico_channel = self.channels[(int(self.data_packet[2 * i]) - 128) >> 3]
+                raw_sensor_value = ((int(self.data_packet[2 * i]) & 7) << 7) + int(self.data_packet[2 * i + 1])
+                if i == 0:  # id
+                    cooked = raw_sensor_value
+                elif i == self.light_position:
+                    if raw_sensor_value < 25:
+                        cooked = 100 - raw_sensor_value
+                    else:
+                        cooked = round((1023 - raw_sensor_value) * (75 / 998))
+                    cooked = self.analog_scaling(cooked, self.light_position)
+
+                elif i == self.sound_position:
+                    n = max(0, raw_sensor_value - 18)
+                    if n < 50:
+                        cooked = int(n / 2)
+                    else:
+                        cooked = 25 + min(75, int((n - 50) * (75 / 580)))
+                elif i == self.button_position:  # invert digital input
+                    cooked = int(not raw_sensor_value)
+
+                if i in self.analog_sensor_list:
+                    # scale for standard analog:
+                    cooked = self.analog_scaling(raw_sensor_value, i)
+
+                # don't add the firmware id to the payload -
+                # the extension does not need it.
+                if i != 0:
+                    self.payload['report'].append(cooked)
+
+            self.publish_payload(self.payload, self.publisher_topic)
+            # print(self.payload)
+            self.payload = {'report': []}
+            self.picoboard.write(self.poll_byte)
 
     def find_the_picoboard(self):
         """
@@ -171,7 +219,7 @@ class PicoboardGateway(BanyanBase, threading.Thread):
                     self.picoboard.write(self.poll_byte)
                     time.sleep(.2)
                 except (KeyboardInterrupt, serial.SerialException):
-                    self.shutdown()
+                    sys.exit()
 
                 not_done = True
                 while not_done:
@@ -181,7 +229,7 @@ class PicoboardGateway(BanyanBase, threading.Thread):
                             self.picoboard.write(self.poll_byte)
                             time.sleep(.5)
                         except (KeyboardInterrupt, serial.SerialException):
-                            self.shutdown()
+                            sys.exit()
                     # check the first 2 bytes for channel 0 or f
                     else:
                         data_packet = self.picoboard.read(18)
@@ -229,77 +277,6 @@ class PicoboardGateway(BanyanBase, threading.Thread):
         """
         self.logger.exception("Uncaught exception: {0}".format(str(value)))
 
-    def run(self):
-        """
-        This method run continually, receiving responses
-        to the poll request.
-
-        Formulas for adjusting light and sound are from this URL:
-        https://twiki.cern.ch/twiki/pub/Sandbox/DaqSchoolExercise14/A_pico.py.txt
-        """
-        self.picoboard.write(self.poll_byte)
-
-        while True:
-            self.data_packet = None
-            # if there is data available from the picoboard
-            # retrieve 18 bytes - a full picoboard packet
-            cooked = None
-            try:
-                while self.picoboard.in_waiting != 18:
-                    # no data available, just kill some time
-                    try:
-                        time.sleep(.001)
-                    except (KeyboardInterrupt, serial.SerialException):
-                        self.shutdown()
-            except (KeyboardInterrupt, serial.SerialException):
-                self.shutdown()
-            # if self.picoboard.inWaiting():
-            self.data_packet = self.picoboard.read(18)
-            # get the channel number and data for the channel
-            for i in range(9):
-                # first channel reporting
-                if i == 0:
-                    pico_channel = (int(self.data_packet[0]) - 128) >> 3
-                    if pico_channel != 15 and pico_channel != 0:
-                        continue
-                    # check if the channel data is a value of 4
-                    pico_data = int(self.data_packet[1])
-                    if pico_data != 4:
-                        break
-                # pico_channel = self.channels[(int(self.data_packet[2 * i]) - 128) >> 3]
-                raw_sensor_value = ((int(self.data_packet[2 * i]) & 7) << 7) + int(self.data_packet[2 * i + 1])
-                if i == 0:  # id
-                    cooked = raw_sensor_value
-                elif i == self.light_position:
-                    if raw_sensor_value < 25:
-                        cooked = 100 - raw_sensor_value
-                    else:
-                        cooked = round((1023 - raw_sensor_value) * (75 / 998))
-                    cooked = self.analog_scaling(cooked, self.light_position)
-
-                elif i == self.sound_position:
-                    n = max(0, raw_sensor_value - 18)
-                    if n < 50:
-                        cooked = int(n / 2)
-                    else:
-                        cooked = 25 + min(75, int((n - 50) * (75 / 580)))
-                elif i == self.button_position:  # invert digital input
-                    cooked = int(not raw_sensor_value)
-
-                if i in self.analog_sensor_list:
-                    # scale for standard analog:
-                    cooked = self.analog_scaling(raw_sensor_value, i)
-
-                # don't add the firmware id to the payload -
-                # the extension does not need it.
-                if i != 0:
-                    self.payload['report'].append(cooked)
-
-            self.publish_payload(self.payload, self.publisher_topic)
-            # print(self.payload)
-            self.payload = {'report': []}
-            self.picoboard.write(self.poll_byte)
-
     def shutdown(self):
         """
         Exit gracefully
@@ -309,6 +286,7 @@ class PicoboardGateway(BanyanBase, threading.Thread):
         self.picoboard.reset_output_buffer()
         self.picoboard.close()
         sys.exit(0)
+
 
 def picoboard_gateway():
     parser = argparse.ArgumentParser()

@@ -15,6 +15,7 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 import argparse
+import atexit
 import psutil
 import signal
 import subprocess
@@ -52,12 +53,15 @@ class S3P(threading.Thread):
 
         # start backplane
         self.start_backplane()
+        time.sleep(1)
 
         # start the websocket gateway
         self.start_wsgw()
 
         # start picoboard gateway
         self.start_pbgw()
+
+        atexit.register(self.killall, self.proc_bp, self.proc_awg, self.proc_hwg)
 
         # webbrowser.open('https://mryslab.github.io/s3onegpio/', new=1)
 
@@ -101,7 +105,6 @@ class S3P(threading.Thread):
 
             if not bp:
                 self.start_backplane()
-                print('start backplane')
 
             try:
                 if bp[0]['status'] == 'zombie':
@@ -141,7 +144,7 @@ class S3P(threading.Thread):
         :param w: websocket gateway
         :param p: picoboard gateway
         """
-
+        # print('in kill all', b,w,p)
         self.stop_event.set()
         # check for missing processes
         if b:
@@ -153,7 +156,7 @@ class S3P(threading.Thread):
                 p.kill()
         if w:
             try:
-                w = psutil.Process(self.proc_awg)
+                p = psutil.Process(self.proc_awg)
             except psutil.NoSuchProcess:
                 pass
             else:
@@ -213,7 +216,6 @@ class S3P(threading.Thread):
             self.proc_awg = subprocess.Popen(wsgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
-
         print('WebSocket Gateway is started...')
 
     def start_pbgw(self):
@@ -239,7 +241,6 @@ class S3P(threading.Thread):
             self.proc_hwg = subprocess.Popen(pbgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
-
         print('Picoboard Gateway is started...')
 
 
