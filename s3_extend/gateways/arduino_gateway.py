@@ -70,25 +70,20 @@ class ArduinoGateway(GatewayBaseAIO):
             sys.excepthook = self.my_handler
 
         # set the event loop to be used. accept user's if provided
-        if event_loop:
-            self.event_loop = event_loop
-        else:
-            self.event_loop = asyncio.get_event_loop()
-
-        the_loop = self.event_loop
+        self.event_loop = event_loop
 
         # instantiate pymata express to control the arduino
         # if user want to pass in a com port, then pass it in
         try:
             if com_port:
-                self.arduino = PymataExpress(loop=the_loop, com_port=com_port)
+                self.arduino = PymataExpress(loop=self.event_loop, com_port=com_port)
             # if user wants to set an instance id, then pass it in
             elif arduino_instance_id:
-                self.arduino = PymataExpress(loop=the_loop,
+                self.arduino = PymataExpress(loop=self.event_loop,
                                              arduino_instance_id=arduino_instance_id)
             # default settings
             else:
-                self.arduino = PymataExpress(loop=the_loop)
+                self.arduino = PymataExpress(loop=self.event_loop)
         except RuntimeError:
             if self.log:
                 logging.exception("Exception occurred", exc_info=True)
@@ -429,10 +424,10 @@ class ArduinoGateway(GatewayBaseAIO):
         payload = {'report': 'sonar_data', 'value': data[1]}
         await self.publish_payload(payload, 'from_arduino_gateway')
 
-    def my_handler(self, type, value, tb):
+    def my_handler(self, tp, value, tb):
         """
         for logging uncaught exceptions
-        :param type:
+        :param tp:
         :param value:
         :param tb:
         :return:
@@ -505,6 +500,10 @@ def arduino_gateway():
         kw_options['arduino_instance_id'] = int(args.arduino_instance_id)
 
     # get the event loop
+    # this is for python 3.8
+    if sys.platform == 'win32':
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
     loop = asyncio.get_event_loop()
 
     # replace with the name of your class

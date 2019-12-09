@@ -64,6 +64,7 @@ class WsGateway(BanyanBaseAIO):
 
         # set up logging if requested
         self.log = log
+        self.event_loop = event_loop
         if self.log:
             fn = str(pathlib.Path.home()) + "/wsgw.log"
             self.logger = logging.getLogger(__name__)
@@ -76,15 +77,7 @@ class WsGateway(BanyanBaseAIO):
                                         subscriber_port=subscriber_port,
                                         publisher_port=publisher_port,
                                         process_name=process_name,
-                                        event_loop=event_loop)
-
-        if sys.platform == 'win32':
-            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-            self.event_loop = asyncio.get_event_loop()
-        # save the event loop
-        else:
-            self.event_loop = event_loop
-
+                                        event_loop=self.event_loop)
 
         # save the server port number
         self.server_ip_port = server_ip_port
@@ -254,6 +247,10 @@ def ws_gateway():
         kw_options['back_plane_ip_address'] = args.back_plane_ip_address
 
     # get the event loop
+    # this is for python 3.8
+    if sys.platform == 'win32':
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
     loop = asyncio.get_event_loop()
 
     WsGateway(subscription_list, **kw_options, event_loop=loop)
