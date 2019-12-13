@@ -90,17 +90,17 @@ class S3P(threading.Thread):
             try:
                 bp = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
                       if 'backplane' in p.info['name']]
-            except psutil.NoSuchProcess:
+            except (psutil.NoSuchProcess, psutil.ZombieProcess):
                 pass
             try:
                 ws = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
                       if 'wsgw' in p.info['name']]
-            except psutil.NoSuchProcess:
+            except (psutil.NoSuchProcess, psutil.ZombieProcess):
                 pass
             try:
                 pb = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
                       if 'pbgw' in p.info['name']]
-            except psutil.NoSuchProcess:
+            except (psutil.NoSuchProcess, psutil.ZombieProcess):
                 pass
 
             if not bp:
@@ -112,8 +112,11 @@ class S3P(threading.Thread):
             except IndexError:
                 pass
 
-            z = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
-                 if 'wsgw' in p.info['name']]
+            try:
+                z = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
+                     if 'wsgw' in p.info['name']]
+            except psutil.ZombieProcess:
+                continue
 
             if not z:
                 self.killall(bp, ws, pb)
@@ -123,8 +126,11 @@ class S3P(threading.Thread):
             except IndexError:
                 pass
 
-            z = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
-                 if 'pbgw' in p.info['name']]
+            try:
+                z = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
+                     if 'pbgw' in p.info['name']]
+            except psutil.ZombieProcess:
+                continue
 
             if not z:
                 self.killall(bp, ws, pb)
@@ -150,21 +156,21 @@ class S3P(threading.Thread):
         if b:
             try:
                 p = psutil.Process(self.proc_bp)
-            except psutil.NoSuchProcess:
+            except (psutil.NoSuchProcess, psutil.ZombieProcess):
                 pass
             else:
                 p.kill()
         if w:
             try:
                 p = psutil.Process(self.proc_awg)
-            except psutil.NoSuchProcess:
+            except (psutil.NoSuchProcess, psutil.ZombieProcess):
                 pass
             else:
                 p.kill()
         if p:
             try:
                 p = psutil.Process(self.proc_hwg)
-            except psutil.NoSuchProcess:
+            except (psutil.NoSuchProcess, psutil.ZombieProcess):
                 pass
             else:
                 p.kill()
@@ -173,8 +179,12 @@ class S3P(threading.Thread):
         """
         Start the backplane
         """
+        p = None
         for pid in psutil.pids():
-            p = psutil.Process(pid)
+            try:
+                p = psutil.Process(pid)
+            except psutil.ZombieProcess:
+                pass
             if p.name() == "backplane":
                 print("Backplane already started.          PID = " + str(p.pid))
                 self.backplane_exists = True
