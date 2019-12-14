@@ -10,7 +10,8 @@
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  General Public License for more details.
 
- You should have received a copy of the GNU AFFERO GENERAL PUBLIC LICENSE
+ You should have received a copy of the GNU AFFERO GENERAL PUBLIC LICENSE                print('killall w exception')
+
  along with this library; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
@@ -91,16 +92,19 @@ class S3P(threading.Thread):
                 bp = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
                       if 'backplane' in p.info['name']]
             except (psutil.NoSuchProcess, psutil.ZombieProcess):
+                print('in thread backplane exception')
                 pass
             try:
                 ws = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
                       if 'wsgw' in p.info['name']]
             except (psutil.NoSuchProcess, psutil.ZombieProcess):
+                print('in thread wsgw exception')
                 pass
             try:
                 pb = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
                       if 'pbgw' in p.info['name']]
             except (psutil.NoSuchProcess, psutil.ZombieProcess):
+                print('in thread pbgw exception')
                 pass
 
             if not bp:
@@ -108,6 +112,7 @@ class S3P(threading.Thread):
 
             try:
                 if bp[0]['status'] == 'zombie':
+                    print('bp status is zombie - killing all')
                     self.killall(bp, ws, pb)
             except IndexError:
                 pass
@@ -116,12 +121,15 @@ class S3P(threading.Thread):
                 z = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
                      if 'wsgw' in p.info['name']]
             except psutil.ZombieProcess:
+                print('wsgw status is zombie - continuing')
                 continue
 
             if not z:
+                print('no wsgw - killing all')
                 self.killall(bp, ws, pb)
             try:
                 if z[0]['status'] == 'zombie':
+                    print('wsgw status is zombie - killing all')
                     self.killall(bp, ws, pb)
             except IndexError:
                 pass
@@ -130,13 +138,16 @@ class S3P(threading.Thread):
                 z = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
                      if 'pbgw' in p.info['name']]
             except psutil.ZombieProcess:
+                print('pbgw status is zombie - continuing')
                 continue
 
             if not z:
+                print('no pbgw - killing all')
                 self.killall(bp, ws, pb)
 
             try:
                 if z[0]['status'] == 'zombie':
+                    print('pbgw status is zombie - killing all')
                     self.killall(bp, ws, pb)
             except IndexError:
                 pass
@@ -150,13 +161,14 @@ class S3P(threading.Thread):
         :param w: websocket gateway
         :param p: picoboard gateway
         """
-        # print('in kill all', b,w,p)
+        print('in kill all', b,w,p)
         self.stop_event.set()
         # check for missing processes
         if b:
             try:
                 p = psutil.Process(self.proc_bp)
             except (psutil.NoSuchProcess, psutil.ZombieProcess):
+                print('killall b exception')
                 pass
             else:
                 p.kill()
@@ -164,6 +176,7 @@ class S3P(threading.Thread):
             try:
                 p = psutil.Process(self.proc_awg)
             except (psutil.NoSuchProcess, psutil.ZombieProcess):
+                print('killall w exception')
                 pass
             else:
                 p.kill()
@@ -171,6 +184,7 @@ class S3P(threading.Thread):
             try:
                 p = psutil.Process(self.proc_hwg)
             except (psutil.NoSuchProcess, psutil.ZombieProcess):
+                print('killall p exception')
                 pass
             else:
                 p.kill()
@@ -184,6 +198,7 @@ class S3P(threading.Thread):
             try:
                 p = psutil.Process(pid)
             except psutil.ZombieProcess:
+                print('start backplane zombie exception')
                 pass
             if p.name() == "backplane":
                 print("Backplane already started.          PID = " + str(p.pid))
