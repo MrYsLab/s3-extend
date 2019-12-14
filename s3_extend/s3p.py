@@ -204,6 +204,7 @@ class S3P(threading.Thread):
                 print("Backplane already started.          PID = " + str(p.pid))
                 self.backplane_exists = True
                 self.proc_bp = p.pid
+                print('bp pid = ', self.proc_bp)
             else:
                 continue
 
@@ -241,6 +242,8 @@ class S3P(threading.Thread):
             self.proc_awg = subprocess.Popen(wsgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
+            print('wsgw pid = ', self.proc_awg)
+            print()
         print('WebSocket Gateway is started...')
 
     def start_pbgw(self):
@@ -266,6 +269,7 @@ class S3P(threading.Thread):
             self.proc_hwg = subprocess.Popen(pbgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
+            print('pbgw pid = ', self.proc_hwg)
         print('Picoboard Gateway is started...')
 
 
