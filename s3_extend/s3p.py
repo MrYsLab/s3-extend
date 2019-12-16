@@ -70,6 +70,8 @@ class S3P(threading.Thread):
         threading.Thread.__init__(self)
         self.daemon = True
         self.stop_event = threading.Event()
+        print('Delaying start of monitor thread by 5 seconds...')
+        time.sleep(5)
         self.stop_event.clear()
         self.start()
 
@@ -86,6 +88,7 @@ class S3P(threading.Thread):
         """
         The thread code to monitor if all processes are still alive.
         """
+        print('monitoring thread started')
         while not self.stop_event.is_set():
             bp = ws = pb = None
             try:
@@ -162,6 +165,7 @@ class S3P(threading.Thread):
         :param p: picoboard gateway
         """
         print('in kill all', b,w,p)
+        print('about to set stop_event')
         self.stop_event.set()
         # check for missing processes
         if b:
@@ -171,7 +175,12 @@ class S3P(threading.Thread):
                 print('killall b exception')
                 pass
             else:
-                p.kill()
+                try:
+                    print('killing backplane')
+                    p.kill()
+                except:
+                    print('exception in killing backplane')
+                    raise
         if w:
             try:
                 p = psutil.Process(self.proc_awg)
@@ -179,7 +188,12 @@ class S3P(threading.Thread):
                 print('killall w exception')
                 pass
             else:
-                p.kill()
+                try:
+                    print('killing websocket gatway')
+                    p.kill()
+                except:
+                    print('exception in killing awg')
+                    raise
         if p:
             try:
                 p = psutil.Process(self.proc_hwg)
@@ -187,7 +201,12 @@ class S3P(threading.Thread):
                 print('killall p exception')
                 pass
             else:
-                p.kill()
+                try:
+                    print('killing picoboard gateway')
+                    p.kill()
+                except:
+                    print('exception in killing pbgw')
+                    raise
 
     def start_backplane(self):
         """
