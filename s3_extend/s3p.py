@@ -88,74 +88,30 @@ class S3P(threading.Thread):
         """
         The thread code to monitor if all processes are still alive.
         """
+        if not self.proc_bp:
+            print('backplane not up')
+        if not self.proc_bp:
+            print('wsgw not up')
+        if not self.proc_hwg:
+            print('pbgw not up')
+        valid_status = ['sleeping', 'running']
+        pid_list = [self.proc_bp, self.proc_awg, self.proc_hwg]
         # print('monitoring thread started')
         while not self.stop_event.is_set():
             bp = ws = pb = None
-            try:
-                bp = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
-                      if 'backplane' in p.info['name']]
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                # print('in thread backplane exception')
-                pass
-            try:
-                ws = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
-                      if 'wsgw' in p.info['name']]
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                # print('in thread wsgw exception')
-                pass
-            try:
-                pb = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
-                      if 'pbgw' in p.info['name']]
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                # print('in thread pbgw exception')
-                pass
-
-            if not bp:
-                self.start_backplane()
-
-            try:
-                if bp[0]['status'] == 'zombie':
-                    print('bp status is zombie - killing all')
+            all_pids = psutil.pids()
+            for pid in pid_list:
+                try:
+                    proc_info = psutil.Process(pid)
+                    status = proc_info.status()
+                    if status not in valid_status:
+                        print('bad status', pid, status)
+                        self.killall(bp, ws, pb)
+                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                    print('exception in loop')
                     self.killall(bp, ws, pb)
-            except IndexError:
-                pass
 
-            try:
-                z = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
-                     if 'wsgw' in p.info['name']]
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                # print('wsgw status is zombie - continuing')
-                continue
-
-            if not z:
-                print('no wsgw - killing all')
-                self.killall(bp, ws, pb)
-            try:
-                if z[0]['status'] == 'zombie':
-                    print('wsgw status is zombie - killing all')
-                    self.killall(bp, ws, pb)
-            except IndexError:
-                pass
-
-            try:
-                z = [p.info for p in psutil.process_iter(attrs=['pid', 'name', 'status'])
-                     if 'pbgw' in p.info['name']]
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                # print('pbgw status is zombie - continuing')
-                continue
-
-            if not z:
-                print('no pbgw - killing all')
-                self.killall(bp, ws, pb)
-
-            try:
-                if z[0]['status'] == 'zombie':
-                    print('pbgw status is zombie - killing all')
-                    self.killall(bp, ws, pb)
-            except IndexError:
-                pass
-
-            time.sleep(.1)
+            time.sleep(.3)
 
     def killall(self, b, w, p):
         """
@@ -190,7 +146,7 @@ class S3P(threading.Thread):
                 pass
             else:
                 try:
-                    print('killing websocket gatway')
+                    print('killing websocket gateway')
                     p.kill()
                 except:
                     print('exception in killing awg')
@@ -240,6 +196,7 @@ class S3P(threading.Thread):
                                                 stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                                 stdout=subprocess.PIPE).pid
             self.backplane_exists = True
+            print('backplane pid: ', self.proc_bp)
             print('Backplane is started...')
 
     def start_wsgw(self):
@@ -263,7 +220,7 @@ class S3P(threading.Thread):
             self.proc_awg = subprocess.Popen(wsgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
-            # print('wsgw pid = ', self.proc_awg)
+        print('wsgw pid = ', self.proc_awg)
             # print()
         print('WebSocket Gateway is started...')
 
@@ -290,7 +247,7 @@ class S3P(threading.Thread):
             self.proc_hwg = subprocess.Popen(pbgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
-            # print('pbgw pid = ', self.proc_hwg)
+        print('pbgw pid = ', self.proc_hwg)
         print('Picoboard Gateway is started...')
 
 
