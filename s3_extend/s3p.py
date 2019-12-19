@@ -106,7 +106,12 @@ class S3P(threading.Thread):
                     proc_info = psutil.Process(pid)
                     status = proc_info.status()
                     if status not in valid_status:
-                        print('bad status', pid, status)
+                        if pid == self.proc_bp:
+                            print('Backplane exited with status of: ', status)
+                        elif pid == self.proc_awg:
+                            print('Websocket Gateway exited with status of: ', status)
+                        else:
+                            print('Picoboard Gateway exited with status of: ', status)
                         self.killall(bp, ws, pb)
                 except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                     self.killall(bp, ws, pb)
@@ -170,7 +175,7 @@ class S3P(threading.Thread):
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                 pass
             if p.name() == "backplane":
-                print("Backplane already started.          PID = " + str(p.pid))
+                print("Backplane already started.\t\tPID = " + str(p.pid))
                 self.backplane_exists = True
                 self.proc_bp = p.pid
                 # print('bp pid = ', self.proc_bp)
@@ -188,7 +193,7 @@ class S3P(threading.Thread):
                                                 stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                                 stdout=subprocess.PIPE).pid
             self.backplane_exists = True
-            print("Backplane started.          PID = " + str(self.proc_bp))
+            print("Backplane started.\t\t\t\tPID = " + str(self.proc_bp))
 
     def start_wsgw(self):
         """
@@ -211,8 +216,7 @@ class S3P(threading.Thread):
             self.proc_awg = subprocess.Popen(wsgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
-        print('wsgw pid = ', self.proc_awg)
-        print("Websocket Gateway started.          PID = " + str(self.proc_awg))
+        print("Websocket Gateway started.\t\tPID = " + str(self.proc_awg))
 
     def start_pbgw(self):
         """
@@ -237,7 +241,7 @@ class S3P(threading.Thread):
             self.proc_hwg = subprocess.Popen(pbgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
-        print("Picoboard Gateway started.          PID = " + str(self.proc_hwg))
+        print("Picoboard Gateway started.\t\tPID = " + str(self.proc_hwg))
 
 
 def signal_handler(sig, frame):
