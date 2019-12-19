@@ -76,7 +76,8 @@ class ArduinoGateway(GatewayBaseAIO):
         # if user want to pass in a com port, then pass it in
         try:
             if com_port:
-                self.arduino = PymataExpress(loop=self.event_loop, com_port=com_port)
+                self.arduino = PymataExpress(loop=self.event_loop,
+                                             com_port=com_port)
             # if user wants to set an instance id, then pass it in
             elif arduino_instance_id:
                 self.arduino = PymataExpress(loop=self.event_loop,
@@ -445,7 +446,7 @@ def arduino_gateway():
                         help="None or IP address used by Back Plane")
     parser.add_argument("-c", dest="com_port", default="None",
                         help="Use this COM port instead of auto discovery")
-    parser.add_argument("-k", dest="keep_alive", default="False",
+    parser.add_argument("-k", dest="keep_alive", default="True",
                         help="Enable firmata-express keep-alive - set to True or False - default=False")
     parser.add_argument("-i", dest="arduino_instance_id", default="None",
                         help="Set an Arduino Instance ID and match it in FirmataExpress")

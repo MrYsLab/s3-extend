@@ -70,8 +70,8 @@ class S3P(threading.Thread):
         threading.Thread.__init__(self)
         self.daemon = True
         self.stop_event = threading.Event()
-        # print('Delaying start of monitor thread by 5 seconds...')
-        # time.sleep(5)
+
+        # allow thread to run
         self.stop_event.clear()
         self.start()
 
@@ -96,10 +96,11 @@ class S3P(threading.Thread):
             print('pbgw not up')
         valid_status = ['sleeping', 'running']
         pid_list = [self.proc_bp, self.proc_awg, self.proc_hwg]
-        # print('monitoring thread started')
+
+        # run the thread as long as stop event is clear
+        # stop event is set in the killall method
         while not self.stop_event.is_set():
             bp = ws = pb = None
-            all_pids = psutil.pids()
             for pid in pid_list:
                 try:
                     proc_info = psutil.Process(pid)
@@ -108,9 +109,7 @@ class S3P(threading.Thread):
                         print('bad status', pid, status)
                         self.killall(bp, ws, pb)
                 except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                    print('exception in loop')
                     self.killall(bp, ws, pb)
-
             time.sleep(.3)
 
     def killall(self, b, w, p):
@@ -120,15 +119,13 @@ class S3P(threading.Thread):
         :param w: websocket gateway
         :param p: picoboard gateway
         """
-        # print('in kill all', b,w,p)
-        # print('about to set stop_event')
+        # prevent loop from running for a clean exit
         self.stop_event.set()
         # check for missing processes
         if b:
             try:
                 p = psutil.Process(self.proc_bp)
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                # print('killall b exception')
                 pass
             else:
                 try:
@@ -141,8 +138,6 @@ class S3P(threading.Thread):
             try:
                 p = psutil.Process(self.proc_awg)
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-
-                # print('killall w exception')
                 pass
             else:
                 try:
@@ -155,8 +150,6 @@ class S3P(threading.Thread):
             try:
                 p = psutil.Process(self.proc_hwg)
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-
-                print('killall p exception')
                 pass
             else:
                 try:
@@ -175,7 +168,6 @@ class S3P(threading.Thread):
             try:
                 p = psutil.Process(pid)
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                print('start backplane zombie exception')
                 pass
             if p.name() == "backplane":
                 print("Backplane already started.          PID = " + str(p.pid))
@@ -196,8 +188,7 @@ class S3P(threading.Thread):
                                                 stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                                 stdout=subprocess.PIPE).pid
             self.backplane_exists = True
-            print('backplane pid: ', self.proc_bp)
-            print('Backplane is started...')
+            print("Backplane started.          PID = " + str(self.proc_bp))
 
     def start_wsgw(self):
         """
@@ -221,8 +212,7 @@ class S3P(threading.Thread):
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
         print('wsgw pid = ', self.proc_awg)
-            # print()
-        print('WebSocket Gateway is started...')
+        print("Websocket Gateway started.          PID = " + str(self.proc_awg))
 
     def start_pbgw(self):
         """
@@ -247,8 +237,7 @@ class S3P(threading.Thread):
             self.proc_hwg = subprocess.Popen(pbgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
-        print('pbgw pid = ', self.proc_hwg)
-        print('Picoboard Gateway is started...')
+        print("Picoboard Gateway started.          PID = " + str(self.proc_hwg))
 
 
 def signal_handler(sig, frame):

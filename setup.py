@@ -5,7 +5,7 @@ with open('pypi_desc.md') as f:
 
 setup(
     name='s3-extend',
-    version='1.8',
+    version='1.9',
     packages=[
       's3_extend',
       's3_extend.gateways'
