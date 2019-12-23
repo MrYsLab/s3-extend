@@ -1,0 +1,46 @@
+site_name: Scratch 3 OneGPIO Extensions
+markdown_extensions:
+    - tables
+
+nav:
+      - Welcome: index.md
+      - Preparing Your Computer:
+        - Verify/Install Python 3.7: python_3_7_install.md
+        - Verifying/Install pip3: pip_update.md
+        - Installing xterm: xterm.md
+        - Install s3-extend: s3-extend.md
+      - Preparing Your Micro-Controller:
+        - Arduino: arduino.md
+        - ESP-8266: esp-8266.md
+        - Raspberry Pi: rpi.md
+        - Picoboard: pico.md
+      - Ready, Set, Go:
+        - How To Use The OneGPIO Extensions: usage.md
+        - Starting the Python Extension Servers:
+          - Arduino: ext_ard.md
+          - ESP-8266: ext_esp.md
+          - Raspberry Pi: ext_rpi.md
+          - Picoboard: ext_pico.md
+        - Launching TheScratch 3 Editor:
+          - A Word About Browser Compatibility: browsers.md
+          - Starting Scratch3 Online: s3-web.md
+          - Starting Scratch3 Offline: s3-local.md
+        - Using OneGPIO Extension Blocks:
+          - Arduino: ard_blocks.md
+          - ESP-8266: esp_blocks.md
+          - Raspberry Pi: rpi_blocks.md
+          - Picoboard: pico_blocks.md
+      - Tips And Techinques:
+          - When In Doubt, Add A Small Delay: delay.md
+          - Running Multiple OneGPIO Extensions Simultaneously: multi.md
+      - A Peek Under The Hood:
+          - The OneGPIO Gateways and Launchers: under_the_hood.md
+      - Want To Contribute A Language Translation?:
+          - Contributing Block Translations: translate.md
+      - Acknowledgements:
+          - Thank You: acks.md
+      - Need Help?:
+        - Reporting Issues: issues.md
+
+
+theme: 'windmill'
