@@ -12,7 +12,7 @@ setup(
     ],
     install_requires=[
         'python-banyan>=3.8',
-        'pymata-express>=1.7'
+        'pymata-express>=1.8'
     ],
 
     entry_points={

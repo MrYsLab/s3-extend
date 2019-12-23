@@ -36,14 +36,12 @@ class S3P(threading.Thread):
     It will start the backplane, picoboard gateway and websocket gateway.
     """
 
-    def __init__(self, com_port=None, log=None):
+    def __init__(self, com_port=None):
         """
         :param com_port: Manually select serial com port
-        :param log: log unhandled exceptions.
         """
 
         self.com_port = com_port
-        self.log = log
 
         self.backplane_exists = False
 
@@ -174,11 +172,10 @@ class S3P(threading.Thread):
                 p = psutil.Process(pid)
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                 pass
-            if p.name() == "backplane":
-                print("Backplane already started.\t\tPID = " + str(p.pid))
+            if p.name() == 'backplane':
+                print('Backplane started.')
                 self.backplane_exists = True
                 self.proc_bp = p.pid
-                # print('bp pid = ', self.proc_bp)
             else:
                 continue
 
@@ -193,7 +190,7 @@ class S3P(threading.Thread):
                                                 stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                                 stdout=subprocess.PIPE).pid
             self.backplane_exists = True
-            print("Backplane started.\t\t\t\tPID = " + str(self.proc_bp))
+            print('Backplane started.')
 
     def start_wsgw(self):
         """
@@ -204,10 +201,6 @@ class S3P(threading.Thread):
         else:
             wsgw_start = ['wsgw', '-i', '9004']
 
-        if self.log:
-            wsgw_start.append('-l')
-            wsgw_start.append('True')
-
         if sys.platform.startswith('win32'):
             self.proc_awg = subprocess.Popen(wsgw_start,
                                              creationflags=subprocess.CREATE_NO_WINDOW).pid
@@ -216,7 +209,7 @@ class S3P(threading.Thread):
             self.proc_awg = subprocess.Popen(wsgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
-        print("Websocket Gateway started.\t\tPID = " + str(self.proc_awg))
+        print('Websocket Gateway started.')
 
     def start_pbgw(self):
         """
@@ -227,9 +220,6 @@ class S3P(threading.Thread):
         else:
             pbgw_start = ['pbgw']
 
-        if self.log:
-            pbgw_start.append('-l')
-            pbgw_start.append('True')
         if self.com_port:
             pbgw_start.append('-c')
             pbgw_start.append(self.com_port)
@@ -241,7 +231,7 @@ class S3P(threading.Thread):
             self.proc_hwg = subprocess.Popen(pbgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
-        print("Picoboard Gateway started.\t\tPID = " + str(self.proc_hwg))
+        print('Picoboard Gateway started.')
 
 
 def signal_handler(sig, frame):
@@ -256,23 +246,15 @@ def s3px():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", dest="com_port", default="None",
                         help="Use this COM port instead of auto discovery")
-    parser.add_argument("-l", dest="log", default="False",
-                        help="Set to True to turn logging on.")
 
     args = parser.parse_args()
-
-    log = args.log.lower()
-    if log == 'false':
-        log = False
-    else:
-        log = True
 
     if args.com_port == "None":
         com_port = None
     else:
         com_port = args.com_port
 
-    S3P(com_port=com_port, log=log)
+    S3P(com_port=com_port)
 
 
 # listen for SIGINT

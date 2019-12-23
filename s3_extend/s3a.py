@@ -31,19 +31,19 @@ import time
 class S3A(threading.Thread):
     """
     This class starts the Banyan server to support Scratch 3 OneGPIO
-    for the Picoboard
+    for the Arduino
 
-    It will start the backplane, picoboard gateway and websocket gateway.
+    It will start the backplane, arduino gateway and websocket gateway.
     """
 
-    def __init__(self, com_port=None, arduino_instance_id=None, log=None):
+    def __init__(self, com_port=None, arduino_instance_id=None):
         """
-        :param com_port: Manually select serial com port
-        :param log: log unhandled exceptions.
+
+        :param com_port:
+        :param arduino_instance_id:
         """
 
         self.com_port = com_port
-        self.log = log
 
         self.backplane_exists = False
 
@@ -59,7 +59,7 @@ class S3A(threading.Thread):
         # start the websocket gateway
         self.start_wsgw()
 
-        # start picoboard gateway
+        # start arduino gateway
         self.start_hwgw()
 
         atexit.register(self.killall, self.proc_bp, self.proc_awg, self.proc_hwg)
@@ -175,8 +175,8 @@ class S3A(threading.Thread):
                 p = psutil.Process(pid)
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                 pass
-            if p.name() == "backplane":
-                print("Backplane already started.\t\tPID = " + str(p.pid))
+            if p.name() == 'backplane':
+                print('Backplane started.')
                 self.backplane_exists = True
                 self.proc_bp = p.pid
                 # print('bp pid = ', self.proc_bp)
@@ -194,7 +194,7 @@ class S3A(threading.Thread):
                                                 stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                                 stdout=subprocess.PIPE).pid
             self.backplane_exists = True
-            print("Backplane started.\t\t\t\tPID = " + str(self.proc_bp))
+            print('Backplane started.')
 
     def start_wsgw(self):
         """
@@ -205,10 +205,6 @@ class S3A(threading.Thread):
         else:
             wsgw_start = ['wsgw']
 
-        if self.log:
-            wsgw_start.append('-l')
-            wsgw_start.append('True')
-
         if sys.platform.startswith('win32'):
             self.proc_awg = subprocess.Popen(wsgw_start,
                                              creationflags=subprocess.CREATE_NO_WINDOW).pid
@@ -217,7 +213,7 @@ class S3A(threading.Thread):
             self.proc_awg = subprocess.Popen(wsgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
-        print("Websocket Gateway started.\t\tPID = " + str(self.proc_awg))
+        print('Websocket Gateway started.')
 
     def start_hwgw(self):
         """
@@ -228,9 +224,6 @@ class S3A(threading.Thread):
         else:
             hwgw_start = ['ardgw']
 
-        if self.log:
-            hwgw_start.append('-l')
-            hwgw_start.append('True')
         if self.com_port:
             hwgw_start.append('-c')
             hwgw_start.append(self.com_port)
@@ -242,7 +235,7 @@ class S3A(threading.Thread):
             self.proc_hwg = subprocess.Popen(hwgw_start,
                                              stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                              stdout=subprocess.PIPE).pid
-        print("Arduino Gateway started.\t\tPID = " + str(self.proc_hwg))
+        print('Arduino Gateway started.')
         seconds = 5
         while seconds >= 0:
             print('\rPlease wait ' + str(seconds) + ' seconds for Arduino to initialize...', end='')
@@ -262,16 +255,7 @@ def s3ax():
                         help="Use this COM port instead of auto discovery")
     parser.add_argument("-i", dest="arduino_instance_id", default="None",
                         help="Set an Arduino Instance ID and match it in FirmataExpress")
-    parser.add_argument("-l", dest="log", default="False",
-                        help="Set to True to turn logging on.")
-
     args = parser.parse_args()
-
-    log = args.log.lower()
-    if log == 'false':
-        log = False
-    else:
-        log = True
 
     if args.com_port == "None":
         com_port = None
@@ -286,7 +270,7 @@ def s3ax():
     if com_port and arduino_instance_id:
         raise RuntimeError('Both com_port arduino_instance_id were set. Only one is allowed')
 
-    S3A(com_port=com_port, arduino_instance_id=args.arduino_instance_id, log=log)
+    S3A(com_port=com_port, arduino_instance_id=args.arduino_instance_id)
 
 
 # listen for SIGINT
