@@ -125,8 +125,6 @@ class PicoboardGateway(BanyanBase):
             if self.find_the_picoboard():
                 print('picoboard found on:', self.picoboard.port)
             else:
-                print('Please wait 5 seconds...')
-                time.sleep(5)
                 if not self.find_the_picoboard():
                     print('Cannot find Picoboard')
                     sys.exit()
@@ -221,13 +219,17 @@ class PicoboardGateway(BanyanBase):
                 except (KeyboardInterrupt, serial.SerialException):
                     sys.exit()
 
-                not_done = True
-                while not_done:
+                try_count = 10
+                while try_count:
                     num_bytes = self.picoboard.in_waiting
                     if num_bytes < 18:
                         try:
                             self.picoboard.write(self.poll_byte)
-                            time.sleep(.5)
+                            time.sleep(.2)
+                            try_count -= 1
+                            print(try_count)
+                            if not try_count:
+                                return False
                         except (KeyboardInterrupt, serial.SerialException):
                             sys.exit()
                     # check the first 2 bytes for channel 0 or f
