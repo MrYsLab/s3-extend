@@ -7,7 +7,6 @@ nav:
       - Preparing Your Computer:
         - Verify/Install Python 3.7: python_3_7_install.md
         - Verifying/Install pip3: pip_update.md
-        - Installing xterm: xterm.md
         - Install s3-extend: s3-extend.md
       - Preparing Your Micro-Controller:
         - Arduino: arduino.md

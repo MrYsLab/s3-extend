@@ -22,12 +22,6 @@ the specific micro-controller:
 *  **s3p** - for the Picoboard
    * **s3r** - for the Raspberry Pi
    
-   For the Arduino, ESP-8266, and Raspberry Pi, you should see two
-   additional terminal windows appear on your computer's screen for each
-   micro-controller you are using.
-   
-   For the Picoboard, no additional windows are opened.
-   
    Note: You may run a single micro-controller or all simultaneously,
    but only one instance of a micro-controller at a time. For example,
    you may run a Raspberry Pi and an Arduino, and use one to control the
@@ -35,14 +29,12 @@ the specific micro-controller:
    
 **Step 4:** Start Scratch 3, select an extension, and create and run
 your Scratch scripts. If you are using the ESP-8266 Extension, when
-Scratch is connected to the ESP-8266, the red LED on the ESP-8266
+Scratch is connected to the ESP-8266 by using the **ESP-8266 Connect IP Address** block, the red LED on the ESP-8266
 NodeMCU is extinguished, indicating a successful connection.
 
 **Step 5:** To power down, dismiss the OneGPIO server by going to the
 window opened in step 3 and pressing Control-C. You may need to do this
-twice. For some operating systems, you may also need to enter Control-C
-if two windows were automatically opened in step 3. Remove power from
-the micro-controller, and finally dismiss the Web Browser tab running
+twice. Finally, dismiss the Web Browser tab running
 Scratch 3.
 
 

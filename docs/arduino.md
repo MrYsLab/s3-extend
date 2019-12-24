@@ -1,10 +1,10 @@
 
 # FirmataExpress Installation Instructions
 
-The Scratch 3 OneGPIO extension for the Arduino Uno takes advantage of
-[pymata-express](https://mryslab.github.io/pymata-express/), to control
-and monitor your Arduino. The s3-extend installation, executed 
-previously, installed pymata-express.
+When s3-extend is installed using pip, a package called
+[pymata-express](https://mryslab.github.io/pymata-express/) is automatically installed
+alongside it. The pymata-express package is used to control
+and monitor your Arduino. 
 
 Pymata-express requires a specialized
 [Firmata ](https://github.com/firmata/protocol)sketch, called
