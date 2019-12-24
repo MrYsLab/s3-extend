@@ -1,10 +1,14 @@
 
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">OneGPIO Scratch 3 Extensions For</div>
-
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:4.0em">Arduino, Raspberry Pi </div>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:4.0em">ESP-8266, and Picoboard</div>
+<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">Installation And Usage Guide</div>
 <br>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">Installation And Usage</div>
+
+
+
+<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">Arduino, Raspberry Pi </div>
+<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">ESP-8266, and Picoboard</div>
+<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">OneGPIO Scratch 3 Extensions</div>
+
+<br>
 
 <br>
 <img src ="images/extensions.png">

@@ -13,58 +13,61 @@ s3a
 <img src="../images/s3a-1.png" >
 
 This command automatically starts the Python Banyan Backplane, and both
-the Banyan WebSocket and Banyan Arduino Gateways. The s3a command will
-automatically open two other windows, one for the Arduino Gateway, and
-the other for the Web Socket Gateway.
+the Banyan WebSocket and Banyan Arduino Gateways. It starts an automatic 5-second
+countdown timer to allow the Arduino adequate time to reset itself and start the 
+Firmata-Express sketch.
 
-Visit "A Peek Under The Hood" for more information about the Backplane and Gateways.
+To learn more about the Backplane and Gateways, visit "A Peek Under The Hood"
+ for more information.
+
+
+After the countdown time completes, the terminal window indicates that the Arduino
+is initialized. You may now start Scratch 3 in your Web browser, as explained in the
+"Launching Scratch 3" section of this document.
 
 <img src="../images/s3a-2.png" > 
 
-The Arduino Gateway window displays a Banyan information header,
-including the Arduino's com port. Note that it will take about four 
-seconds for the Arduino Gateway to perform board discovery.
 
-<img src="../images/s3a-3.png" >
+## Manually Specifying The COM Port
 
-The WebSocket Gateway displays an informational banner with the
-WebSocket IP address and port number in use.
+The Arduino Gateway will automatically discover the COM port that the Arduino Gateway
+is using. 
 
-You may now start Scratch 3 in your Web browser, as explained in the
-"Launching Scratch 3" section of this document.
+If you wish to manually specify the COM port, use the **_-c_** command-line option
+when starting s3a.
 
-If you wish to specify a COM port manually, then start s3a with a 
--c command-line option:
+For example, if you are using Windows and the COM port you wish to use is COM6, then,
+start s3a with the following command:
 
 ```
 s3a -c COM6
 ```
 
-If you wish to use the
+For Linux or macOS, use the COM port designator specific to your operating system. 
+For example, if the COM port is /dev/ttyACM0, then start s3a with the following command:
+
+```
+s3a -c /dev/ttyACM0
+```
+
+## Manually Specifying An Arduino Instance
+
+If you have multiple Arduino's plugged into your computer, you can explicitly
+tell s3a which one to use by taking advantage of the 
 [pymata-express Arduino Instance Id Feature,](https://mryslab.github.io/pymata-express/firmata_express/)
-you may do so using the -i command-line option:
+
+You may do so using the **_-i_** command-line option:
 
 ```
 s3a -i 2
 ```
 
-If you wish to turn on logging, use the -l command-line option
-
-```
-s3a -l True
-```
-
-There are two possible logs that will be placed in your home directory,
-ardgw.log and wsgw.log.
-
 ## Troubleshooting
 
-Only use a high-quality USB cable. Make sure that the USB cable you are
-using is fully plugged into your computer and the Arduino. If only one
-or none of the Gateway windows stay open, dismiss s3a by pressing
-Control-C and dismiss the terminal window.
+Only use a high-quality USB cable. Verify that you properly connected the cable to both your computer and the Arduino. 
+If s3a detects an error in either the backplane or the two gateways, it will shut itself down. 
 
-Open a new terminal and type:
+To troubleshoot why this may be happening, open a new terminal window and type:
 
 ```
 backplane
@@ -80,8 +83,10 @@ Next, open an additional terminal window and type:
 ```
 ardgw
 ```
-You should see a window similar to the one shown above for the Arduino
-Gateway when the s3a command succeeds.
+
+<img src="../images/ardgw_success.png" >
+
+You should see a window similar to the one shown above.
 
 If you do not, make sure that you've flashed the Arduino with the
 FirmataExpress sketch, as explained in the "Preparing Your
@@ -95,8 +100,10 @@ Next, open a third terminal window and type:
 ```
 wsgw
 ```
-You should see a window similar to the one shown above for the WebSocket
-Gateway when the s3a command succeeds. 
+
+<img src="../images/wsgwa_success.png" >
+
+You should see a window similar to the one shown above.
 
 If there are exceptions or errors in any of the terminal windows,
 [create an issue against the s3-extend distribution](https://github.com/MrYsLab/s3-extend/issues)

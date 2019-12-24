@@ -13,29 +13,15 @@ s3e
 <img src="../images/s3e-1.png" >
 
 This command automatically starts the Python Banyan Backplane, and both
-the Banyan WebSocket and Banyan ESP-8266 Gateways. The s3e command will
-automatically open two other windows, one for the ESP-8266 Gateway, and
-the other for the Web Socket Gateway.
-
-Visit "A Peek Under The Hood" for more information about the Backplane and Gateways.
-
-<img src="../images/s3e-2.png" > 
-
-The ESP-8266 Gateway window displays a Banyan information header
-
-<img src="../images/s3e-3.png" >
-
-The WebSocket Gateway displays an informational banner with the
-WebSocket IP address and port number in use.
+the Banyan WebSocket and Banyan ESP-8266 Gateways. 
 
 You may now start Scratch 3 in your Web browser, as explained in the
 "Launching Scratch 3" section of this document.
 
 ## Troubleshooting
-If only one or none of the Gateway windows stay open, dismiss s3e by
-pressing Control-C and dismiss the terminal window.
+If the command window does not look similar to the one above, 
+open a new terminal and type:
 
-Open a new terminal and type:
 
 ```
 backplane
@@ -49,8 +35,11 @@ the one shown.
 Next, open an additional terminal window and type:
 
 ```
-espgw
+espgw -w True
 ```
+
+<img src="../images/s3e-2.png" >
+
 You should see a window similar to the one shown above for the ESP-8266
 Gateway when the s3e command succeeds.
 
@@ -61,8 +50,11 @@ the "Preparing Your Micro-Controller" section of this document.
 Next, open a third terminal window and type:
 
 ```
-wsgw
+wsgw -i 9002
 ```
+
+<img src="../images/s3e-3.png" >
+
 You should see a window similar to the one shown above for the WebSocket
 Gateway when the s3e command succeeds. 
 
