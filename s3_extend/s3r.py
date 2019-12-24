@@ -90,7 +90,7 @@ class S3R(threading.Thread):
             print('wsgw not up')
         if not self.proc_hwg:
             print('rpigw not up')
-        valid_status = ['sleeping', 'running']
+        valid_status = ['sleeping', 'running', 'disk-sleep']
         pid_list = [self.proc_bp, self.proc_awg, self.proc_hwg]
 
         # run the thread as long as stop event is clear
