@@ -125,9 +125,9 @@ class PicoboardGateway(BanyanBase):
             if self.find_the_picoboard():
                 print('picoboard found on:', self.picoboard.port)
             else:
-                if not self.find_the_picoboard():
-                    print('Cannot find Picoboard')
-                    sys.exit()
+                # if not self.find_the_picoboard():
+                print('Cannot find Picoboard')
+                sys.exit()
 
         # allow thread time to start
         time.sleep(.2)
@@ -189,7 +189,6 @@ class PicoboardGateway(BanyanBase):
                     self.payload['report'].append(cooked)
 
             self.publish_payload(self.payload, self.publisher_topic)
-            # print(self.payload)
             self.payload = {'report': []}
             self.picoboard.write(self.poll_byte)
 
@@ -227,9 +226,9 @@ class PicoboardGateway(BanyanBase):
                             self.picoboard.write(self.poll_byte)
                             time.sleep(.2)
                             try_count -= 1
-                            print(try_count)
                             if not try_count:
-                                return False
+                                # return False
+                                continue
                         except (KeyboardInterrupt, serial.SerialException):
                             sys.exit()
                     # check the first 2 bytes for channel 0 or f
