@@ -14,8 +14,8 @@ Ethernet address in the Remote IP Address block.
 
 NOTE: It is recommended that if you wish to access a Raspberry Pi using
 a remote browser, that you install and use the off-line version of the
-Scratch 3 OneGPIO editor. This is because using the on-line version will
-most likely result in a security error.
+Scratch 3 OneGPIO editor. The reason is, using an on-line version 
+will most likely result in a security error.
 
 ### Command Blocks
 

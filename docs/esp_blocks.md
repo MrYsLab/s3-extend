@@ -20,6 +20,8 @@ used once.
 
 <img src="../images/esp_ip.png" >
 
+When Scratch executes this block, the red LED on the ESP-8266 should
+turn off, indicating a successful connection.
 
 #### Write Digital
 This block allows you to select a pin and set its output to either a one

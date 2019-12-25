@@ -21,7 +21,7 @@ extensions, you simply update the
 [translate.txt file.](https://github.com/MrYsLab/s3onegpio/blob/master/translations/translations.txt)
 For the Picoboard, you update the
 [picoboard.txt file.](https://github.com/MrYsLab/s3onegpio/blob/master/translations/picoboard.txt)
-You then either generate a GitHub pull request or if you are unfamiliar
+You then either generate a GitHub pull request, or if you are unfamiliar
 with Git and pull requests, submit it as an issue to
 [https://github.com/MrYsLab/s3onegpio/issues.](https://github.com/MrYsLab/s3onegpio/issues)
 If you submit the translation as an issue, please call the issue:

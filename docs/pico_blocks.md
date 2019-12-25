@@ -1,5 +1,8 @@
 ## The Picoboard Blocks
 
+The blocks consist of a set of HAT blocks that have a bump at the left top,
+boolean blocks that have pointed ends, and reporter blocks that are rounded in shape.
+
 <img src="../images/pico_blocks_en.png" >
 
 And the blocks translated to Taiwanese
@@ -8,6 +11,9 @@ And the blocks translated to Taiwanese
 
 
 ## HAT Blocks
+
+HAT blocks test for a specific condition. When that condition is met for
+the first time, all of the blocks under the HAT block execute.
 
 ### When The Selected SENSOR Is Less Or Greater Than A Value
 This block allows you to select a sensor type, a comparison type, and a
@@ -29,6 +35,8 @@ below this block are executed once.
 
 ## Boolean Blocks
 
+Boolean blocks test for a specific condition and return either True or False.
+
 ### Is Button Pressed
 When the button is pressed, this blocks returns True. If the button is
 not pressed, it returns FALSE.
@@ -39,6 +47,8 @@ value for the comparison. It returns TRUE when the comparison is true
 and FALSE when the comparison is false.
 
 ## Reporter Blocks
+
+Reporter blocks retrieve the current value for a selected sensor.
 
 ### SENSOR Current Value
 This block reports the current value of the selected sensor.
