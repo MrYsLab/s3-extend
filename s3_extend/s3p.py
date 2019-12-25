@@ -98,21 +98,21 @@ class S3P(threading.Thread):
         # run the thread as long as stop event is clear
         # stop event is set in the killall method
         while not self.stop_event.is_set():
-            bp = ws = pb = None
             for pid in pid_list:
                 try:
                     proc_info = psutil.Process(pid)
-                    status = proc_info.status()
-                    if status not in valid_status:
-                        if pid == self.proc_bp:
-                            print('Backplane exited with status of: ', status)
-                        elif pid == self.proc_awg:
-                            print('Websocket Gateway exited with status of: ', status)
-                        else:
-                            print('Picoboard Gateway exited with status of: ', status)
-                        self.killall(bp, ws, pb)
                 except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                    self.killall(bp, ws, pb)
+                    continue
+                status = proc_info.status()
+                if status not in valid_status:
+                    if pid == self.proc_bp:
+                        print('Backplane exited with status of: ', status)
+                    elif pid == self.proc_awg:
+                        print('Websocket Gateway exited with status of: ', status)
+                    else:
+                        print('Picoboard Gateway exited with status of: ', status)
+                    self.killall(*pid_list)
+
             time.sleep(.3)
 
     def killall(self, b, w, p):
