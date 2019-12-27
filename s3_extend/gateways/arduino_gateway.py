@@ -514,7 +514,8 @@ def arduino_gateway():
     except (KeyboardInterrupt, asyncio.CancelledError, RuntimeError):
         if app.log:
             logging.exception("Exception occurred", exc_info=True)
-        loop.run_until_complete(app.arduino.shutdown())
+        loop.stop()
+        loop.close()
         sys.exit(0)
 
 

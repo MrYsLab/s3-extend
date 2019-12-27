@@ -17,18 +17,18 @@
 """
 import argparse
 import atexit
-import psutil
 import signal
 import subprocess
 import sys
-import threading
 import time
+
+import psutil
 
 
 # import webbrowser
 
 
-class S3P(threading.Thread):
+class S3P:
     """
     This class starts the Banyan server to support Scratch 3 OneGPIO
     for the Picoboard
@@ -43,195 +43,152 @@ class S3P(threading.Thread):
 
         self.com_port = com_port
 
-        self.backplane_exists = False
-
-        # pids of processes
+        # psutil pids
         self.proc_bp = None
         self.proc_awg = None
         self.proc_hwg = None
 
-        # start backplane
-        self.start_backplane()
-        time.sleep(1)
+        atexit.register(self.killall)
 
-        # start the websocket gateway
-        self.start_wsgw()
+        # start backplane
+        self.proc_bp = self.start_backplane()
+        if self.proc_bp:
+            print('backplane started: ')
+
+        else:
+            print('backplane start failed - exiting')
+            sys.exit(0)
+
+        self.proc_awg = self.start_wsgw()
+        if self.proc_awg:
+            print('Websocket Gateway started: ')
+        else:
+            print('WebSocket Gateway start failed - exiting')
+            sys.exit(0)
 
         # start picoboard gateway
-        self.start_pbgw()
-
-        atexit.register(self.killall, self.proc_bp, self.proc_awg, self.proc_hwg)
+        self.proc_hwg = self.start_pbgw()
+        if self.proc_hwg:
+            print('Picoboard Gateway started ')
+        else:
+            print('Picobard Gateway start failed - exiting')
+            sys.exit(0)
 
         # webbrowser.open('https://mryslab.github.io/s3onegpio/', new=1)
 
-        # start the thread to check if processes are still alive
-        threading.Thread.__init__(self)
-        self.daemon = True
-        self.stop_event = threading.Event()
-
-        # allow thread to run
-        self.stop_event.clear()
-        self.start()
-
         while True:
-            if self.stop_event.is_set():
-                print('Exiting. Error detected - is your Picoboard plugged in?')
-                sys.exit(0)
             try:
-                time.sleep(.01)
+                if self.proc_bp.poll() is not None:
+                    self.proc_bp = None
+                    print('backplane exited...')
+                    self.killall()
+                if self.proc_awg.poll() is not None:
+                    self.proc_awg = None
+                    print('Websocket Gateway exited...')
+                    self.killall()
+                if self.proc_hwg.poll() is not None:
+                    self.proc_hwg = None
+                    print('Picoboard Gateway exited. Is your Picoboard plugged in?')
+                    self.killall()
+
+                # allow some time between polls
+                time.sleep(.4)
             except KeyboardInterrupt:
-                sys.exit(0)
+                self.killall()
 
-    def run(self):
+    def killall(self):
         """
-        The thread code to monitor if all processes are still alive.
-        """
-        if not self.proc_bp:
-            print('backplane not up')
-        if not self.proc_bp:
-            print('wsgw not up')
-        if not self.proc_hwg:
-            print('pbgw not up')
-        valid_status = ['sleeping', 'running', 'disk-sleep']
-        pid_list = [self.proc_bp, self.proc_awg, self.proc_hwg]
-
-        # run the thread as long as stop event is clear
-        # stop event is set in the killall method
-        while not self.stop_event.is_set():
-            for pid in pid_list:
-                try:
-                    proc_info = psutil.Process(pid)
-                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                    continue
-                status = proc_info.status()
-                if status not in valid_status:
-                    if pid == self.proc_bp:
-                        print('Backplane exited with status of: ', status)
-                    elif pid == self.proc_awg:
-                        print('Websocket Gateway exited with status of: ', status)
-                    else:
-                        print('Picoboard Gateway exited with status of: ', status)
-                    self.killall(*pid_list)
-
-            time.sleep(.3)
-
-    def killall(self, b, w, p):
-        """
-        Kill all running or zombie processes
-        :param b: backplane
-        :param w: websocket gateway
-        :param p: picoboard gateway
+        Kill all running processes
         """
         # prevent loop from running for a clean exit
-        self.stop_event.set()
+        # self.stop_event.set()
         # check for missing processes
-        if b:
+        if self.proc_bp:
             try:
-                p = psutil.Process(self.proc_bp)
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                if sys.platform.startswith('win32'):
+                    subprocess.run(['taskkill', '/F', '/t', '/PID', str(self.proc_bp.pid)],
+                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                 subprocess.CREATE_NO_WINDOW
+                                   )
+                else:
+                    self.proc_bp.kill()
+                self.proc_bp = None
+            except:
                 pass
-            else:
-                try:
-                    print('killing backplane')
-                    p.kill()
-                except:
-                    print('exception in killing backplane')
-                    pass
-        if w:
+        if self.proc_awg:
             try:
-                p = psutil.Process(self.proc_awg)
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                if sys.platform.startswith('win32'):
+                    subprocess.run(['taskkill', '/F', '/t', '/pid', str(self.proc_awg.pid)],
+                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                 subprocess.CREATE_NO_WINDOW
+                                   )
+                else:
+                    self.proc_awg.kill()
+                self.proc_awg = None
+            except:
                 pass
-            else:
-                try:
-                    print('killing websocket gateway')
-                    p.kill()
-                except:
-                    print('exception in killing awg')
-                    pass
-        if p:
+        if self.proc_hwg:
             try:
-                p = psutil.Process(self.proc_hwg)
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                if sys.platform.startswith('win32'):
+                    subprocess.run(['taskkill', '/F', '/t', '/PID', str(self.proc_hwg.pid)],
+                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                 subprocess.CREATE_NO_WINDOW
+                                   )
+                else:
+                    self.proc_hwg.kill()
+                self.proc_hwg = None
+            except:
                 pass
-            else:
-                try:
-                    print('killing picoboard gateway')
-                    p.kill()
-                except:
-                    print('exception in killing pbgw')
-                    pass
+        sys.exit(0)
 
     def start_backplane(self):
         """
         Start the backplane
         """
-        p = None
-        for pid in psutil.pids():
-            try:
-                p = psutil.Process(pid)
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                pass
-            if p.name() == 'backplane':
-                print('Backplane started.')
-                self.backplane_exists = True
-                self.proc_bp = p.pid
-            else:
-                continue
 
-        # if backplane is not already running, start a new instance
-        if not self.backplane_exists:
-            if sys.platform.startswith('win32'):
-                self.proc_bp = subprocess.Popen('backplane',
-                                                creationflags=subprocess.CREATE_NO_WINDOW).pid
+        # check to see if the backplane is already running
+        try:
+            for proc in psutil.process_iter(attrs=['pid', 'name']):
+                if 'backplane' in proc.info['name']:
+                    # its running - return its pid
+                    return proc
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
 
-            else:
-                self.proc_bp = subprocess.Popen('backplane',
-                                                stdin=subprocess.PIPE, stderr=subprocess.PIPE,
-                                                stdout=subprocess.PIPE).pid
-            self.backplane_exists = True
-            print('Backplane started.')
+        # backplane is not running, so start one
+        if sys.platform.startswith('win32'):
+            return subprocess.Popen(['backplane'],
+                                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                  subprocess.CREATE_NO_WINDOW)
+        else:
+            return subprocess.Popen(['backplane'],
+                                    stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    stdout=subprocess.PIPE)
 
     def start_wsgw(self):
         """
         Start the websocket gateway
         """
         if sys.platform.startswith('win32'):
-            wsgw_start = ['wsgw', '-i', '9004']
+            return subprocess.Popen(['wsgw', '-i', '9004'],
+                                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
+                                                  |
+                                                  subprocess.CREATE_NO_WINDOW)
         else:
-            wsgw_start = ['wsgw', '-i', '9004']
-
-        if sys.platform.startswith('win32'):
-            self.proc_awg = subprocess.Popen(wsgw_start,
-                                             creationflags=subprocess.CREATE_NO_WINDOW).pid
-
-        else:
-            self.proc_awg = subprocess.Popen(wsgw_start,
-                                             stdin=subprocess.PIPE, stderr=subprocess.PIPE,
-                                             stdout=subprocess.PIPE).pid
-        print('Websocket Gateway started.')
+            return subprocess.Popen(['wsgw', '-i', '9004'],
+                                    stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    stdout=subprocess.PIPE)
 
     def start_pbgw(self):
         """
         Start the picoboard gateway
         """
         if sys.platform.startswith('win32'):
-            pbgw_start = ['pbgw']
+            return subprocess.Popen(['pbgw'], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                            subprocess.CREATE_NO_WINDOW)
         else:
-            pbgw_start = ['pbgw']
-
-        if self.com_port:
-            pbgw_start.append('-c')
-            pbgw_start.append(self.com_port)
-
-        if sys.platform.startswith('win32'):
-            self.proc_hwg = subprocess.Popen(pbgw_start,
-                                             creationflags=subprocess.CREATE_NO_WINDOW).pid
-        else:
-            self.proc_hwg = subprocess.Popen(pbgw_start,
-                                             stdin=subprocess.PIPE, stderr=subprocess.PIPE,
-                                             stdout=subprocess.PIPE).pid
-        print('Picoboard Gateway started.')
+            return subprocess.Popen(['pbgw'], stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    stdout=subprocess.PIPE)
 
 
 def signal_handler(sig, frame):
@@ -241,8 +198,8 @@ def signal_handler(sig, frame):
 
 def s3px():
     """
-    Start the s3p script
-    """
+     Start the s3p script
+     """
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", dest="com_port", default="None",
                         help="Use this COM port instead of auto discovery")
