@@ -65,6 +65,10 @@ class WsGateway(BanyanBaseAIO):
         # set up logging if requested
         self.log = log
         self.event_loop = event_loop
+
+        # a kludge to shutdown the socket on control C
+        self.wsocket = None
+
         if self.log:
             fn = str(pathlib.Path.home()) + "/wsgw.log"
             self.logger = logging.getLogger(__name__)
@@ -92,13 +96,28 @@ class WsGateway(BanyanBaseAIO):
                   + ':' + self.server_ip_port)
             # start the websocket server and call the main task, wsg
             self.event_loop.run_until_complete(self.start_server)
+            self.event_loop.create_task(self.wakeup())
             self.event_loop.run_forever()
         except (websockets.exceptions.ConnectionClosed,
                 RuntimeError,
                 KeyboardInterrupt):
             if self.log:
                 logging.exception("Exception occurred", exc_info=True)
+            self.event_loop.stop()
+            self.event_loop.close()
             sys.exit()
+
+    async def wakeup(self):
+        while True:
+            try:
+                await asyncio.sleep(1)
+            except KeyboardInterrupt:
+                for task in asyncio.Task.all_tasks():
+                    task.cancel()
+                await self.wsocket.close()
+                self.event_loop.stop()
+                self.event_loop.close()
+                sys.exit(0)
 
     async def wsg(self, websocket, path):
         """
@@ -108,6 +127,7 @@ class WsGateway(BanyanBaseAIO):
         :param path: required, but unused
         :return:
         """
+        self.wsocket = websocket
         # start up banyan
         await self.begin()
 
@@ -253,7 +273,15 @@ def ws_gateway():
 
     loop = asyncio.get_event_loop()
 
-    WsGateway(subscription_list, **kw_options, event_loop=loop)
+    try:
+        WsGateway(subscription_list, **kw_options, event_loop=loop)
+    except KeyboardInterrupt:
+        for task in asyncio.Task.all_tasks():
+            task.cancel()
+        loop.stop()
+        loop.close()
+        sys.exit(0)
+
 
 
 def signal_handler(sig, frame):

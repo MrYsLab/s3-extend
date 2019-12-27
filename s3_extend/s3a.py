@@ -77,7 +77,8 @@ class S3A:
                 print('\rPlease wait ' + str(seconds) + ' seconds for Arduino to initialize...', end='')
                 time.sleep(1)
                 seconds -= 1
-            print('\rArduino is initialized.')
+            print()
+            print('Arduino is initialized.')
         else:
             print('Arduino Gateway start failed - exiting')
             sys.exit(0)
@@ -109,7 +110,6 @@ class S3A:
         Kill all running processes
         """
         # prevent loop from running for a clean exit
-        # self.stop_event.set()
         # check for missing processes
         if self.proc_bp:
             try:
