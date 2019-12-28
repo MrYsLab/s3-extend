@@ -94,10 +94,14 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     
 
     <h2 id="the-picoboard-blocks">The Picoboard Blocks</h2>
+<p>The blocks consist of a set of HAT blocks that have a bump at the left top,
+boolean blocks that have pointed ends, and reporter blocks that are rounded in shape.</p>
 <p><img src="../images/pico_blocks_en.png" ></p>
 <p>And the blocks translated to Taiwanese</p>
 <p><img src="../images/pico_blocks_tw.png" ></p>
 <h2 id="hat-blocks">HAT Blocks</h2>
+<p>HAT blocks test for a specific condition. When that condition is met for
+the first time, all of the blocks under the HAT block execute.</p>
 <h3 id="when-the-selected-sensor-is-less-or-greater-than-a-value">When The Selected SENSOR Is Less Or Greater Than A Value</h3>
 <p>This block allows you to select a sensor type, a comparison type, and a
 value for the comparison.</p>
@@ -112,6 +116,7 @@ are executed once.</p>
 value is within the specified range. If it is, then all of the blocks
 below this block are executed once.</p>
 <h2 id="boolean-blocks">Boolean Blocks</h2>
+<p>Boolean blocks test for a specific condition and return either True or False.</p>
 <h3 id="is-button-pressed">Is Button Pressed</h3>
 <p>When the button is pressed, this blocks returns True. If the button is
 not pressed, it returns FALSE.</p>
@@ -120,6 +125,7 @@ not pressed, it returns FALSE.</p>
 value for the comparison. It returns TRUE when the comparison is true
 and FALSE when the comparison is false.</p>
 <h2 id="reporter-blocks">Reporter Blocks</h2>
+<p>Reporter blocks retrieve the current value for a selected sensor.</p>
 <h3 id="sensor-current-value">SENSOR Current Value</h3>
 <p>This block reports the current value of the selected sensor.</p>
 <h3 id="convert-sensor-to-a-specified-range">Convert SENSOR To A Specified Range</h3>

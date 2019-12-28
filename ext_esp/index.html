@@ -92,21 +92,12 @@ then stay continually on. </p>
 <p><br>
 <img src="../images/s3e-1.png" ></p>
 <p>This command automatically starts the Python Banyan Backplane, and both
-the Banyan WebSocket and Banyan ESP-8266 Gateways. The s3e command will
-automatically open two other windows, one for the ESP-8266 Gateway, and
-the other for the Web Socket Gateway.</p>
-<p>Visit "A Peek Under The Hood" for more information about the Backplane and Gateways.</p>
-<p><img src="../images/s3e-2.png" > </p>
-<p>The ESP-8266 Gateway window displays a Banyan information header</p>
-<p><img src="../images/s3e-3.png" ></p>
-<p>The WebSocket Gateway displays an informational banner with the
-WebSocket IP address and port number in use.</p>
+the Banyan WebSocket and Banyan ESP-8266 Gateways. </p>
 <p>You may now start Scratch 3 in your Web browser, as explained in the
 "Launching Scratch 3" section of this document.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
-<p>If only one or none of the Gateway windows stay open, dismiss s3e by
-pressing Control-C and dismiss the terminal window.</p>
-<p>Open a new terminal and type:</p>
+<p>If the command window does not look similar to the one above, 
+open a new terminal and type:</p>
 <pre><code>backplane
 </code></pre>
 
@@ -115,18 +106,20 @@ backplane is running correctly. The IP address does not need to match
 the one shown.</p>
 <p><img src="../images/backplane.png" ></p>
 <p>Next, open an additional terminal window and type:</p>
-<pre><code>espgw
+<pre><code>espgw -w True
 </code></pre>
 
+<p><img src="../images/s3e-2.png" ></p>
 <p>You should see a window similar to the one shown above for the ESP-8266
 Gateway when the s3e command succeeds.</p>
 <p>If you do not, make sure that you've installed MicroPython on the
 ESP-8266 and flashed it with main.py and esp8266_min.py as explained in
 the "Preparing Your Micro-Controller" section of this document.</p>
 <p>Next, open a third terminal window and type:</p>
-<pre><code>wsgw
+<pre><code>wsgw -i 9002
 </code></pre>
 
+<p><img src="../images/s3e-3.png" ></p>
 <p>You should see a window similar to the one shown above for the WebSocket
 Gateway when the s3e command succeeds. </p>
 <p>If there are exceptions or errors in any of the terminal windows,

@@ -87,11 +87,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>The Scratch 3 OneGPIO extensions consist of two major components. </p>
 <h3 id="the-modified-scratch-3-editor">The Modified Scratch 3 Editor</h3>
 <p>The first of the major components is the
-<a href="https://github.com/MrYsLab/s3onegpio">modified Scratch 3 editor.</a> The
+<a href="https://github.com/MrYsLab/s3onegpio">modified Scratch 3 editor, </a> depicted as the terminal 
+on the left side of the illustration above. The
 modified editor uses all of the code provided by the Scratch 3 team but
 adds the additional code to create the custom Scratch blocks to support
-the OneGPIO extensions. This is depicted as the terminal on the left
-side of the illustration above.</p>
+the OneGPIO extensions. </p>
 <p>If you would like additional information about how the OneGPIO
 extensions were created and added to the Scratch 3 editor, please refer
 to the
@@ -99,23 +99,24 @@ to the
 <h3 id="the-onegpio-extension-servers">The OneGPIO Extension Servers</h3>
 <p>The second major component for each of the OneGPIO extensions is the
  Extension Server, depicted in the center of the illustration.</p>
-<p>Each board type has its own Extension Server.</p>
-<p>An extension server is built as a
- <a href="https://mryslab.github.io/python_banyan/#users_guide/#_top">Python Banyan Framework</a>
- application that implements the
+<p>Each board type has a specific associated Extension Server, using the
+ <a href="https://mryslab.github.io/python_banyan/#users_guide/#_top">Python Banyan Framework</a> to implement
+ the 
  <a href="https://mryslab.github.io/python_banyan/#gpio_intro/">OneGPIO messaging protocol.</a></p>
-<p>This is all done transparently, to assure excellent performance and to
- simplify the design and implementation.</p>
+<p>The OneGPIO design concept assures excellent performance and simplifies the 
+ design and implementation for each extension server.</p>
 <p>Each server utilizes three Python Banyan components. The first is the
  <a href="https://mryslab.github.io/python_banyan/#examples_intro/#the-banyan-backplane">Backplane, </a>
- a shared message distributor used by all of the extension servers. Each
- Extension Server has its own
- <a href="https://mryslab.github.io/python_banyan/#additional_gateways/#websocket-gateway">WebSocket Gateway</a>
- that communicates with the Scratch 3 editor running in the browser. A
+ a shared message distributor used by all of the extension servers. </p>
+<p>Each
+ Extension Server utilizes a unique instance of the
+ <a href="https://mryslab.github.io/python_banyan/#additional_gateways/#websocket-gateway">WebSocket Gateway</a>,
+ providing a communication channel between the Scratch 3 editor running in the browser, and the Python code interacting
+  with microcontroller hardware. A
  unique IP port number is assigned to each WebSocket Gateway.</p>
-<p>Finally, each Extension Server has its own unique
- <a href="https://mryslab.github.io/python_banyan/#banyan_gateways/#introduction-to-onegpio-gateways">Hardware Gateway</a>
- to translate the platform-independent OneGPIO control and report
+<p>Finally, each Extension Server supports its connected microcontroller using a unique
+ <a href="https://mryslab.github.io/python_banyan/#banyan_gateways/#introduction-to-onegpio-gateways">Hardware Gateway.</a>
+ The Hardware Gateway translates the platform-independent OneGPIO control and report
  messages to hardware-specific messages.</p>
 <p>The transport mechanism used between the Hardware Gateway and its
  associated micro-controller varies, depending upon the micro-controller
