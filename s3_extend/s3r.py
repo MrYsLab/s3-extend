@@ -44,6 +44,9 @@ class S3R:
         self.proc_awg = None
         self.proc_hwg = None
 
+        self.skip_backplane = False
+
+
         print("Only run this script on a Raspberry Pi!")
 
         # start backplane
@@ -75,10 +78,11 @@ class S3R:
 
         while True:
             try:
-                if self.proc_bp.poll() is not None:
-                    self.proc_bp = None
-                    print('backplane exited...')
-                    self.killall()
+                if not self.skip_backplane:
+                    if self.proc_bp.poll() is not None:
+                        self.proc_bp = None
+                        print('backplane exited...')
+                        self.killall()
                 if self.proc_awg.poll() is not None:
                     self.proc_awg = None
                     print('Websocket Gateway exited...')
@@ -146,6 +150,7 @@ class S3R:
         try:
             for proc in psutil.process_iter(attrs=['pid', 'name']):
                 if 'backplane' in proc.info['name']:
+                    self.skip_backplane = True
                     # its running - return its pid
                     return proc
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
