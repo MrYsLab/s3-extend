@@ -22,13 +22,8 @@ the specific micro-controller:
 *  **s3p** - for the Picoboard
    * **s3r** - for the Raspberry Pi
    
-   Note: You may run a single micro-controller or all simultaneously,
-   but only one instance of a micro-controller at a time. For example,
-   you may run a Raspberry Pi and an Arduino, and use one to control the
-   other, but you cannot run two of the same type of controller.
-   
 **Step 4:** Start Scratch 3, select an extension, and create and run
-your Scratch scripts. If you are using the ESP-8266 Extension, when
+your Scratch scripts. If you are using the ESP-8266 extension, when
 Scratch is connected to the ESP-8266 by using the **ESP-8266 Connect IP Address** block, the red LED on the ESP-8266
 NodeMCU is extinguished, indicating a successful connection.
 
@@ -37,9 +32,29 @@ window opened in step 3 and pressing Control-C. You may need to do this
 twice. Finally, dismiss the Web Browser tab running
 Scratch 3.
 
-
 There is more detail about these steps in the following sections. Please
 read those sections before proceeding.
+
+**NOTE: **You may run a single micro-controller or all simultaneously on a single
+computer, but only a single instance of a microcontroller may be run at a time.
+For example,
+you may run a Raspberry Pi and an Arduino simultaneously, and use one to control the
+other. However, you may not run two of the same type of controller at the same.
+
+Running
+two boards that use a serial link is an advanced and experimental feature and not recommended nor
+officially supported. An example would be running
+an Arduino and a Picoboard on the same computer at the same time.
+If you wish to run two boards that use a serial link,
+you may have to specify the COM port for one of the boards manually. This is done by using
+the -c option in the launcher. For example, to start the Picoboard
+extension forcing it to use COM7, you would start the launcher with:
+
+```bash
+ s3p -c com7
+```
+
+
 
 <br> <br> <br>
 
