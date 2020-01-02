@@ -74,4 +74,4 @@ pasting any error output into the issue comment.
 <br> <br> <br>
 
 
-Copyright (C) 2019 Alan Yorinks All Rights Reserved
+Copyright (C) 2019-2020 Alan Yorinks All Rights Reserved

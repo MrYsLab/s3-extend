@@ -20,6 +20,8 @@ nav:
           - ESP-8266: ext_esp.md
           - Raspberry Pi: ext_rpi.md
           - Picoboard: ext_pico.md
+        - Shutting Down The Python Extension Servers:
+          - Performing A Clean Shutdown: shutdown.md
         - Launching TheScratch 3 Editor:
           - A Word About Browser Compatibility: browsers.md
           - Starting Scratch3 Online: s3-web.md

@@ -30,5 +30,5 @@ Chinese: **https://gasolin.idv.tw/**, **Justina Hsu**
 <br> <br> <br>
 
 
-Copyright (C) 2019 Alan Yorinks All Rights Reserved
+Copyright (C) 2019-2020 Alan Yorinks All Rights Reserved
 
