@@ -117,10 +117,8 @@ class CpxGateway(GatewayBase):
         """
         if payload['value']:
             self.cpx.cpx_board_light_on()
-            print('a')
         else:
             self.cpx.cpx_board_light_off()
-            print('b')
 
     # The CPX sensor callbacks
 
@@ -141,39 +139,30 @@ class CpxGateway(GatewayBase):
         z = data[4]
 
         # Convert raw Accelerometer values to degrees
-        x_angle = (math.atan2(y, z) + math.pi) * (180 / math.pi)
-        y_angle = (math.atan2(z, x) + math.pi) * (180 / math.pi)
+        x_angle = int((math.atan2(y, z) + math.pi) * (180 / math.pi))
+        y_angle = int((math.atan2(z, x) + math.pi) * (180 / math.pi))
 
-        position = 0
+        h = v = -1
 
-        if 175 < x_angle < 185:
-            position = 0  # 'flat'
-        elif 186 < x_angle < 360:
-            position = 9  # 'up'
-        elif 90 < x_angle < 185:
-            position = 10  # 'down'
+        if 175 < x_angle < 185 and 265 < y_angle < 275:
+            h = v = 0  # 'flat'
 
-        if position == 9:
-            if 275 < y_angle < 360:
-                position = 2  # up and right
+        elif h or v:
+            if 180 <= x_angle <= 270:
+                v = 1  # up
 
-            elif 180 < y_angle < 270:
-                position = 1  # up and left
-            else:
-                position = 1
+            elif 90 <= x_angle <= 180:
+                v = 2  # down
 
-        elif position == 10:
-            if 275 < y_angle < 360:
-                position = 4  # down and right
+            if 180 <= y_angle <= 270:
+                h = 3  # left
 
-            elif 180 < y_angle < 270:
-                position = 3  # down and left
-            else:
-                position = 3
+            elif 270 <= y_angle <= 360:
+                h = 4  # right
 
-        print(position)
+        # value = v * 10 + h
 
-        payload = {'report': 'tilted', 'value': position}
+        payload = {'report': 'tilted', 'value': [v, h]}
         self.publish_payload(payload, 'from_cpx_gateway')
 
     def switch_callback(self, data):
@@ -215,7 +204,6 @@ class CpxGateway(GatewayBase):
         :param data: data[1] = touchpad and data[2] = boolean value
         """
         payload = {'report': 'touch' + str(data[1]), 'value': int(data[2])}
-        print(payload)
         self.publish_payload(payload, 'from_cpx_gateway')
 
     def shutdown(self):
