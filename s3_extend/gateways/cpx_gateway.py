@@ -61,8 +61,6 @@ class CpxGateway(GatewayBase):
             logging.basicConfig(filename=fn, filemode='w', level=logging.DEBUG)
             sys.excepthook = self.my_handler
 
-        self.last_position = 0 # 'flat'
-
         self.publisher_topic = publisher_topic
         self.cpx = PyMataCpx()
         atexit.register(self.shutdown)
@@ -151,35 +149,23 @@ class CpxGateway(GatewayBase):
         if 175 < x_angle < 185:
             position = 0 # 'flat'
         elif 186 < x_angle < 360:
-            position = 1 # 'up'
+            position = 5 # 'up'
         elif 90 < x_angle < 185:
-            position = 2 #'down'
+            position = 6 #'down'
 
-        if position == 1:
+        if position == 5:
             if 275 < y_angle < 360:
-                position = 5 # up and right
+                position = 2 # up and right
 
             elif 180 < y_angle < 270:
-                position = 6 # up and left
+                position = 1 # up and left
 
-        elif position == 2:
+        elif position == 6:
             if 275 < y_angle < 360:
-                position = 7 # down and right
+                position = 5 # down and right
 
             elif 180 < y_angle < 270:
-                position = 8 # down and left
-
-        else:
-            if 275 < y_angle < 360:
-                position = 3 # position + ' right'
-
-            elif 180 < y_angle < 270:
-                position = 4 # position + ' left'
-
-        if self.last_position != position:
-            self.last_position = position
-
-        print(position)
+                position = 4 # down and left
 
         payload = {'report': 'tilted', 'value': position}
         self.publish_payload(payload, 'from_cpx_gateway')
