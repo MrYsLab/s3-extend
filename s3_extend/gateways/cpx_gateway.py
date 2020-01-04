@@ -149,23 +149,29 @@ class CpxGateway(GatewayBase):
         if 175 < x_angle < 185:
             position = 0  # 'flat'
         elif 186 < x_angle < 360:
-            position = 5  # 'up'
+            position = 9  # 'up'
         elif 90 < x_angle < 185:
-            position = 6  # 'down'
+            position = 10  # 'down'
 
-        if position == 5:
+        if position == 9:
             if 275 < y_angle < 360:
                 position = 2  # up and right
 
             elif 180 < y_angle < 270:
                 position = 1  # up and left
+            else:
+                position = 1
 
-        elif position == 6:
+        elif position == 10:
             if 275 < y_angle < 360:
                 position = 5  # down and right
 
             elif 180 < y_angle < 270:
                 position = 4  # down and left
+            else:
+                position = 4
+
+        print(position, x_angle, y_angle)
 
         payload = {'report': 'tilted', 'value': position}
         self.publish_payload(payload, 'from_cpx_gateway')
