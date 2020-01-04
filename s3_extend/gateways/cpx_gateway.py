@@ -23,12 +23,12 @@ import atexit
 import logging
 import math
 import pathlib
-import serial
 import signal
 import sys
 
-from python_banyan.gateway_base import GatewayBase
+import serial
 from pymata_cpx.pymata_cpx import PyMataCpx
+from python_banyan.gateway_base import GatewayBase
 
 
 # noinspection PyMethodMayBeStatic
@@ -40,7 +40,7 @@ class CpxGateway(GatewayBase):
 
     def __init__(self, *subscriber_list, back_plane_ip_address=None, subscriber_port='43125',
                  publisher_port='43124', process_name='CpxGateway',
-                 com_port=None, publisher_topic=None, log=False):
+                 publisher_topic=None, log=False):
         """
         :param subscriber_list: a tuple or list of subscription topics.
         :param back_plane_ip_address:
@@ -147,25 +147,25 @@ class CpxGateway(GatewayBase):
         position = 0
 
         if 175 < x_angle < 185:
-            position = 0 # 'flat'
+            position = 0  # 'flat'
         elif 186 < x_angle < 360:
-            position = 5 # 'up'
+            position = 5  # 'up'
         elif 90 < x_angle < 185:
-            position = 6 #'down'
+            position = 6  # 'down'
 
         if position == 5:
             if 275 < y_angle < 360:
-                position = 2 # up and right
+                position = 2  # up and right
 
             elif 180 < y_angle < 270:
-                position = 1 # up and left
+                position = 1  # up and left
 
         elif position == 6:
             if 275 < y_angle < 360:
-                position = 5 # down and right
+                position = 5  # down and right
 
             elif 180 < y_angle < 270:
-                position = 4 # down and left
+                position = 4  # down and left
 
         payload = {'report': 'tilted', 'value': position}
         self.publish_payload(payload, 'from_cpx_gateway')
@@ -208,7 +208,6 @@ class CpxGateway(GatewayBase):
         Build and send a banyan message for the pad and value
         :param data: data[1] = touchpad and data[2] = boolean value
         """
-        touchpad = data[1]
         payload = {'report': 'touch' + str(data[1]), 'value': int(data[2])}
         print(payload)
         self.publish_payload(payload, 'from_cpx_gateway')
