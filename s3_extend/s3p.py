@@ -54,7 +54,7 @@ class S3P:
         # start backplane
         self.proc_bp = self.start_backplane()
         if self.proc_bp:
-            print('backplane started: ')
+            print('backplane started')
 
         else:
             print('backplane start failed - exiting')
@@ -62,7 +62,7 @@ class S3P:
 
         self.proc_awg = self.start_wsgw()
         if self.proc_awg:
-            print('Websocket Gateway started: ')
+            print('Websocket Gateway started')
         else:
             print('WebSocket Gateway start failed - exiting')
             sys.exit(0)
@@ -71,6 +71,8 @@ class S3P:
         self.proc_hwg = self.start_pbgw()
         if self.proc_hwg:
             print('Picoboard Gateway started ')
+            print('To exit this program, press Control-c')
+
         else:
             print('Picobard Gateway start failed - exiting')
             sys.exit(0)
