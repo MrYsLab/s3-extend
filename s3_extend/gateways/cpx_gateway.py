@@ -160,8 +160,6 @@ class CpxGateway(GatewayBase):
             elif 270 <= y_angle <= 360:
                 h = 4  # right
 
-        # value = v * 10 + h
-
         payload = {'report': 'tilted', 'value': [v, h]}
         self.publish_payload(payload, 'from_cpx_gateway')
 
@@ -172,16 +170,13 @@ class CpxGateway(GatewayBase):
         """
         if data[1] == 4:
             switch = 'a'
-            value = data[2]
         elif data[1] == 5:
             switch = 'b'
-            value = data[2]
         else:
-            value = 'right'
-            switch = 'slide'
-            if data[2]:
-                value = 'left'
-        payload = {'report': switch, 'value': value}
+            # 0 = right, 1 = left
+            switch ='slide'
+
+        payload = {'report': switch, 'value': data[2]}
         self.publish_payload(payload, 'from_cpx_gateway')
 
     def analog_callback(self, data):
