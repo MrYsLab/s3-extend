@@ -22,9 +22,12 @@ import argparse
 import atexit
 import logging
 import math
+import os
 import pathlib
 import signal
 import sys
+import threading
+import time
 
 import serial
 from pymata_cpx.pymata_cpx import PyMataCpx
@@ -32,7 +35,7 @@ from python_banyan.gateway_base import GatewayBase
 
 
 # noinspection PyMethodMayBeStatic
-class CpxGateway(GatewayBase):
+class CpxGateway(GatewayBase, threading.Thread):
     """
     This class is the interface class for the Circuit Playground
     Express supporting Scratch 3.
@@ -65,6 +68,10 @@ class CpxGateway(GatewayBase):
         self.cpx = PyMataCpx()
         atexit.register(self.shutdown)
 
+        # hold the time of the last analog data to be received.
+        # use to determine if connectivity is gone.
+        self.last_analog_data_time = None
+
         # start up all the sensors
         self.cpx.cpx_accel_start(self.tilt_callback)
         self.cpx.cpx_button_a_start(self.switch_callback)
@@ -77,12 +84,22 @@ class CpxGateway(GatewayBase):
         for touch_pad in range(1, 8):
             self.cpx.cpx_cap_touch_start(touch_pad, self.touchpad_callback)
 
+        threading.Thread.__init__(self)
+        self.daemon = True
+
+        # start the watchdog thread
+        self.start()
         # start the banyan receive loop
         try:
             self.receive_loop()
-        except KeyboardInterrupt:
-            self.cpx.cpx_close_and_exit()
-            sys.exit(0)
+        except:
+            pass
+        # except KeyboardInterrupt:
+        # except KeyboardInterrupt:
+            # self.cpx.cpx_close_and_exit()
+            # sys.exit(0)
+        #     os._exit(1)
+
 
     def init_pins_dictionary(self):
         pass
@@ -181,9 +198,17 @@ class CpxGateway(GatewayBase):
 
     def analog_callback(self, data):
         """
-        This handles the light, temperature and sound sensors
+        This handles the light, temperature and sound sensors.
+
+        It also sets up a "watchdog timer" and if there is no activity
+        for > 1 second will exit.
+
+
         :param data: data[1] - 8 = light, temp = 9, 10 = sound,
         """
+
+        self.last_analog_data_time = time.time()
+
         if data[1] == 8:
             sensor = 'light'
         elif data[1] == 9:
@@ -217,6 +242,16 @@ class CpxGateway(GatewayBase):
         :return:
         """
         self.logger.exception("Uncaught exception: {0}".format(str(value)))
+
+    def run(self):
+        if not self.last_analog_data_time:
+            self.last_analog_data_time = time.time()
+        while True:
+            if time.time() - self.last_analog_data_time > 1.0:
+                print('Watchdog timed out - exiting.')
+                os._exit(1)
+
+            time.sleep(1)
 
 
 def cpx_gateway():
@@ -265,19 +300,21 @@ def cpx_gateway():
 
     kw_options['log'] = log
 
-    CpxGateway(subscriber_list, **kw_options)
+    cpx = CpxGateway(subscriber_list, **kw_options)
 
 
 # signal handler function called when Control-C occurs
 # noinspection PyShadowingNames,PyUnusedLocal
 def signal_handler(sig, frame):
     print('Exiting Through Signal Handler')
-    raise KeyboardInterrupt
+    raise
+
 
 
 # listen for SIGINT
 signal.signal(signal.SIGINT, signal_handler)
 signal.signal(signal.SIGTERM, signal_handler)
+
 
 if __name__ == '__main__':
     cpx_gateway()
