@@ -18,6 +18,7 @@ for each microcontroller you wish to use and then enter the command for
 the specific micro-controller:
    
    * **s3a** - for the Arduino
+   * **s3c** - for the Adafruit Circuit Playground Express
 *    **s3e** - for the ESP-8266
 *  **s3p** - for the Picoboard
    * **s3r** - for the Raspberry Pi
@@ -30,7 +31,10 @@ NodeMCU is extinguished, indicating a successful connection.
 **Step 5:** To power down, dismiss the OneGPIO server by going to the
 window opened in step 3 and pressing Control-C. You may need to do this
 twice. Finally, dismiss the Web Browser tab running
-Scratch 3.
+Scratch 3. **SPECIAL NOTE:** Please use Control-C before dismissing the window.
+If you dismiss the window without pressing Control-C first, the next time you start
+the server, it may fail. In that case, reboot your computer, and the server
+should succeed.
 
 There is more detail about these steps in the following sections. Please
 read those sections before proceeding.
@@ -39,7 +43,7 @@ read those sections before proceeding.
 computer, but only a single instance of a microcontroller may be run at a time.
 For example,
 you may run a Raspberry Pi and an Arduino simultaneously, and use one to control the
-other. However, you may not run two of the same type of controller at the same.
+other. However, you may not run two of the same type of controllers at the same.
 
 Running
 two boards that use a serial link is an advanced and experimental feature and not recommended nor
