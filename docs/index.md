@@ -3,10 +3,10 @@
 <br>
 
 
+<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">OneGPIO Scratch 3 Extensions For</div>
 
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">Arduino, Raspberry Pi </div>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">ESP-8266, and Picoboard</div>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">OneGPIO Scratch 3 Extensions</div>
+<div style="text-align:center;color:#990033; font-family:times, serif; font-size:2.0em">Arduino, Raspberry Pi, ESP-8266, </div>
+<div style="text-align:center;color:#990033; font-family:times, serif; font-size:2.0em">Picoboard and Circuit Playground Express</div>
 
 <br>
 
@@ -25,14 +25,13 @@
 
 * **Control your Raspberry Pi either locally or from your PC.**
 
-* **Control one of the micro-controllers or all!**
 
 <br>
 <br>
 <br>
 
 
-Last Updated: 2 January 2020
+Last Updated: 6 January 2020
 
 Copyright (C) 2019-2020 Alan Yorinks All Rights Reserved
 
