@@ -216,8 +216,40 @@ def signal_handler(sig, frame):
     print('Exiting Through Signal Handler')
     raise KeyboardInterrupt
 
+#--------------------------
+def findPendingProcess(process):
+ 
+    # Create a list with running instances (focus will be pending running instances Python.exe process)
+    list = []
+    for proc in psutil.process_iter():
+        try:
+            process_info = proc.as_dict(attrs=['pid', 'name'])           
+            if process.lower() in process_info['name'].lower() :
+                list.append(process_info)
+        except (psutil.NoSuchProcess, psutil.AccessDenied , psutil.ZombieProcess) :
+            pass
+    return list;
+#--------------------------
+#--------------------------   
 
 def s3ax():
+    #--------------------------
+    # Check is is there available pending process - valid for windows OS only
+    if sys.platform.startswith('win32'):
+        # Get current PID to be excluded from taskill list
+        pid = os.getpid() 
+
+        # Set what process will be checked (Python)
+        listOfProcessIds = findPendingProcess('python')
+
+        for item in listOfProcessIds:
+            processID = item['pid']
+        # Exclude current process from list    
+            if str(processID) != str(pid):
+                print((processID))
+                os.system("taskkill /PID " + str(processID) + " /F")
+    #--------------------------
+    #-------------------------- 
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", dest="com_port", default="None",
                         help="Use this COM port instead of auto discovery")
