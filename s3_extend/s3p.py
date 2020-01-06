@@ -11,9 +11,11 @@
  General Public License for more details.
 
  You should have received a copy of the GNU AFFERO GENERAL PUBLIC LICENSE
+
  along with this library; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
+import argparse
 import atexit
 import signal
 import subprocess
@@ -26,28 +28,28 @@ import psutil
 # import webbrowser
 
 
-class S3R:
+class S3P:
     """
-    This class starts the Banyan server to support the Scratch 3 OneGPIO Raspberry Pi
-    extension for local mode. That means the browser and components are all executing
-    on a single RPi.
+    This class starts the Banyan server to support Scratch 3 OneGPIO
+    for the Picoboard
 
-    It will start the backplane, Raspberry Pi gateway and websocket gateway.
+    It will start the backplane, picoboard gateway and websocket gateway.
     """
 
-    def __init__(self):
+    def __init__(self, com_port=None):
         """
-        Prepare for launching the rpi extension
+        :param com_port: Manually select serial com port
         """
 
+        self.com_port = com_port
+
+        # psutil pids
         self.proc_bp = None
         self.proc_awg = None
         self.proc_hwg = None
 
+        atexit.register(self.killall)
         self.skip_backplane = False
-
-
-        print("Only run this script on a Raspberry Pi!")
 
         # start backplane
         self.proc_bp = self.start_backplane()
@@ -65,15 +67,14 @@ class S3R:
             print('WebSocket Gateway start failed - exiting')
             sys.exit(0)
 
-        # start rpi gateway
-        self.proc_hwg = self.start_rpigw()
+        # start picoboard gateway
+        self.proc_hwg = self.start_pbgw()
         if self.proc_hwg:
-            print('RPi Gateway started ')
+            print('Picoboard Gateway started ')
         else:
-            print('RPi Gateway start failed - exiting')
+            print('Picobard Gateway start failed - exiting')
             sys.exit(0)
 
-        atexit.register(self.killall)
         # webbrowser.open('https://mryslab.github.io/s3onegpio/', new=1)
 
         while True:
@@ -89,7 +90,7 @@ class S3R:
                     self.killall()
                 if self.proc_hwg.poll() is not None:
                     self.proc_hwg = None
-                    print('RPi Gateway exited.')
+                    print('Picoboard Gateway exited. Is your Picoboard plugged in?')
                     self.killall()
 
                 # allow some time between polls
@@ -101,7 +102,8 @@ class S3R:
         """
         Kill all running processes
         """
-
+        # prevent loop from running for a clean exit
+        # self.stop_event.set()
         # check for missing processes
         if self.proc_bp:
             try:
@@ -171,24 +173,24 @@ class S3R:
         Start the websocket gateway
         """
         if sys.platform.startswith('win32'):
-            return subprocess.Popen(['wsgw', '-i', '9001'],
+            return subprocess.Popen(['wsgw', '-i', '9004'],
                                     creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
                                                   |
                                                   subprocess.CREATE_NO_WINDOW)
         else:
-            return subprocess.Popen(['wsgw', '-i', '9001'],
+            return subprocess.Popen(['wsgw', '-i', '9004'],
                                     stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                     stdout=subprocess.PIPE)
 
-    def start_rpigw(self):
+    def start_pbgw(self):
         """
-        Start the rpi gateway
+        Start the picoboard gateway
         """
         if sys.platform.startswith('win32'):
-            return subprocess.Popen(['rpigw'], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
-                                                             subprocess.CREATE_NO_WINDOW)
+            return subprocess.Popen(['pbgw'], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                            subprocess.CREATE_NO_WINDOW)
         else:
-            return subprocess.Popen(['rpigw'], stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+            return subprocess.Popen(['pbgw'], stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                     stdout=subprocess.PIPE)
 
 
@@ -197,12 +199,22 @@ def signal_handler(sig, frame):
     raise KeyboardInterrupt
 
 
-def s3rx():
+def s3px():
     """
-    Start the extension
-    :return:
-    """
-    S3R()
+     Start the s3p script
+     """
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", dest="com_port", default="None",
+                        help="Use this COM port instead of auto discovery")
+
+    args = parser.parse_args()
+
+    if args.com_port == "None":
+        com_port = None
+    else:
+        com_port = args.com_port
+
+    S3P(com_port=com_port)
 
 
 # listen for SIGINT
@@ -211,4 +223,4 @@ signal.signal(signal.SIGTERM, signal_handler)
 
 if __name__ == '__main__':
     # replace with name of function you defined above
-    s3rx()
+    s3px()

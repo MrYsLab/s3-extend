@@ -11,74 +11,206 @@
  General Public License for more details.
 
  You should have received a copy of the GNU AFFERO GENERAL PUBLIC LICENSE
+
  along with this library; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
-
-import psutil
+import argparse
+import atexit
 import signal
 import subprocess
 import sys
 import time
+
+import psutil
+
+
 # import webbrowser
 
 
 class S3A:
     """
-    This class starts the Banyan server to support the Scratch 3 OneGPIO Arduino
-    extension.
+    This class starts the Banyan server to support Scratch 3 OneGPIO
+    for the Arduino
 
     It will start the backplane, arduino gateway and websocket gateway.
     """
 
-    def __init__(self):
-        self.backplane_exists = False
+    def __init__(self, com_port=None, arduino_instance_id=None):
+        """
+
+        :param com_port:
+        :param arduino_instance_id:
+        """
+
+        self.com_port = com_port
+
+        # psutil process objects
         self.proc_bp = None
-        self.proc_agw = None
+        self.proc_awg = None
         self.proc_hwg = None
 
-        # checking running processes.
-        # if the backplane is already running, just note that and move on.
-        for pid in psutil.pids():
-            p = psutil.Process(pid)
-            if p.name() == "backplane":
-                print("Backplane already running.          PID = " + str(p.pid))
-                self.backplane_exists = True
-            else:
-                continue
+        atexit.register(self.killall)
+        self.skip_backplane = False
 
-        # if backplane is not already running, start a new instance
-        if not self.backplane_exists:
-            self.proc_bp = subprocess.Popen(['backplane'],
-                                            stdin=subprocess.PIPE, stderr=subprocess.PIPE,
-                                            stdout=subprocess.PIPE)
-            # new_entry['process'] = self.proc
-            # new_entry['process_id'] = self.proc.pid
-            self.backplane_exists = True
-            print('Backplane is now running')
-        if sys.platform.startswith('win32'):
-
-            self.proc_agw = subprocess.Popen(['wsgw'],
-                                             creationflags=subprocess.CREATE_NEW_CONSOLE)
-            self.proc_hwg = subprocess.Popen(['ardgw'],
-                                             creationflags=subprocess.CREATE_NEW_CONSOLE)
+        # start backplane
+        self.proc_bp = self.start_backplane()
+        if self.proc_bp:
+            print('backplane started: ')
 
         else:
-            self.proc_awg = subprocess.Popen(['xterm','-e', 'wsgw'],
-                                             stdin=subprocess.PIPE, stderr=subprocess.PIPE,
-                                             stdout=subprocess.PIPE)
-            self.proc_hwg = subprocess.Popen(['xterm', '-e', 'ardgw'],
-                                             stdin=subprocess.PIPE, stderr=subprocess.PIPE,
-                                             stdout=subprocess.PIPE)
+            print('backplane start failed - exiting')
+            sys.exit(0)
+
+        self.proc_awg = self.start_wsgw()
+        if self.proc_awg:
+            print('Websocket Gateway started: ')
+        else:
+            print('WebSocket Gateway start failed - exiting')
+            sys.exit(0)
+
+        # start arduino gateway
+        self.proc_hwg = self.start_ardgw()
+        if self.proc_hwg:
+            print('Arduino Gateway started.')
+            seconds = 5
+            while seconds >= 0:
+                print('\rPlease wait ' + str(seconds) + ' seconds for Arduino to initialize...', end='')
+                time.sleep(1)
+                seconds -= 1
+            print()
+            print('Arduino is initialized.')
+        else:
+            print('Arduino Gateway start failed - exiting')
+            sys.exit(0)
+
         # webbrowser.open('https://mryslab.github.io/s3onegpio/', new=1)
 
         while True:
             try:
-                time.sleep(1)
+                if not self.skip_backplane:
+                    if self.proc_bp.poll() is not None:
+                        self.proc_bp = None
+                        print('backplane exited...')
+                        self.killall()
+                if self.proc_awg.poll() is not None:
+                    self.proc_awg = None
+                    print('Websocket Gateway exited...')
+                    self.killall()
+                if self.proc_hwg.poll() is not None:
+                    self.proc_hwg = None
+                    print('Arduino Gateway exited. Is your Arduino plugged in?')
+                    self.killall()
+
+                # allow some time between polls
+                time.sleep(.4)
             except KeyboardInterrupt:
-                self.proc_awg.kill()
-                self.proc_hwg.kill()
-                sys.exit(0)
+                self.killall()
+
+    def killall(self):
+        """
+        Kill all running processes
+        """
+        # prevent loop from running for a clean exit
+        # check for missing processes
+        if self.proc_bp:
+            try:
+                if sys.platform.startswith('win32'):
+                    subprocess.run(['taskkill', '/F', '/t', '/PID', str(self.proc_bp.pid)],
+                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                 subprocess.CREATE_NO_WINDOW
+                                   )
+                else:
+                    self.proc_bp.kill()
+                self.proc_bp = None
+            except:
+                pass
+        if self.proc_awg:
+            try:
+                if sys.platform.startswith('win32'):
+                    subprocess.run(['taskkill', '/F', '/t', '/pid', str(self.proc_awg.pid)],
+                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                 subprocess.CREATE_NO_WINDOW
+                                   )
+                else:
+                    self.proc_awg.kill()
+                self.proc_awg = None
+            except:
+                pass
+        if self.proc_hwg:
+            try:
+                if sys.platform.startswith('win32'):
+                    subprocess.run(['taskkill', '/F', '/t', '/PID', str(self.proc_hwg.pid)],
+                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                 subprocess.CREATE_NO_WINDOW
+                                   )
+                else:
+                    self.proc_hwg.kill()
+                self.proc_hwg = None
+            except:
+                pass
+        sys.exit(0)
+
+    def start_backplane(self):
+        """
+        Start the backplane
+        """
+
+        # check to see if the backplane is already running
+        try:
+            for proc in psutil.process_iter(attrs=['pid', 'name']):
+                if 'backplane' in proc.info['name']:
+                    self.skip_backplane = True
+                    # its running - return its pid
+                    return proc
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
+
+        # backplane is not running, so start one
+        if sys.platform.startswith('win32'):
+            return subprocess.Popen(['backplane'],
+                                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                  subprocess.CREATE_NO_WINDOW)
+        else:
+            return subprocess.Popen(['backplane'],
+                                    stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    stdout=subprocess.PIPE)
+
+    def start_wsgw(self):
+        """
+        Start the websocket gateway
+        """
+        if sys.platform.startswith('win32'):
+            return subprocess.Popen(['wsgw'],
+                                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
+                                                  |
+                                                  subprocess.CREATE_NO_WINDOW)
+        else:
+            return subprocess.Popen(['wsgw'],
+                                    stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    stdout=subprocess.PIPE)
+
+    def start_ardgw(self):
+        """
+        Start the arduino gateway
+        """
+        if sys.platform.startswith('win32'):
+            hwgw_start = ['ardgw']
+        else:
+            hwgw_start = ['ardgw']
+
+        if self.com_port:
+            hwgw_start.append('-c')
+            hwgw_start.append(self.com_port)
+
+        if sys.platform.startswith('win32'):
+            return subprocess.Popen(hwgw_start,
+                                    creationflags=subprocess.CREATE_NO_WINDOW)
+        else:
+            return subprocess.Popen(hwgw_start,
+                                    stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    stdout=subprocess.PIPE)
+
 
 def signal_handler(sig, frame):
     print('Exiting Through Signal Handler')
@@ -86,7 +218,27 @@ def signal_handler(sig, frame):
 
 
 def s3ax():
-    S3A()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", dest="com_port", default="None",
+                        help="Use this COM port instead of auto discovery")
+    parser.add_argument("-i", dest="arduino_instance_id", default="None",
+                        help="Set an Arduino Instance ID and match it in FirmataExpress")
+    args = parser.parse_args()
+
+    if args.com_port == "None":
+        com_port = None
+    else:
+        com_port = args.com_port
+
+    if args.arduino_instance_id == "None":
+        arduino_instance_id = None
+    else:
+        arduino_instance_id = int(args.arduino_instance_id)
+
+    if com_port and arduino_instance_id:
+        raise RuntimeError('Both com_port arduino_instance_id were set. Only one is allowed')
+
+    S3A(com_port=com_port, arduino_instance_id=args.arduino_instance_id)
 
 
 # listen for SIGINT

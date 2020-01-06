@@ -25,6 +25,8 @@ import argparse
 import asyncio
 import datetime
 import json
+import logging
+import pathlib
 import signal
 import sys
 import websockets
@@ -49,7 +51,7 @@ class WsGateway(BanyanBaseAIO):
     def __init__(self, subscription_list, back_plane_ip_address=None,
                  subscriber_port='43125',
                  publisher_port='43124', process_name='WebSocketGateway',
-                 event_loop=None, server_ip_port=9000):
+                 event_loop=None, server_ip_port=9000, log=False):
         """
         These are all the normal base class parameters
         :param subscription_list:
@@ -60,15 +62,26 @@ class WsGateway(BanyanBaseAIO):
         :param event_loop:
         """
 
+        # set up logging if requested
+        self.log = log
+        self.event_loop = event_loop
+
+        # a kludge to shutdown the socket on control C
+        self.wsocket = None
+
+        if self.log:
+            fn = str(pathlib.Path.home()) + "/wsgw.log"
+            self.logger = logging.getLogger(__name__)
+            logging.basicConfig(filename=fn, filemode='w', level=logging.DEBUG)
+            sys.excepthook = self.my_handler
+
         # initialize the base class
         super(WsGateway, self).__init__(subscriber_list=subscription_list,
                                         back_plane_ip_address=back_plane_ip_address,
                                         subscriber_port=subscriber_port,
                                         publisher_port=publisher_port,
                                         process_name=process_name,
-                                        event_loop=event_loop)
-        # save the event loop
-        self.event_loop = event_loop
+                                        event_loop=self.event_loop)
 
         # save the server port number
         self.server_ip_port = server_ip_port
@@ -83,11 +96,28 @@ class WsGateway(BanyanBaseAIO):
                   + ':' + self.server_ip_port)
             # start the websocket server and call the main task, wsg
             self.event_loop.run_until_complete(self.start_server)
+            self.event_loop.create_task(self.wakeup())
             self.event_loop.run_forever()
         except (websockets.exceptions.ConnectionClosed,
                 RuntimeError,
                 KeyboardInterrupt):
+            if self.log:
+                logging.exception("Exception occurred", exc_info=True)
+            self.event_loop.stop()
+            self.event_loop.close()
             sys.exit()
+
+    async def wakeup(self):
+        while True:
+            try:
+                await asyncio.sleep(1)
+            except KeyboardInterrupt:
+                for task in asyncio.Task.all_tasks():
+                    task.cancel()
+                await self.wsocket.close()
+                self.event_loop.stop()
+                self.event_loop.close()
+                sys.exit(0)
 
     async def wsg(self, websocket, path):
         """
@@ -97,6 +127,7 @@ class WsGateway(BanyanBaseAIO):
         :param path: required, but unused
         :return:
         """
+        self.wsocket = websocket
         # start up banyan
         await self.begin()
 
@@ -166,7 +197,6 @@ class WsGateway(BanyanBaseAIO):
             payload['timestamp'] = timestamp
 
         ws_data = json.dumps(payload)
-        print(ws_data)
 
         # find the websocket of interest by looking for the topic in
         # active_sockets
@@ -174,6 +204,16 @@ class WsGateway(BanyanBaseAIO):
             if topic in socket.keys():
                 pub_socket = socket[topic]
                 await pub_socket.send(ws_data)
+
+    def my_handler(self, the_type, value, tb):
+        """
+        For logging uncaught exceptions
+        :param the_type:
+        :param value:
+        :param tb:
+        :return:
+        """
+        self.logger.exception("Uncaught exception: {0}".format(str(value)))
 
 
 def ws_gateway():
@@ -189,10 +229,13 @@ def ws_gateway():
     parser.add_argument("-m", dest="subscription_list", default="from_arduino_gateway, "
                                                                 "from_esp8266_gateway, "
                                                                 "from_rpi_gateway, "
-                                                                "from_microbit_gateway", nargs='+',
+                                                                "from_microbit_gateway"
+                                                                "from_picoboard_gateway", nargs='+',
                         help="A space delimited list of topics")
     parser.add_argument("-i", dest="server_ip_port", default="9000",
                         help="Set the WebSocket Server IP Port number")
+    parser.add_argument("-l", dest="log", default="False",
+                        help="Set to True to turn logging on.")
     parser.add_argument("-n", dest="process_name", default="WebSocket Gateway",
                         help="Set process name in banner")
     parser.add_argument("-p", dest="publisher_port", default='43124',
@@ -214,13 +257,31 @@ def ws_gateway():
         'server_ip_port': args.server_ip_port,
     }
 
+    log = args.log.lower()
+    if log == 'false':
+        log = False
+    else:
+        log = True
+
     if args.back_plane_ip_address != 'None':
         kw_options['back_plane_ip_address'] = args.back_plane_ip_address
 
     # get the event loop
+    # this is for python 3.8
+    if sys.platform == 'win32':
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
     loop = asyncio.get_event_loop()
 
-    WsGateway(subscription_list, **kw_options, event_loop=loop)
+    try:
+        WsGateway(subscription_list, **kw_options, event_loop=loop)
+    except KeyboardInterrupt:
+        for task in asyncio.Task.all_tasks():
+            task.cancel()
+        loop.stop()
+        loop.close()
+        sys.exit(0)
+
 
 
 def signal_handler(sig, frame):

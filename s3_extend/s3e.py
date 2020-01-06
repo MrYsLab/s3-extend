@@ -15,11 +15,13 @@
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
 
+import atexit
 import psutil
 import signal
 import subprocess
 import sys
 import time
+
 # import webbrowser
 
 
@@ -33,49 +35,159 @@ class S3E:
     """
 
     def __init__(self):
-        self.backplane_exists = False
+        """
+        Launch the esp extension
+        """
+
         self.proc_bp = None
-        self.proc_agw = None
+        self.proc_awg = None
         self.proc_hwg = None
 
-        # checking running processes.
-        # if the backplane is already running, just note that and move on.
-        for pid in psutil.pids():
-            p = psutil.Process(pid)
-            if p.name() == "backplane":
-                print("Backplane already running.          PID = " + str(p.pid))
-                self.backplane_exists = True
-            else:
-                continue
 
-        # if backplane is not already running, start a new instance
-        if not self.backplane_exists:
-            self.proc_bp = subprocess.Popen(['backplane'],
-                                            stdin=subprocess.PIPE, stderr=subprocess.PIPE,
-                                            stdout=subprocess.PIPE)
-            self.backplane_exists = True
-            print('Backplane started')
-        if sys.platform.startswith('win32'):
+        self.skip_backplane = False
 
-            self.proc_agw = subprocess.Popen(['wsgw', '-i', '9002'],
-                                             creationflags=subprocess.CREATE_NEW_CONSOLE)
-            self.proc_hwg = subprocess.Popen(['espgw', '-w', 'True'],
-                                             creationflags=subprocess.CREATE_NEW_CONSOLE)
+        # start backplane
+        self.proc_bp = self.start_backplane()
+        if self.proc_bp:
+            print('backplane started: ')
 
         else:
-            self.proc_awg = subprocess.Popen(['xterm', '-e', 'wsgw -i 9002'],
-                                             stdin=subprocess.PIPE, stderr=subprocess.PIPE,
-                                             stdout=subprocess.PIPE)
-            self.proc_hwg = subprocess.Popen(['xterm', '-e', 'espgw -w True'],
-                                             stdin=subprocess.PIPE, stderr=subprocess.PIPE,
-                                             stdout=subprocess.PIPE)
+            print('backplane start failed - exiting')
+            sys.exit(0)
+
+        self.proc_awg = self.start_wsgw()
+        if self.proc_awg:
+            print('Websocket Gateway started: ')
+        else:
+            print('WebSocket Gateway start failed - exiting')
+            sys.exit(0)
+
+        # start esp gateway
+        self.proc_hwg = self.start_espgw()
+        if self.proc_hwg:
+            print('ESP-8266 Gateway started ')
+        else:
+            print('ESP-8266 Gateway start failed - exiting')
+            sys.exit(0)
+
+        atexit.register(self.killall)
         # webbrowser.open('https://mryslab.github.io/s3onegpio/', new=1)
 
         while True:
             try:
-                time.sleep(1)
+                if not self.skip_backplane:
+                    if self.proc_bp.poll() is not None:
+                        self.proc_bp = None
+                        print('backplane exited...')
+                        self.killall()
+                if self.proc_awg.poll() is not None:
+                    self.proc_awg = None
+                    print('Websocket Gateway exited...')
+                    self.killall()
+                if self.proc_hwg.poll() is not None:
+                    self.proc_hwg = None
+                    print('ESP-8266 Gateway exited.')
+                    self.killall()
+
+                # allow some time between polls
+                time.sleep(.4)
             except KeyboardInterrupt:
-                sys.exit(0)
+                self.killall()
+
+    def killall(self):
+        """
+        Kill all running processes
+        """
+        
+        # check for missing processes
+        if self.proc_bp:
+            try:
+                if sys.platform.startswith('win32'):
+                    subprocess.run(['taskkill', '/F', '/t', '/PID', str(self.proc_bp.pid)],
+                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                 subprocess.CREATE_NO_WINDOW
+                                   )
+                else:
+                    self.proc_bp.kill()
+                self.proc_bp = None
+            except:
+                pass
+        if self.proc_awg:
+            try:
+                if sys.platform.startswith('win32'):
+                    subprocess.run(['taskkill', '/F', '/t', '/pid', str(self.proc_awg.pid)],
+                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                 subprocess.CREATE_NO_WINDOW
+                                   )
+                else:
+                    self.proc_awg.kill()
+                self.proc_awg = None
+            except:
+                pass
+        if self.proc_hwg:
+            try:
+                if sys.platform.startswith('win32'):
+                    subprocess.run(['taskkill', '/F', '/t', '/PID', str(self.proc_hwg.pid)],
+                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                 subprocess.CREATE_NO_WINDOW
+                                   )
+                else:
+                    self.proc_hwg.kill()
+                self.proc_hwg = None
+            except:
+                pass
+        sys.exit(0)
+
+    def start_backplane(self):
+        """
+        Start the backplane
+        """
+        
+
+        # check to see if the backplane is already running
+        try:
+            for proc in psutil.process_iter(attrs=['pid', 'name']):
+                if 'backplane' in proc.info['name']:
+                    self.skip_backplane = True
+                    # its running - return its pid
+                    return proc
+        except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            pass
+
+        # backplane is not running, so start one
+        if sys.platform.startswith('win32'):
+            return subprocess.Popen(['backplane'],
+                                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                  subprocess.CREATE_NO_WINDOW)
+        else:
+            return subprocess.Popen(['backplane'],
+                                    stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    stdout=subprocess.PIPE)
+
+    def start_wsgw(self):
+        """
+        Start the websocket gateway
+        """
+        if sys.platform.startswith('win32'):
+            return subprocess.Popen(['wsgw', '-i', '9002'],
+                                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
+                                                  |
+                                                  subprocess.CREATE_NO_WINDOW)
+        else:
+            return subprocess.Popen(['wsgw', '-i', '9002'],
+                                    stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    stdout=subprocess.PIPE)
+
+    def start_espgw(self):
+        """
+        Start the esp_8266 gateway
+        """
+        if sys.platform.startswith('win32'):
+            return subprocess.Popen(['espgw', '-w', 'True'], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                            subprocess.CREATE_NO_WINDOW)
+        else:
+            return subprocess.Popen(['espgw', '-w', 'True'], stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+                                    stdout=subprocess.PIPE)
 
 
 def signal_handler(sig, frame):
@@ -84,6 +196,8 @@ def signal_handler(sig, frame):
 
 
 def s3ex():
+
+    # instantiate
     S3E()
 
 
