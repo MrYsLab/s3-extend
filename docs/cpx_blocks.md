@@ -51,14 +51,6 @@ Boolean blocks test for a specific condition and return either True or False.
 This block returns TRUE if the selected switch is currently in the selected
 state. Otherwise, it returns FALSE.
 
-### SLIDE Switch Is Positioned Left/Right
-
-<img src="../images/cpx_boolean_slide.png" >
-
-
-This block returns TRUE if the slide switch is currently positioned as selected. Otherwise,
-it returns FALSE.
-
 ### Light/Temperature Sensor Value is > or < Specified Value
 
 <img src="../images/cpx_boolean_light.png" >
