@@ -105,7 +105,6 @@ class WsGateway(BanyanBaseAIO):
                 logging.exception("Exception occurred", exc_info=True)
             self.event_loop.stop()
             self.event_loop.close()
-            sys.exit()
 
     async def wakeup(self):
         while True:
@@ -119,6 +118,7 @@ class WsGateway(BanyanBaseAIO):
                 self.event_loop.close()
                 sys.exit(0)
 
+
     async def wsg(self, websocket, path):
         """
         This method handles connections and will be used to send
@@ -131,8 +131,12 @@ class WsGateway(BanyanBaseAIO):
         # start up banyan
         await self.begin()
 
+
         # wait for a connection
-        data = await websocket.recv()
+        try:
+            data = await websocket.recv()
+        except websockets.exceptions.ConnectionClosedOK:
+            pass
 
         # expecting an id string from client
         data = json.loads(data)
@@ -230,7 +234,9 @@ def ws_gateway():
                                                                 "from_esp8266_gateway, "
                                                                 "from_rpi_gateway, "
                                                                 "from_microbit_gateway"
-                                                                "from_picoboard_gateway", nargs='+',
+                                                                "from_picoboard_gateway"
+                                                                "from_cpx_gateway",
+                                                                nargs='+',
                         help="A space delimited list of topics")
     parser.add_argument("-i", dest="server_ip_port", default="9000",
                         help="Set the WebSocket Server IP Port number")
@@ -287,6 +293,7 @@ def ws_gateway():
 def signal_handler(sig, frame):
     print('Exiting Through Signal Handler')
     raise KeyboardInterrupt
+
 
 
 # listen for SIGINT

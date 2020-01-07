@@ -5,23 +5,26 @@ with open('pypi_desc.md') as f:
 
 setup(
     name='s3-extend',
-    version='1.10',
+    version='1.11',
     packages=[
       's3_extend',
       's3_extend.gateways'
     ],
     install_requires=[
         'python-banyan>=3.8',
-        'pymata-express>=1.8'
+        'pymata-express>=1.8',
+        'pymata-cpx'
     ],
 
     entry_points={
         'console_scripts': [
             's3a = s3_extend.s3a:s3ax',
+            's3c = s3_extend.s3c:s3cx',
             's3e = s3_extend.s3e:s3ex',
             's3p = s3_extend.s3p:s3px',
             's3r = s3_extend.s3r:s3rx',
             'ardgw = s3_extend.gateways.arduino_gateway:arduino_gateway',
+            'cpxgw = s3_extend.gateways.cpx_gateway:cpx_gateway',
             'espgw = s3_extend.gateways.esp8266_gateway:esp8266_gateway',
             'pbgw = s3_extend.gateways.picoboard_gateway:picoboard_gateway',
             'rpigw = s3_extend.gateways.rpi_gateway:rpi_gateway',
