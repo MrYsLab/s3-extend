@@ -10,16 +10,18 @@ nav:
         - Install s3-extend: s3-extend.md
       - Preparing Your Micro-Controller:
         - Arduino: arduino.md
+        - Circuit Playground Express: cpx.md
         - ESP-8266: esp-8266.md
-        - Raspberry Pi: rpi.md
         - Picoboard: pico.md
+        - Raspberry Pi: rpi.md
       - Ready, Set, Go:
         - How To Use The OneGPIO Extensions: usage.md
         - Starting the Python Extension Servers:
           - Arduino: ext_ard.md
+          - Circuit Playground Express: ext_cpx.md
           - ESP-8266: ext_esp.md
-          - Raspberry Pi: ext_rpi.md
           - Picoboard: ext_pico.md
+          - Raspberry Pi: ext_rpi.md
         - Shutting Down The Python Extension Servers:
           - Performing A Clean Shutdown: shutdown.md
         - Launching TheScratch 3 Editor:
@@ -28,6 +30,7 @@ nav:
           - Starting Scratch3 Offline: s3-local.md
         - Using OneGPIO Extension Blocks:
           - Arduino: ard_blocks.md
+          - Circuit Playground Express: cpx_blocks.md
           - ESP-8266: esp_blocks.md
           - Raspberry Pi: rpi_blocks.md
           - Picoboard: pico_blocks.md
