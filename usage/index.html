@@ -69,10 +69,10 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     </div>
     
     <div class="wm-article-nav">
-      <a href="../pico/" class="btn btn-xs btn-default pull-left">
+      <a href="../rpi/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../pico/" class="btn btn-xs btn-link">
-        Picoboard
+        Previous</a><a href="../rpi/" class="btn btn-xs btn-link">
+        Raspberry Pi
       </a>
     </div>
     
@@ -95,25 +95,29 @@ for each microcontroller you wish to use and then enter the command for
 the specific micro-controller:</p>
 <ul>
 <li><strong>s3a</strong> - for the Arduino</li>
+<li><strong>s3c</strong> - for the Adafruit Circuit Playground Express</li>
 <li><strong>s3e</strong> - for the ESP-8266</li>
 <li><strong>s3p</strong> - for the Picoboard</li>
 <li><strong>s3r</strong> - for the Raspberry Pi</li>
 </ul>
-<p><strong>Step 4:</strong> Start Scratch 3, select an extension, and create and run
+<p><strong>Step 4:</strong> Start Scratch 3, select an extension and create and run
 your Scratch scripts. If you are using the ESP-8266 extension, when
 Scratch is connected to the ESP-8266 by using the <strong>ESP-8266 Connect IP Address</strong> block, the red LED on the ESP-8266
 NodeMCU is extinguished, indicating a successful connection.</p>
 <p><strong>Step 5:</strong> To power down, dismiss the OneGPIO server by going to the
 window opened in step 3 and pressing Control-C. You may need to do this
 twice. Finally, dismiss the Web Browser tab running
-Scratch 3.</p>
+Scratch 3. <strong>SPECIAL NOTE:</strong> Please use Control-C before dismissing the window.
+If you dismiss the window without pressing Control-C first, the next time you start
+the server, it may fail. In that case, reboot your computer, and the server
+should succeed.</p>
 <p>There is more detail about these steps in the following sections. Please
 read those sections before proceeding.</p>
 <p><strong>NOTE: </strong>You may run a single micro-controller or all simultaneously on a single
 computer, but only a single instance of a microcontroller may be run at a time.
 For example,
 you may run a Raspberry Pi and an Arduino simultaneously, and use one to control the
-other. However, you may not run two of the same type of controller at the same.</p>
+other. However, you may not run two of the same type of controllers at the same.</p>
 <p>Running
 two boards that use a serial link is an advanced and experimental feature and not recommended nor
 officially supported. An example would be running
@@ -149,10 +153,10 @@ extension forcing it to use COM7, you would start the launcher with:</p>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../pico/" class="btn btn-xs btn-default pull-left">
+      <a href="../rpi/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../pico/" class="btn btn-xs btn-link">
-        Picoboard
+        Previous</a><a href="../rpi/" class="btn btn-xs btn-link">
+        Raspberry Pi
       </a>
     </div>
     

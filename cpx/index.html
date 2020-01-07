@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Raspberry Pi - Scratch 3 OneGPIO Extensions</title>
+    <title>Circuit Playground Express - Scratch 3 OneGPIO Extensions</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,7 +32,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "No Additional Files Are Required For The Raspberry Pi", url: "#_top", children: [
+          {title: "Installation", url: "#_top", children: [
           ]},
         ];
 
@@ -59,20 +59,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../usage/" class="btn btn-xs btn-default pull-right">
+      <a href="../esp-8266/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../usage/" class="btn btn-xs btn-link">
-        How To Use The OneGPIO Extensions
+      <a href="../esp-8266/" class="btn btn-xs btn-link">
+        ESP-8266
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../pico/" class="btn btn-xs btn-default pull-left">
+      <a href="../arduino/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../pico/" class="btn btn-xs btn-link">
-        Picoboard
+        Previous</a><a href="../arduino/" class="btn btn-xs btn-link">
+        Arduino
       </a>
     </div>
     
@@ -80,12 +80,31 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="no-additional-files-are-required-for-the-raspberry-pi">No Additional Files Are Required For The Raspberry Pi</h1>
-<p>Make sure that you have installed s3-extend on your Raspberry Pi,
-as explained in the Preparing Your Computer section of this document.</p>
-<p>You may skip to the next section.</p>
-<p><br> <br> <br></p>
-<p>Copyright (C) 2019-2020 Alan Yorinks All Rights Reserved</p>
+    <div style="text-align:left;color:#990033; font-family:times, serif; font-size:3.0em">The FirmataCPx Firmware</div>
+
+<p><br></p>
+<p>To monitor and control the Circuit Playground Express, a special version of StandardFirmata, called
+<strong>FirmataCPx</strong>, must be installed on the Playground Express.</p>
+<h1 id="installation">Installation</h1>
+<p>Since the Circuit Playground Express utilizes a UF2 bootloader,
+installation is quick and straightforward. To install FirmataCPx on to the
+Express, first, click on
+<a href="https://github.com/MrYsLab/pymata-cpx/raw/master/FirmataCPxUF2/FirmataCPx.uf2">this link</a>
+to download FirmataCPx.uf2.</p>
+<p>Next, place the Circuit Playground Express in bootloader mode by plugging
+the Express into a USB port on your computer and double-clicking the
+reset button on the Playground Express. All the neo-pixels should light green.</p>
+<p>Open up a file explorer tool, and you should see a USB drive called
+CPLAYBOOT. Using the file explorer, drag the FirmataCPx.uf2 file onto the CPLAYBOOT entry.
+ In a few seconds, FirmataCPx should be
+loaded on the Playground Express. The red LED should flash several times and then
+extinguish after a successful load. For more information about loading UF2 files onto the Express,
+please refer to
+<a href="https://learn.adafruit.com/adafruit-circuit-playground-express/downloading-and-flashing">this Adafruit page.</a>
+Even though this page addresses MakeCode, the procedure for flashing a
+.uf2 file is the same in all cases.</p>
+<p><br> <br></p>
+<p>Copyright (C) 2019-2020 Alan Yorinks. All Rights Reserved.</p>
 
   <br>
     
@@ -98,20 +117,20 @@ as explained in the Preparing Your Computer section of this document.</p>
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../usage/" class="btn btn-xs btn-default pull-right">
+      <a href="../esp-8266/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../usage/" class="btn btn-xs btn-link">
-        How To Use The OneGPIO Extensions
+      <a href="../esp-8266/" class="btn btn-xs btn-link">
+        ESP-8266
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../pico/" class="btn btn-xs btn-default pull-left">
+      <a href="../arduino/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../pico/" class="btn btn-xs btn-link">
-        Picoboard
+        Previous</a><a href="../arduino/" class="btn btn-xs btn-link">
+        Arduino
       </a>
     </div>
     

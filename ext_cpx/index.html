@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>ESP-8266 - Scratch 3 OneGPIO Extensions</title>
+    <title>Circuit Playground Express - Scratch 3 OneGPIO Extensions</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,7 +32,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Starting The OneGPIO Server For The ESP-8266", url: "#_top", children: [
+          {title: "Starting The OneGPIO Server For The Circuit Playground Express", url: "#_top", children: [
           ]},
           {title: "Troubleshooting", url: "#troubleshooting", children: [
           ]},
@@ -61,20 +61,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../ext_pico/" class="btn btn-xs btn-default pull-right">
+      <a href="../ext_esp/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../ext_pico/" class="btn btn-xs btn-link">
-        Picoboard
+      <a href="../ext_esp/" class="btn btn-xs btn-link">
+        ESP-8266
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../ext_cpx/" class="btn btn-xs btn-default pull-left">
+      <a href="../ext_ard/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../ext_cpx/" class="btn btn-xs btn-link">
-        Circuit Playground Express
+        Previous</a><a href="../ext_ard/" class="btn btn-xs btn-link">
+        Arduino
       </a>
     </div>
     
@@ -82,22 +82,29 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h2 id="starting-the-onegpio-server-for-the-esp-8266">Starting The OneGPIO Server For The ESP-8266</h2>
-<p>Apply power to the ESP-8266. The red LED should blink a few times and
-then stay continually on. </p>
+    <h2 id="starting-the-onegpio-server-for-the-circuit-playground-express">Starting The OneGPIO Server For The Circuit Playground Express</h2>
+<p>Plug the Circuit Playground Express into a USB connector on your computer</p>
 <p>Next, open a terminal window and type:</p>
-<pre><code>s3e
+<pre><code>s3c
 </code></pre>
 
 <p><br>
-<img src="../images/s3e-1.png" ></p>
+<img src="../images/s3c-1.png" ></p>
 <p>This command automatically starts the Python Banyan Backplane, and both
-the Banyan WebSocket and Banyan ESP-8266 Gateways. </p>
-<p>You may now start Scratch 3 in your Web browser, as explained in the
-"Launching Scratch 3" section of this document.</p>
+the Banyan WebSocket and Banyan Circuit Playground Express Gateways.</p>
+<p>If you remove the USB cable after starting s3c, or if you have forgotten
+to plug in the cable before starting s3c, you will see something similar to
+the following:</p>
+<p><br>
+<img src="../images/s3c-2.png" ></p>
+<p>Here, s3c tried to start the Circuit Playground Express Gateway but detected an error
+and aborted.</p>
+<p>Visit "A Peek Under The Hood" for more information about the Backplane and Gateways.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
-<p>If the command window does not look similar to the one above, 
-open a new terminal and type:</p>
+<p>Only use a high-quality USB cable. Verify that you properly
+connected the cable to both your computer and the Circuit Playground express.
+If s3c detects an error in either the backplane or either of the two gateways, it will shut itself down.</p>
+<p>To troubleshoot why this may be happening, open a new terminal window and type:</p>
 <pre><code>backplane
 </code></pre>
 
@@ -106,22 +113,18 @@ backplane is running correctly. The IP address does not need to match
 the one shown.</p>
 <p><img src="../images/backplane.png" ></p>
 <p>Next, open an additional terminal window and type:</p>
-<pre><code>espgw -w True
+<pre><code>cpxgw
 </code></pre>
 
-<p><img src="../images/s3e-2.png" ></p>
-<p>You should see a window similar to the one shown above for the ESP-8266
-Gateway when the s3e command succeeds.</p>
-<p>If you do not, make sure that you've installed MicroPython on the
-ESP-8266 and flashed it with main.py and esp8266_min.py as explained in
-the "Preparing Your Micro-Controller" section of this document.</p>
+<p><img src="../images/cpxgw_success.png" ></p>
+<p>You should see a window similar to the one shown above. Here, the screenshot displays
+the version of pymata-cpx and the release date of FirmataCPx.</p>
 <p>Next, open a third terminal window and type:</p>
-<pre><code>wsgw -i 9002
+<pre><code class="bash">wsgw -i 9003
 </code></pre>
 
-<p><img src="../images/s3e-3.png" ></p>
-<p>You should see a window similar to the one shown above for the WebSocket
-Gateway when the s3e command succeeds. </p>
+<p><img src="../images/s3c-3.png" ></p>
+<p>You should see a window similar to the one shown above.</p>
 <p>If there are exceptions or errors in any of the terminal windows,
 <a href="https://github.com/MrYsLab/s3-extend/issues">create an issue against the s3-extend distribution</a>
 pasting any error output into the issue comment.</p>
@@ -139,20 +142,20 @@ pasting any error output into the issue comment.</p>
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../ext_pico/" class="btn btn-xs btn-default pull-right">
+      <a href="../ext_esp/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../ext_pico/" class="btn btn-xs btn-link">
-        Picoboard
+      <a href="../ext_esp/" class="btn btn-xs btn-link">
+        ESP-8266
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../ext_cpx/" class="btn btn-xs btn-default pull-left">
+      <a href="../ext_ard/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../ext_cpx/" class="btn btn-xs btn-link">
-        Circuit Playground Express
+        Previous</a><a href="../ext_ard/" class="btn btn-xs btn-link">
+        Arduino
       </a>
     </div>
     
