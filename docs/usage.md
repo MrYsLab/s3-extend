@@ -23,7 +23,7 @@ the specific micro-controller:
 *  **s3p** - for the Picoboard
    * **s3r** - for the Raspberry Pi
    
-**Step 4:** Start Scratch 3, select an extension, and create and run
+**Step 4:** Start Scratch 3, select an extension and create and run
 your Scratch scripts. If you are using the ESP-8266 extension, when
 Scratch is connected to the ESP-8266 by using the **ESP-8266 Connect IP Address** block, the red LED on the ESP-8266
 NodeMCU is extinguished, indicating a successful connection.

@@ -21,67 +21,102 @@ either pressed or released.
 
 This block executes when the slide switch moves to the selected position.
 
-### When CPX Position is TILT_POSITION
+### When CPX Position Is TILT_POSITION
 <img src="../images/cpx_hat_when_position.png" >
 
 This block executes when the Playground Express tilt position changes to
-Flat, Up, Down, Left or Right.
+Flat, Up, Down, Left, or Right.
 
+### When A Loud Sound Is Detected
+<img src="../images/cpx_hat_when_sound.png" >
 
+This block executes when a relatively loud sound is detected. The sound
+only needs to be momentary, such as a hand clap.
 
+### When A Touchpad Is Touched/Released
+<img src="../images/cpx_hat_when_touch.png" >
 
-
-
-
-
-
-
-
-
-
-
-
-
-For example, ***When Light > 15***.
-
-If the result of the comparison is TRUE, then all of the blocks below
-this block are executed once.
-
-### When Button Is Pressed
-When the Picoboard button is pressed, all of the blocks below this block
-are executed once.
-
-### When The Selected SENSOR Value Is Within A Range
-This block uses the current value of the selected sensor to check if its
-value is within the specified range. If it is, then all of the blocks
-below this block are executed once.
+This block executes when the selected touchpad is either touched
+or released.
+<br>
+<br>
 
 ## Boolean Blocks
 
 Boolean blocks test for a specific condition and return either True or False.
 
-### Is Button Pressed
-When the button is pressed, this blocks returns True. If the button is
-not pressed, it returns FALSE.
+### BUTTON Switch Is Pressed/Released
+<img src="../images/cpx_boolean_a_pressed.png" >
 
-### Is SENSOR Less Or Greater Than A Value
-This block allows you to select a sensor type, a comparison type, and a
-value for the comparison. It returns TRUE when the comparison is true
-and FALSE when the comparison is false.
+This block returns TRUE if the selected switch is currently in the selected
+state. Otherwise, it returns FALSE.
+
+### SLIDE Switch Is Positioned Left/Right
+
+<img src="../images/cpx_boolean_slide.png" >
+
+
+This block returns TRUE if the slide switch is currently positioned as selected. Otherwise,
+it returns FALSE.
+
+### Light/Temperature Sensor Value is > or < Specified Value
+
+<img src="../images/cpx_boolean_light.png" >
+
+This block compares the current value of the selected sensor,
+using the selected operator, to the value entered by the user.
+
+### Tilt Position of The CPX
+
+<img src="../images/cpx_boolean_position.png" >
+
+This block returns TRUE if the CPX is currently in the selected
+tilt position.
+
+### Selected Touchpad is Currently Touched/Released
+
+<img src="../images/cpx_boolean_touch.png" >
+
+This block returns TRUE if the selected touchpad is currently in the
+selected state.
 
 ## Reporter Blocks
 
 Reporter blocks retrieve the current value for a selected sensor.
 
-### SENSOR Current Value
-This block reports the current value of the selected sensor.
 
-### Convert SENSOR To A Specified Range
-This block scales the current value for the selected sensor and to be
-within the specified range. So, for example, if the Slider is set to 100
-and the range is set to -240 to 240, this block will return 240. If the
-Slider is set to 50, this block will return 0, and if the Slider is set
-to 0, this block will return -240.
+### Current Light/Temperature Value
+
+<img src="../images/cpx_reporter_light.png" >
+
+This block returns the current value for the selected sensor.
+The light value is non-calibrated, and the temperature is expressed
+in degrees Celsius.
+
+
+## Command Blocks
+
+Command blocks control actuators on the CPX.
+
+### Set Neopixel To Color
+
+<img src="../images/cpx_command_neopixel.png" >
+
+This block sets the selected neopixel to the red, green, and blue values
+entered. To turn a neopixel off, set its r, g, and b values to zero.
+
+### Play A Tone
+
+<img src="../images/cpx_command_tone.png" >
+
+This block plays a tone at the specified frequency in Hertz for the duration
+specified in milliseconds
+
+### Board LED On/Off
+
+<img src="../images/cpx_command_boardLED.png" >
+
+This block controls the state of the red board LED.
 
 
  <br> <br> <br>

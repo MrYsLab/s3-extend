@@ -32,8 +32,8 @@ nav:
           - Arduino: ard_blocks.md
           - Circuit Playground Express: cpx_blocks.md
           - ESP-8266: esp_blocks.md
-          - Raspberry Pi: rpi_blocks.md
           - Picoboard: pico_blocks.md
+          - Raspberry Pi: rpi_blocks.md
       - Tips And Techinques:
           - When In Doubt, Add A Small Delay: delay.md
           - Running Multiple OneGPIO Extensions Simultaneously: multi.md

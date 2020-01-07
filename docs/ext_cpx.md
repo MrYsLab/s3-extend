@@ -20,7 +20,7 @@ the following:
 <br>
 <img src="../images/s3c-2.png" >
 
-Here, s3c tried to start the Circuit Playground Express Gateway, but did detected an error
+Here, s3c tried to start the Circuit Playground Express Gateway but detected an error
 and aborted.
 
 Visit "A Peek Under The Hood" for more information about the Backplane and Gateways.
@@ -47,7 +47,7 @@ the one shown.
 Next, open an additional terminal window and type:
 
 ```
-pbgw
+cpxgw
 ```
 
 <img src="../images/cpxgw_success.png" >

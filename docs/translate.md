@@ -20,7 +20,7 @@ To provide a translation for the Arduino, ESP-8266, and Raspberry Pi
 extensions, you simply update the
 [translate.txt file.](https://github.com/MrYsLab/s3onegpio/blob/master/translations/translations.txt)
 For the Picoboard, you update the
-[picoboard.txt file.](https://github.com/MrYsLab/s3onegpio/blob/master/translations/picoboard.txt).
+[picoboard.txt file](https://github.com/MrYsLab/s3onegpio/blob/master/translations/picoboard.txt).
 And for the CircuitPlayground Express, you update the
 [playground_express.txt file.](https://github.com/MrYsLab/s3onegpio/blob/master/translations/playground_express.tx)
 You then either generate a GitHub pull request, or if you are unfamiliar
@@ -35,7 +35,7 @@ where ***LANGUAGE BEING ADDED*** is the name of your language.
 I will then incorporate your translation into the source code and update
 the Scratch 3 Editor to contain your translation.
 
-### Translations.txt, Picoboard.txt And Playground_Express.txt
+### Translations.txt, Picoboard.txt, And Playground_Express.txt
  
  The translations.txt, picoboard.txt, and playground_express.txt files contain the text for all
  of the blocks and alerts for the OneGPIO extensions.
