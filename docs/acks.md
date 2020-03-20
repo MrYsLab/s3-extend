@@ -23,7 +23,7 @@ Edson curates the
 
 Brazilian Portuguese and Portuguese: **Edson Sidnei Sobreira**
 
-French: **Florian Becard**
+French: **Florian Becard** And **Francois MOCQ**
 
 Chinese: **https://gasolin.idv.tw/**, **Justina Hsu**
 
