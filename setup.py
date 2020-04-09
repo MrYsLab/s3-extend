@@ -5,14 +5,14 @@ with open('pypi_desc.md') as f:
 
 setup(
     name='s3-extend',
-    version='1.11',
+    version='1.12',
     packages=[
       's3_extend',
       's3_extend.gateways'
     ],
     install_requires=[
-        'python-banyan>=3.8',
-        'pymata-express>=1.8',
+        'python-banyan>=3.9',
+        'pymata-express>=1.11',
         'pymata-cpx'
     ],
 

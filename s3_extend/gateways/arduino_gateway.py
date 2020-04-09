@@ -346,7 +346,7 @@ class ArduinoGateway(GatewayBaseAIO):
         self.pins_dictionary[trigger][GatewayBaseAIO.PIN_MODE] = GatewayBaseAIO.SONAR_MODE
         self.pins_dictionary[echo][GatewayBaseAIO.PIN_MODE] = GatewayBaseAIO.SONAR_MODE
 
-        await self.arduino.set_pin_mode_sonar(trigger, echo, cb=self.sonar_callback)
+        await self.arduino.set_pin_mode_sonar(trigger, echo, callback=self.sonar_callback)
 
     async def set_mode_stepper(self, topic, payload):
         """
@@ -388,17 +388,17 @@ class ArduinoGateway(GatewayBaseAIO):
         :param data:
         :return:
         """
-        # data = [pin, current reported value, pin_mode, timestamp]
-        self.pins_dictionary[data[0]][GatewayBaseAIO.LAST_VALUE] = data[1]
-        payload = {'report': 'digital_input', 'pin': data[0],
-                   'value': data[1], 'timestamp': data[3]}
+        # data = [pin mode, pin, current reported value, timestamp]
+        self.pins_dictionary[data[1]][GatewayBaseAIO.LAST_VALUE] = data[2]
+        payload = {'report': 'digital_input', 'pin': data[1],
+                   'value': data[2], 'timestamp': data[3]}
         await self.publish_payload(payload, 'from_arduino_gateway')
 
     async def analog_input_callback(self, data):
-        # data = [pin, current reported value, pin_mode, timestamp]
-        self.pins_dictionary[data[0] + self.arduino.first_analog_pin][GatewayBaseAIO.LAST_VALUE] = data[1]
-        payload = {'report': 'analog_input', 'pin': data[0],
-                   'value': data[1], 'timestamp': data[3]}
+        # data = [pin mode, pin, current reported value, timestamp]
+        self.pins_dictionary[data[1] + self.arduino.first_analog_pin][GatewayBaseAIO.LAST_VALUE] = data[2]
+        payload = {'report': 'analog_input', 'pin': data[1],
+                   'value': data[2], 'timestamp': data[3]}
         await self.publish_payload(payload, 'from_arduino_gateway')
 
     async def i2c_callback(self, data):
@@ -421,8 +421,8 @@ class ArduinoGateway(GatewayBaseAIO):
         :param data:
         :return:
         """
-        self.pins_dictionary[data[0]][GatewayBaseAIO.LAST_VALUE] = data[1]
-        payload = {'report': 'sonar_data', 'value': data[1]}
+        self.pins_dictionary[data[1]][GatewayBaseAIO.LAST_VALUE] = data[2]
+        payload = {'report': 'sonar_data', 'value': data[2]}
         await self.publish_payload(payload, 'from_arduino_gateway')
 
     def my_handler(self, tp, value, tb):
