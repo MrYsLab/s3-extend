@@ -31,7 +31,7 @@
 <br>
 
 
-Last Updated: 20 March 2020 &nbsp; &nbsp; &nbsp; &nbsp; s3-extend v1.11 &nbsp; &nbsp; &nbsp; &nbsp;s3onegpio v1.8
+Last Updated: 20 March 2020 &nbsp; &nbsp; &nbsp; &nbsp; s3-extend v1.11 &nbsp; &nbsp; &nbsp; &nbsp;s3onegpio v1.12
 
 Copyright (C) 2019-2020 Alan Yorinks All Rights Reserved
 
