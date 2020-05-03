@@ -27,6 +27,8 @@ French: **Florian Becard** And **Francois MOCQ**
 
 Chinese: **https://gasolin.idv.tw/**, **Justina Hsu**
 
+Polish: **Tomasz Regdos**
+
 <br> <br> <br>
 
 
