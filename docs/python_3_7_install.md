@@ -1,11 +1,11 @@
 
-## Python 3.7 Verification
+## Python 3.7 (or newer) Verification
  
 The Scratch 3 OneGPIO extension servers utilize the latest advances in
-the Python 3.7 asyncio library. Python 3.7 or later is required to run
+the Python 3 asyncio library. Python 3.7 or later is required to run
 the servers.
 
-To check if you have Python 3.7 installed open a command window and
+To check if you have Python 3.7 (or newer) installed open a command window and
 type:
 
 ```
@@ -37,11 +37,13 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-## Installing Python 3.7
+## Installing The Latest Version of Python 3
+
+Always install the newset stable release of Python 3.
 
 ### Windows Users
 
-To install Python 3.7 or later, go to the
+To install Python 3.7 (or newer), go to the
 <a href="https://www.python.org/" target="_blank">Python home page,</a>
 and download the latest 3.7 (or later) distribution for your operating system.
 
