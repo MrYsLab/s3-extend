@@ -1,7 +1,7 @@
-## Starting The OneGPIO Server For Arduino
+## Starting The OneGPIO Server For RoboHAT MM1
 
-With power applied to your Arduino, press and release the Arduino's reset button.
-<img src="../images/ard_reset.png" >
+With power applied to your RoboHAT, press and release the RoboHAT's reset button.
+<img src="../images/rh_reset.png" >
 
 Next, open a terminal window and type:
 

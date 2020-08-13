@@ -39,7 +39,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ## Installing The Latest Version of Python 3
 
-Always install the newset stable release of Python 3.
+Always install the newest stable release of Python 3.
 
 ### Windows Users
 
@@ -50,7 +50,7 @@ and download the latest 3.7 (or later) distribution for your operating system.
 If you have Python 2.7 installed, you do not need to remove it.
 
 During the installation process, if there is a checkbox to add Python 3.7 to your path,
- make sure it is checked before proceeding with the installation.
+ make sure it is checked.
 
 ![](./images/windows_python_install.png)
 
@@ -61,7 +61,7 @@ Go to the
 and download and install the latest version of Python 3.
 
 ### Raspberry Pi Users
-The 2019-09-26 release of *Raspbian Buster with desktop and recommended
+As of the 2019-09-26 release of *Raspbian Buster with desktop and recommended
 software* comes with Python 3.7 pre-installed. If you are using an older
 version of Raspbian, it is easiest to flash the latest version of
 Rasbian on to an SD card and start anew.

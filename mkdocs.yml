@@ -9,7 +9,7 @@ nav:
         - Verifying/Install pip3: pip_update.md
         - Install s3-extend: s3-extend.md
       - Preparing Your Micro-Controller:
-        - Arduino: arduino.md
+        - Arduino And RoboHAT MM1: arduino.md
         - Circuit Playground Express: cpx.md
         - ESP-8266: esp-8266.md
         - Picoboard: pico.md
@@ -22,6 +22,7 @@ nav:
           - ESP-8266: ext_esp.md
           - Picoboard: ext_pico.md
           - Raspberry Pi: ext_rpi.md
+          - RoboHAT MMI: ext_rh.md
         - Shutting Down The Python Extension Servers:
           - Performing A Clean Shutdown: shutdown.md
         - Launching TheScratch 3 Editor:
@@ -34,17 +35,17 @@ nav:
           - ESP-8266: esp_blocks.md
           - Picoboard: pico_blocks.md
           - Raspberry Pi: rpi_blocks.md
-      - Tips And Techinques:
+      - Tips And Techniques:
           - When In Doubt, Add A Small Delay: delay.md
           - Running Multiple OneGPIO Extensions Simultaneously: multi.md
       - A Peek Under The Hood:
           - The OneGPIO Gateways and Launchers: under_the_hood.md
       - Want To Contribute A Language Translation?:
           - Contributing Block Translations: translate.md
-      - Acknowledgements:
+      - Acknowledgments:
           - Thank You: acks.md
       - Need Help?:
         - Reporting Issues: issues.md
 
 
-theme: 'windmill'
+theme: 'material'

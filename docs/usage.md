@@ -1,32 +1,33 @@
 ## An Overview Of Using The OneGPIO Extensions
 
-Now that all the necessary software is installed both on your computer
+Now that all the necessary software is installed on your computer
 and your physical computing device, it is time to try things out.
 
 Here is a brief recommended procedure for using Scratch 3 with your
 physical computing projects:
 
 **Step 1:** With the power disconnected from your micro-controller, attach
-the sensors and actuators to the micro-controller. ***Never*** add or
+the sensors and actuators to the micro-controller. **Never** add or
 remove sensors or actuators with power applied - you may permanently
 damage your micro-controller.
    
 **Step 2:** Apply power to the micro-controller.
 
-**Step 3:** Start the OneGPIO server code by opening a terminal window
-for each microcontroller you wish to use and then enter the command for
-the specific micro-controller:
+**Step 3:** Start the OneGPIO server code by opening a terminal 
+window for each microcontroller you wish to use. Then, enter the command for the specific micro-controller:
    
    * **s3a** - for the Arduino
    * **s3c** - for the Adafruit Circuit Playground Express
 *    **s3e** - for the ESP-8266
 *  **s3p** - for the Picoboard
    * **s3r** - for the Raspberry Pi
+   * **s3rh** - for the RoboHAT MM1
    
-**Step 4:** Start Scratch 3, select an extension and create and run
-your Scratch scripts. If you are using the ESP-8266 extension, when
-Scratch is connected to the ESP-8266 by using the **ESP-8266 Connect IP Address** block, the red LED on the ESP-8266
-NodeMCU is extinguished, indicating a successful connection.
+**Step 4:** Start Scratch 3, select an extension, and create and run
+your Scratch scripts. If you are using the ESP-8266 extension, you must use the **ESP-8266 Connect IP Address** block, 
+to connect to the ESP-8266. When successfully connected, 
+the red LED on the ESP-8266
+NodeMCU is extinguished.
 
 **Step 5:** To power down, dismiss the OneGPIO server by going to the
 window opened in step 3 and pressing Control-C. You may need to do this
@@ -49,10 +50,10 @@ Running
 two boards that use a serial link is an advanced and experimental feature and not recommended nor
 officially supported. An example would be running
 an Arduino and a Picoboard on the same computer at the same time.
-If you wish to run two boards that use a serial link,
-you may have to specify the COM port for one of the boards manually. This is done by using
-the -c option in the launcher. For example, to start the Picoboard
-extension forcing it to use COM7, you would start the launcher with:
+If you wish to run two boards that use a serial link, you may have to manually specify 
+the COM port for one of the boards. This is done by using 
+the -c option in the launcher. For example, to start the Picoboard extension 
+forcing it to use COM7, you would start the launcher with:
 
 ```bash
  s3p -c com7

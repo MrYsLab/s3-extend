@@ -1,15 +1,18 @@
 
 # FirmataExpress Installation Instructions
 
-When s3-extend is installed using pip, a package called
-[pymata-express](https://mryslab.github.io/pymata-express/) is automatically installed
-alongside it. The pymata-express package is used to control
-and monitor your Arduino. 
+When s3-extend is installed using pip,  packages called
+[pymata-express](https://mryslab.github.io/pymata-express/) and
+[pymata_rh](https://github.com/MrYsLab/pymata_rh) 
+are automatically installed to support Arduino boards and the RoboHAT MM1, 
+respectively.
+These packages are used to control
+and monitor the two devices.
 
-Pymata-express requires a specialized
+Both pymata-express and pymata_rh require a specialized
 [Firmata ](https://github.com/firmata/protocol)sketch, called
 [FirmataExpress](https://github.com/MrYsLab/FirmataExpress) to be
-installed on your Arduino Uno.
+installed on your Arduino or RoboHAT MM1.
 
 The following steps explain how to install FirmataExpress on your
 Arduino.
