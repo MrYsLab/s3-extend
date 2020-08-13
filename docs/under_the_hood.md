@@ -8,10 +8,8 @@ The Scratch 3 OneGPIO extensions consist of two major components.
 
 The first of the major components is the
 [modified Scratch 3 editor, ](https://github.com/MrYsLab/s3onegpio) depicted as the terminal 
-on the left side of the illustration above. The
-modified editor uses all of the code provided by the Scratch 3 team but
-adds the additional code to create the custom Scratch blocks to support
-the OneGPIO extensions. 
+on the left side of the illustration above. The modified editor uses all of the Scratch 3 team's code but adds the 
+additional code to create the custom Scratch blocks to support the OneGPIO extensions.
 
 
 If you would like additional information about how the OneGPIO
@@ -38,8 +36,8 @@ to the
  
  Each
  Extension Server utilizes a unique instance of the
- [WebSocket Gateway](https://mryslab.github.io/python_banyan/#additional_gateways/#websocket-gateway),
- providing a communication channel between the Scratch 3 editor running in the browser, and the Python code interacting
+ [WebSocket Gateway](https://mryslab.github.io/python_banyan/#additional_gateways/#websocket-gateway).
+ It provides a communication channel between the Scratch 3 editor running in the browser, and the Python code interacting
   with microcontroller hardware. A
  unique IP port number is assigned to each WebSocket Gateway.
  

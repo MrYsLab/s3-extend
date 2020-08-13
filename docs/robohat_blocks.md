@@ -1,19 +1,19 @@
 ## The RoboHAT MM1 Blocks
-## The RoboHAT MM1 Blocks
 
-<img src="../images/rpi_blocks.png" >
+<img src="../images/robohat_blocks.png" >
 
 The blocks consist of a set of command blocks that are rectangular in
 shape and reporter blocks rounded in shape.
 
 ### Connecting To A Local Browser Versus A Remote Browser
-For the Raspberry Pi extension, you can run Scratch 3 on a local
+For the RoboHAT extension, you can run Scratch 3 on a local
 browser, or a browser on your PC.
 
-For remote operation, you must specify the Raspberry Pi's WiFi or
-Ethernet address in the Remote IP Address block.
+For remote operation, in the Remote IP Address block,
+you must specify the IP address of the
+ computer running s3rh.
 
-NOTE: It is recommended that if you wish to access a Raspberry Pi using
+NOTE: It is recommended that if you wish to access a RoboHAT using
 a remote browser, that you install and use the off-line version of the
 Scratch 3 OneGPIO editor. The reason is, using an on-line version 
 will most likely result in a security error.
@@ -26,13 +26,11 @@ Raspberry Pi's IP address into this block. This block
 should be executed before any of the other Raspberry Pi blocks and
 executed only once.
 
-<img src="../images/rpi_ip.png" >
 
 
 If you wish to use a local browser running on the Raspberry Pi, do not
 use the Remote IP block.
 
-<img src="../images/rpi-local.png" >
 
 
 #### Write Digital
@@ -49,15 +47,6 @@ a PWM value. If you use a PWM value of less than zero, it will be set to
 0 internally. If you set the value to greater than 100, it will be set
 to 100.
 
-#### Tone
-If you connect a Piezo type buzzer to a pin, this block will generate a
-tone on the pin for the frequency and duration specified. It contains
-three parameters. The first is a drop-down list of valid PINs. The
-second allows you to specify the frequency of the tone in Herz. The
-third parameter specifies the tone duration in milliseconds. If a
-value greater than 5000 is entered, the value will be set to 5000
-internally, limiting the maximum playing time to 5 seconds.
-
 #### Write Servo
 This block allows you to control the angle of a servo motor. It contains
 two parameters. The first is a
@@ -71,11 +60,36 @@ This block allows you to read the current state of a digital input pin.
 It has one parameter, a drop-down list containing all the valid PINs. It
 reports a value of zero or one.
 
-#### Read Sonar
-This block allows you to connect an HC-SR04 type device. It has two
-parameters, both containing a drop-down list of valid PINs. The
-first parameter allows you to select a trigger pin and the second an
-echo pin. It returns the measured distance in centimeters.
+#### Read Analog
+This block allows you to read the current state of an analog input pin.
+It has one parameter, a drop-down list containing all the valid Pins.
+It reports a value between 0 and 1023.
+
+#### Read MPU
+This block allows you read any of the MPU9250 registers selected in the drop-down list:
+
+* AX: Accelerometer X Register
+* AY: Accelerometer Y Register
+* AZ: Accelerometer Z Register
+
+* GX: GyroScope X Register
+* GY: GyroScope Y Register
+* GZ: GyroScope Z Register
+
+* MX: Magnetometer X Register
+* MY: Magnetometer Y Register
+* MZ: Magnetometer Z Register
+
+* Temperature
+
+#### Read INA
+This block allows you read any of the INA219 registers selected in the drop-down list:
+
+* V: Bus Voltage
+* A: Bus Current
+* Supply: Supply Voltage
+* Shunt: Shunt Voltage
+* Power: Power
 
 <br> <br> <br>
 
