@@ -35,6 +35,7 @@ nav:
           - ESP-8266: esp_blocks.md
           - Picoboard: pico_blocks.md
           - Raspberry Pi: rpi_blocks.md
+          - RoboHAT MM1: robohat_blocks.md
       - Tips And Techniques:
           - When In Doubt, Add A Small Delay: delay.md
           - Running Multiple OneGPIO Extensions Simultaneously: multi.md

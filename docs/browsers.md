@@ -44,7 +44,7 @@ successfully started the Python code, as described in the
 _How To Use The OneGPIO Extensions_ section of this document and that it is
 still running.
 
-If the warning appears after successfully starting the Python extension, then
+If the warning appears after successfully starting the Python extension,
 please visit the Troubleshooting section for the extension you are using,
 and follow the instructions there.
 
@@ -52,7 +52,7 @@ and follow the instructions there.
 
 If, after loading an extension, it is not behaving as expected, with the browser open, press the F12
  key on your keyboard to expose the
-browser console. If you see any errors reported, and are still not sure
+browser console. If you see any errors reported, and are still unsure
 how to solve the issue,
 [create an issue against the s3-extend distribution](https://github.com/MrYsLab/s3-extend/issues)
 pasting any error output into the issue comment.

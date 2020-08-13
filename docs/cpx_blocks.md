@@ -1,6 +1,6 @@
 # The Circuit Playground Express Blocks
 
-The blocks consist of a set of **HAT** blocks that have a bump at the left top,
+The blocks consist of a set of **HAT** blocks with a bump at the left top,
 **boolean** blocks that have pointed ends, **reporter** blocks that are rounded in shape,
 and **command** blocks that are rectangular in shape.
 
@@ -102,7 +102,7 @@ entered. To turn a neopixel off, set its r, g, and b values to zero.
 <img src="../images/cpx_command_tone.png" >
 
 This block plays a tone at the specified frequency in Hertz for the duration
-specified in milliseconds
+specified in milliseconds.
 
 ### Board LED On/Off
 

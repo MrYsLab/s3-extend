@@ -1,4 +1,5 @@
-## The Raspberry Pi Blocks
+## The RoboHAT MM1 Blocks
+## The RoboHAT MM1 Blocks
 
 <img src="../images/rpi_blocks.png" >
 

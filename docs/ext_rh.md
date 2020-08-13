@@ -1,71 +1,71 @@
 ## Starting The OneGPIO Server For RoboHAT MM1
 
-With power applied to your RoboHAT, press and release the RoboHAT's reset button.
+Power the  RoboHAT and then press and release the RoboHAT's reset button.
 <img src="../images/rh_reset.png" >
 
 Next, open a terminal window and type:
 
 ```
-s3a
+s3rh
 ```
 
 <br>
-<img src="../images/s3a-1.png" >
+<img src="../images/srh-1.png" >
 
 This command automatically starts the Python Banyan Backplane, and both
-the Banyan WebSocket and Banyan Arduino Gateways. It starts an automatic 5-second
-countdown timer to allow the Arduino adequate time to reset itself and start the 
+the Banyan WebSocket and Banyan RoboHAT Gateways. It starts an automatic 5-second
+countdown timer to allow the RoboHAT adequate time to reset itself and start the 
 Firmata-Express sketch.
 
 To learn more about the Backplane and Gateways, visit "A Peek Under The Hood"
  for more information.
 
 
-After the countdown time completes, the terminal window indicates that the Arduino
+After the countdown time completes, the terminal window indicates that the RoboHAT
 is initialized. You may now start Scratch 3 in your Web browser, as explained in the
 "Launching Scratch 3" section of this document.
 
-<img src="../images/s3a-2.png" > 
+<img src="../images/srh-2.png" > 
 
 
 ## Manually Specifying The COM Port
 
-The Arduino Gateway will automatically discover the COM port that the Arduino Gateway
+The RoboHAT Gateway will automatically discover the COM port that the RoboHAT Gateway
 is using. 
 
 If you wish to manually specify the COM port, use the **_-c_** command-line option
-when starting s3a.
+when starting s3rh.
 
-For example, if you are using Windows and the COM port you wish to use is COM6, then,
-start s3a with the following command:
+For example, if you are using Windows and the COM port you wish to use is COM6,
+start s3rh with the following command:
 
 ```
-s3a -c COM6
+s3rh -c COM6
 ```
 
 For Linux or macOS, use the COM port designator specific to your operating system. 
-For example, if the COM port is /dev/ttyACM0, then start s3a with the following command:
+For example, if the COM port is /dev/ttyACM0 start s3rh with the following command:
 
 ```
-s3a -c /dev/ttyACM0
+s3rh -c /dev/ttyACM0
 ```
 
-## Manually Specifying An Arduino Instance
+## Manually Specifying An RoboHAT Instance
 
-If you have multiple Arduino's plugged into your computer, you can explicitly
-tell s3a which one to use by taking advantage of the 
-[pymata-express Arduino Instance Id Feature,](https://mryslab.github.io/pymata-express/firmata_express/)
+If you are you using one or more Arduino's while using the RoboHAT, you can explicitly
+tell s3rh which one to use by taking advantage of the 
+[FirmataExpress Arduino Instance Id Feature,](https://mryslab.github.io/pymata_rh/firmata_express/)
 
-You may do so using the **_-i_** command-line option:
+You may do so using the **-i** command-line option:
 
 ```
-s3a -i 2
+s3rh -i 2
 ```
 
 ## Troubleshooting
 
-Only use a high-quality USB cable. Verify that you properly connected the cable to both your computer and the Arduino. 
-If s3a detects an error in either the backplane or the two gateways, it will shut itself down. 
+Only use a high-quality USB cable. Verify that you correctly connected the cable to both your computer and the RoboHAT. 
+If s3rh detects an error in either the backplane or the two gateways, it will shut itself down. 
 
 To troubleshoot why this may be happening, open a new terminal window and type:
 
@@ -76,32 +76,32 @@ You should see a similar output, as shown below, indicating that the
 backplane is running correctly. The IP address does not need to match
 the one shown.
 
-<img src="../images/backplane.png" >
+<img src="../images/rhbackplane.png" >
 
 Next, open an additional terminal window and type:
 
 ```
-ardgw
+rhgw
 ```
 
-<img src="../images/ardgw_success.png" >
+<img src="../images/rhgw_success.png" >
 
 You should see a window similar to the one shown above.
 
-If you do not, make sure that you've flashed the Arduino with the
+If you do not, make sure that you've flashed the RoboHAT with the
 FirmataExpress sketch, as explained in the "Preparing Your
 Micro-Controller" section of this document.
 
-Also, make sure that you've plugged the Arduino into a USB port before
-starting s3a.
+Also, make sure that you've plugged the RoboHAT into a USB port before
+starting s3rh.
 
 Next, open a third terminal window and type:
 
 ```
-wsgw
+wsgw -i 9005
 ```
 
-<img src="../images/wsgwa_success.png" >
+<img src="../images/wsgwrh_success.png" >
 
 You should see a window similar to the one shown above.
 

@@ -1,6 +1,5 @@
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:2.0em">Performing A Clean Shutdown</div>
-<br>
-To properly close the s3a, s3e, s3p, and s3r launchers go into the command
+
+To properly close the s3a, s3e, s3p, s3r, and s3rh launchers go into the command
 or terminal window and type Control-C. This will ensure that all of the
 processes started by a launcher are killed correctly.
 

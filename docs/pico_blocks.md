@@ -5,7 +5,7 @@ boolean blocks that have pointed ends, and reporter blocks that are rounded in s
 
 <img src="../images/pico_blocks_en.png" >
 
-And the blocks translated to Taiwanese
+And the blocks translated to Taiwanese.
 
 <img src="../images/pico_blocks_tw.png" >
 
@@ -55,7 +55,7 @@ This block reports the current value of the selected sensor.
 
 ### Convert SENSOR To A Specified Range
 This block scales the current value for the selected sensor and to be
-within the specified range. So, for example, if the Slider is set to 100
+within the specified range. For example, if the Slider is set to 100
 and the range is set to -240 to 240, this block will return 240. If the
 Slider is set to 50, this block will return 0, and if the Slider is set
 to 0, this block will return -240.
