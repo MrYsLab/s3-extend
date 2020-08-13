@@ -1,6 +1,6 @@
 # Scratch 3 OneGPIO Extension Servers
 
-![](docs/images/extensions.png)
+![](./docs/images/extensions.png)
 
 ## Control your favorite physical computing device using Scratch 3.
 
