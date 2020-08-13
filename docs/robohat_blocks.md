@@ -90,6 +90,7 @@ This block allows you read any of the INA219 registers selected in the drop-down
 * Supply: Supply Voltage
 * Shunt: Shunt Voltage
 * Power: Power
+* Power: Power
 
 <br> <br> <br>
 
