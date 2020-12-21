@@ -5,6 +5,8 @@
 The blocks consist of a set of command blocks that are rectangular in
 shape and reporter blocks rounded in shape.
 
+Pin numbers are expressed as GPIO pin numbers.
+
 ### Connecting To A Local Browser Versus A Remote Browser
 For the Raspberry Pi extension, you can run Scratch 3 on a local
 browser, or a browser on your PC.
@@ -12,8 +14,8 @@ browser, or a browser on your PC.
 For remote operation, you must specify the Raspberry Pi's WiFi or
 Ethernet address in the Remote IP Address block.
 
-NOTE: It is recommended that if you wish to access a Raspberry Pi using
-a remote browser, that you install and use the off-line version of the
+**NOTE**: It is recommended that if you wish to access a Raspberry Pi using
+**a remote browser**, that you install and use the off-line version of the
 Scratch 3 OneGPIO editor. The reason is, using an on-line version 
 will most likely result in a security error.
 
