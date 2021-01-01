@@ -29,6 +29,8 @@ Chinese: **https://gasolin.idv.tw/**, **Justina Hsu**
 
 Polish: **Tomasz Regdos**
 
+Japanese (ESP-8266, Circuit Playground Express, Pico Board, RoboHat): **KigenHasebe**
+
 <br> <br> <br>
 
 

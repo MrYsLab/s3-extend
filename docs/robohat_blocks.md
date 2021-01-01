@@ -95,4 +95,4 @@ This block allows you read any of the INA219 registers selected in the drop-down
 <br> <br> <br>
 
 
-Copyright (C) 2019-2020 Alan Yorinks All Rights Reserved
+Copyright (C) 2019-2021 Alan Yorinks All Rights Reserved

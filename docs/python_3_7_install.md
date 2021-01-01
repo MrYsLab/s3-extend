@@ -76,7 +76,7 @@ and have it coexist with the supplied version, using the
 <br>
 
 
-Copyright (C) 2019-2020 Alan Yorinks All Rights Reserved
+Copyright (C) 2019-2021 Alan Yorinks All Rights Reserved
 
 
 

@@ -89,5 +89,5 @@ sudo pip3 install --upgrade pip
 <br>
 
 
-Copyright (C) 2019-2020 Alan Yorinks All Rights Reserved
+Copyright (C) 2019-2021 Alan Yorinks All Rights Reserved
 
