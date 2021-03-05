@@ -31,6 +31,10 @@ Polish: **Tomasz Regdos**
 
 Japanese : **KigenHasebe**
 
+German: **christianimmler**
+
+
+
 <br> <br> <br>
 
 

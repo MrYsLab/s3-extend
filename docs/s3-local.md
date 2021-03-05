@@ -36,4 +36,4 @@ Go to the "Using OneGPIO Extension Blocks" section for information on block usag
 <br>
 
 
-Copyright (C) 2019-2020 Alan Yorinks All Rights Reserved
+Copyright (C) 2019-2021 Alan Yorinks All Rights Reserved
