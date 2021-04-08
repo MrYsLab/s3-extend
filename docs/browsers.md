@@ -7,6 +7,10 @@ the next section.
 
 These are the only browsers supported at this time.
 
+**SPECIAL NOTE FOR  Raspberry Pi USERS:** Chrome no longer supports insecure 
+Websockets across the network. If you wish to use Chrome in the remote configuration, 
+you must run the Scratch editor off-line. 
+
 ### If You Wish To Use Firefox
 You may use Firefox, but you will need to configure it to do so.
 
