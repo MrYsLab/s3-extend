@@ -5,7 +5,7 @@ with open('pypi_desc.md') as f:
 
 setup(
     name='s3-extend',
-    version='1.13',
+    version='1.14',
     packages=[
       's3_extend',
       's3_extend.gateways'
@@ -14,7 +14,8 @@ setup(
         'python-banyan>=3.9',
         'pymata-express>=1.11',
         'pymata_rh',
-        'pymata-cpx'
+        'pymata-cpx',
+        'tmx-pico-aio',
     ],
 
     entry_points={
@@ -24,13 +25,15 @@ setup(
             's3e = s3_extend.s3e:s3ex',
             's3p = s3_extend.s3p:s3px',
             's3r = s3_extend.s3r:s3rx',
-            's3rh= s3_extend.s3rh:s3rhx',
+            's3rh = s3_extend.s3rh:s3rhx',
+            's3rp = s3_extend.s3rp:s3rpx',
             'ardgw = s3_extend.gateways.arduino_gateway:arduino_gateway',
             'cpxgw = s3_extend.gateways.cpx_gateway:cpx_gateway',
             'espgw = s3_extend.gateways.esp8266_gateway:esp8266_gateway',
             'pbgw = s3_extend.gateways.picoboard_gateway:picoboard_gateway',
             'rpigw = s3_extend.gateways.rpi_gateway:rpi_gateway',
             'rhgw = s3_extend.gateways.robohat_gateway:robohat_gateway',
+            'rpgw = s3_extend.gateways.rpi_pico_gateway:rpi_pico_gateway',
             'wsgw = s3_extend.gateways.ws_gateway:ws_gateway',
         ]
     },
