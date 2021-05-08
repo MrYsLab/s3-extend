@@ -187,8 +187,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../python_3_7_install/" title="Verify/Install Python 3.7" class="md-nav__link">
-      Verify/Install Python 3.7
+    <a href="../python_3_8_install/" title="Verify/Install Python 3.8" class="md-nav__link">
+      Verify/Install Python 3.8
     </a>
   </li>
 
@@ -303,6 +303,18 @@
   <li class="md-nav__item">
     <a href="../rpi/" title="Raspberry Pi" class="md-nav__link">
       Raspberry Pi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../rpi_pico/" title="Raspberry Pi Pico" class="md-nav__link">
+      Raspberry Pi Pico
     </a>
   </li>
 
@@ -470,6 +482,18 @@
   <li class="md-nav__item">
     <a href="../ext_rpi/" title="Raspberry Pi" class="md-nav__link">
       Raspberry Pi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ext_rpi_pico/" title="Raspberry Pi Pico" class="md-nav__link">
+      Raspberry Pi Pico
     </a>
   </li>
 
@@ -680,6 +704,18 @@
   <li class="md-nav__item">
     <a href="../rpi_blocks/" title="Raspberry Pi" class="md-nav__link">
       Raspberry Pi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../rpi_pico_blocks/" title="Raspberry Pi Pico" class="md-nav__link">
+      Raspberry Pi Pico
     </a>
   </li>
 
@@ -994,10 +1030,12 @@ window for each microcontroller you wish to use. Then, enter the command for the
 <li><strong>s3e</strong> - for the ESP-8266</li>
 <li><strong>s3p</strong> - for the Picoboard</li>
 <li><strong>s3r</strong> - for the Raspberry Pi</li>
+<li><strong>s3rp</strong> for the Raspberry Pi Pico</li>
 <li><strong>s3rh</strong> - for the RoboHAT MM1</li>
 </ul>
-<p><strong>Step 4:</strong> Start Scratch 3, select an extension, and create and run
-your Scratch scripts. If you are using the ESP-8266 extension, you must use the <strong>ESP-8266 Connect IP Address</strong> block, 
+<p><strong>Step 4:</strong> Start Scratch 3, select an extension and create and run
+your Scratch scripts. If you are using the ESP-8266 extension, you must use 
+the <strong>ESP-8266 Connect IP Address</strong> block 
 to connect to the ESP-8266. When successfully connected, 
 the red LED on the ESP-8266
 NodeMCU is extinguished.</p>
@@ -1013,14 +1051,14 @@ read those sections before proceeding.</p>
 <p><strong>NOTE: </strong>You may run a single micro-controller or all simultaneously on a single
 computer, but only a single instance of a microcontroller may be run at a time.
 For example,
-you may run a Raspberry Pi and an Arduino simultaneously, and use one to control the
+you may run a Raspberry Pi and an Arduino simultaneously and use one to control the
 other. However, you may not run two of the same type of controllers at the same.</p>
 <p>Running
 two boards that use a serial link is an advanced and experimental feature and not recommended nor
 officially supported. An example would be running
 an Arduino and a Picoboard on the same computer at the same time.
-If you wish to run two boards that use a serial link, you may have to manually specify 
-the COM port for one of the boards. This is done by using 
+If you wish to run two boards that use a serial link, you may have
+to specify the COM port for one of the boards manually. This is done by using 
 the -c option in the launcher. For example, to start the Picoboard extension 
 forcing it to use COM7, you would start the launcher with:</p>
 <pre><code class="bash"> s3p -c com7
@@ -1046,7 +1084,7 @@ forcing it to use COM7, you would start the launcher with:</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../rpi/" title="Raspberry Pi" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../rpi_pico/" title="Raspberry Pi Pico" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1055,7 +1093,7 @@ forcing it to use COM7, you would start the launcher with:</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Raspberry Pi
+                Raspberry Pi Pico
               </div>
             </div>
           </a>
