@@ -7,7 +7,7 @@ the OneGPIO Scratch block text appears in that language.
 <img src="../images/languages.png" >
 
 If translation for your selected language is not available, then the
-text will be in English
+text will be in English.
 
 If your language is not currently supported and you wish to provide a
 translation, I encourage you to do so. Not only will you be listed as a
@@ -23,7 +23,7 @@ For the Picoboard, you update the
 [picoboard.txt file](https://github.com/MrYsLab/s3onegpio/blob/master/translations/picoboard.txt).
 And for the CircuitPlayground Express, you update the
 [playground_express.txt file.](https://github.com/MrYsLab/s3onegpio/blob/master/translations/playground_express.tx)
-You then either generate a GitHub pull request, or if you are unfamiliar
+You then either generate a GitHub pull request or if you are unfamiliar
 with Git and pull requests, submit it as an issue to
 [https://github.com/MrYsLab/s3onegpio/issues.](https://github.com/MrYsLab/s3onegpio/issues)
 If you submit the translation as an issue, please call the issue:
@@ -65,7 +65,7 @@ Each language has its own line in the list of translations, and each
 line begins with the language's identifier. In this case, **pt-br** for
 Brazilian Portuguese, **pt** for Portuguese, and **en** for English.
 
-Any text between square brackets is a place holder for a parameter field
+Any text between square brackets is a placeholder for a parameter field
 in the block. Do not translate the text within the square brackets, and
 please use them as is, no matter the alphabet being used. All other text
 should be translated.

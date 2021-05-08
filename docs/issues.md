@@ -8,7 +8,7 @@ output from the browser console. Press F12 while in the browser to get
 to the console. 
 
 Please also include a .sb3 file for your Scratch project or a
-screen-shot of the blocks in the Scatch script.
+screenshot of the blocks in the Scatch script.
 
 ## Issues With Any Of The OneGPIO Extension Servers
 
@@ -20,7 +20,7 @@ output from the browser console. Press F12 while in the browser to get
 to the console. 
 
 Please also include a .sb3 file for your Scratch project or a
-screen-shot of the blocks in the Scatch script.
+screenshot of the blocks in the Scatch script.
 
 ## Issues With This Document
 

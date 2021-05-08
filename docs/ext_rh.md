@@ -12,7 +12,7 @@ s3rh
 <br>
 <img src="../images/srh-1.png" >
 
-This command automatically starts the Python Banyan Backplane, and both
+This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan RoboHAT Gateways. It starts an automatic 5-second
 countdown timer to allow the RoboHAT adequate time to reset itself and start the 
 Firmata-Express sketch.
@@ -44,7 +44,7 @@ s3rh -c COM6
 ```
 
 For Linux or macOS, use the COM port designator specific to your operating system. 
-For example, if the COM port is /dev/ttyACM0 start s3rh with the following command:
+For example, if the COM port is /dev/ttyACM0, start s3rh with the following command:
 
 ```
 s3rh -c /dev/ttyACM0
@@ -52,7 +52,7 @@ s3rh -c /dev/ttyACM0
 
 ## Manually Specifying An RoboHAT Instance
 
-If you are you using one or more Arduino's while using the RoboHAT, you can explicitly
+If you are using one or more Arduino's while using the RoboHAT, you can explicitly
 tell s3rh which one to use by taking advantage of the 
 [FirmataExpress Arduino Instance Id Feature,](https://mryslab.github.io/pymata_rh/firmata_express/)
 

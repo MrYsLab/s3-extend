@@ -37,7 +37,8 @@ to the
  Each
  Extension Server utilizes a unique instance of the
  [WebSocket Gateway](https://mryslab.github.io/python_banyan/#additional_gateways/#websocket-gateway).
- It provides a communication channel between the Scratch 3 editor running in the browser, and the Python code interacting
+ It provides a communication channel between the Scratch 3 editor running in the browser
+ and the Python code interacting
   with microcontroller hardware. A
  unique IP port number is assigned to each WebSocket Gateway.
  
@@ -49,7 +50,7 @@ to the
  The transport mechanism used between the Hardware Gateway and its
  associated micro-controller varies, depending upon the micro-controller
  in use. For example, the Arduino uses a hardwired, USB-Serial interface
- is used. The Raspberry Pi and ESP-8266, use a WiFi connection.
+ is used. The Raspberry Pi and ESP-8266 use a WiFi connection.
 
 <br>
 <br>

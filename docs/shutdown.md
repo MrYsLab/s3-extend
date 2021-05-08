@@ -1,5 +1,5 @@
 
-To properly close the s3a, s3e, s3p, s3r, and s3rh launchers go into the command
+To properly close the s3a, s3e, s3p, s3r, s3rp, and s3rh launchers, go into the command
 or terminal window and type Control-C. This will ensure that all of the
 processes started by a launcher are killed correctly.
 

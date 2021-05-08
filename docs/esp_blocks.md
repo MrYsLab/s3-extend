@@ -15,7 +15,7 @@ reminding you to enter and use the ESP-8266 IP address block.
 
 #### ESP-8266 IP Address
 You must enter the WiFi IP address of the ESP-8266 into this block. This
-block must precede any of the other ESP-8266 blocks, and should only be
+block must precede any of the other ESP-8266 blocks and should only be
 used once.
 
 <img src="../images/esp_ip.png" >
@@ -67,7 +67,7 @@ reports a value between 0 and 100.
 #### Read Sonar
 This block allows you to connect an HC-SR04 type device. It has two
 parameters, both containing a drop-down list of valid PINs. The
-first parameter allows you to select a trigger pin and the second an
+first parameter allows you to select a trigger pin, and the second an
 echo pin. It returns the measured distance in centimeters.
 
 <br> <br> <br>

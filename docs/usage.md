@@ -21,10 +21,12 @@ window for each microcontroller you wish to use. Then, enter the command for the
 *    **s3e** - for the ESP-8266
 *  **s3p** - for the Picoboard
    * **s3r** - for the Raspberry Pi
+  * **s3rp** for the Raspberry Pi Pico
    * **s3rh** - for the RoboHAT MM1
    
-**Step 4:** Start Scratch 3, select an extension, and create and run
-your Scratch scripts. If you are using the ESP-8266 extension, you must use the **ESP-8266 Connect IP Address** block, 
+**Step 4:** Start Scratch 3, select an extension and create and run
+your Scratch scripts. If you are using the ESP-8266 extension, you must use 
+the **ESP-8266 Connect IP Address** block 
 to connect to the ESP-8266. When successfully connected, 
 the red LED on the ESP-8266
 NodeMCU is extinguished.
@@ -43,15 +45,15 @@ read those sections before proceeding.
 **NOTE: **You may run a single micro-controller or all simultaneously on a single
 computer, but only a single instance of a microcontroller may be run at a time.
 For example,
-you may run a Raspberry Pi and an Arduino simultaneously, and use one to control the
+you may run a Raspberry Pi and an Arduino simultaneously and use one to control the
 other. However, you may not run two of the same type of controllers at the same.
 
 Running
 two boards that use a serial link is an advanced and experimental feature and not recommended nor
 officially supported. An example would be running
 an Arduino and a Picoboard on the same computer at the same time.
-If you wish to run two boards that use a serial link, you may have to manually specify 
-the COM port for one of the boards. This is done by using 
+If you wish to run two boards that use a serial link, you may have
+to specify the COM port for one of the boards manually. This is done by using 
 the -c option in the launcher. For example, to start the Picoboard extension 
 forcing it to use COM7, you would start the launcher with:
 

@@ -9,7 +9,7 @@ These are the only browsers supported at this time.
 
 **SPECIAL NOTE FOR  Raspberry Pi USERS:** Chrome no longer supports insecure 
 Websockets across the network. If you wish to use Chrome in the remote configuration, 
-you must run the Scratch editor off-line. 
+you must run the Scratch editor offline. 
 
 ### If You Wish To Use Firefox
 You may use Firefox, but you will need to configure it to do so.
@@ -56,7 +56,7 @@ and follow the instructions there.
 
 If, after loading an extension, it is not behaving as expected, with the browser open, press the F12
  key on your keyboard to expose the
-browser console. If you see any errors reported, and are still unsure
+browser console. If you see any errors reported and are still unsure
 how to solve the issue,
 [create an issue against the s3-extend distribution](https://github.com/MrYsLab/s3-extend/issues)
 pasting any error output into the issue comment.

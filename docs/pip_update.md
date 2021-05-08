@@ -13,7 +13,7 @@ Verifying the pip version and instructions on updating pip are explained a littl
 ## Determining If Pip Is Installed On Your System
 
 To determine if pip is installed on your system, 
-open a command or terminal window and for Windows type:
+open a command or terminal window, and for Windows, type:
 
 ```bash
 pip --version

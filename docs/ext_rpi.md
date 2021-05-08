@@ -11,7 +11,7 @@ s3r
 <br>
 <img src="../images/s3r-1.png" >
 
-This command automatically starts the Python Banyan Backplane, and both
+This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan Raspberry Pi Gateways. 
 
 **IMPORTANT NOTE:** The s3r command is intended to run exclusively on a

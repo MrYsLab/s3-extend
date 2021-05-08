@@ -12,7 +12,7 @@ s3e
 <br>
 <img src="../images/s3e-1.png" >
 
-This command automatically starts the Python Banyan Backplane, and both
+This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan ESP-8266 Gateways. 
 
 You may now start Scratch 3 in your Web browser, as explained in the

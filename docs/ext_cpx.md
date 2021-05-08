@@ -10,7 +10,7 @@ s3c
 <br>
 <img src="../images/s3c-1.png" >
 
-This command automatically starts the Python Banyan Backplane, and both
+This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan Circuit Playground Express Gateways.
 
 If you remove the USB cable after starting s3c, or if you have forgotten
@@ -21,7 +21,7 @@ the following:
 <img src="../images/s3c-2.png" >
 
 Here, s3c tried to start the Circuit Playground Express Gateway but detected an error
-and aborted.
+and aborted it.
 
 Visit "A Peek Under The Hood" for more information about the Backplane and Gateways.
 

@@ -5,7 +5,7 @@ markdown_extensions:
 nav:
       - Welcome: index.md
       - Preparing Your Computer:
-        - Verify/Install Python 3.7: python_3_7_install.md
+        - Verify/Install Python 3.8: python_3_8_install.md
         - Verifying/Install pip3: pip_update.md
         - Install s3-extend: s3-extend.md
       - Preparing Your Micro-Controller:
@@ -14,6 +14,7 @@ nav:
         - ESP-8266: esp-8266.md
         - Picoboard: pico.md
         - Raspberry Pi: rpi.md
+        - Raspberry Pi Pico: rpi_pico.md
       - Ready, Set, Go:
         - How To Use The OneGPIO Extensions: usage.md
         - Starting the Python Extension Servers:
@@ -22,6 +23,7 @@ nav:
           - ESP-8266: ext_esp.md
           - Picoboard: ext_pico.md
           - Raspberry Pi: ext_rpi.md
+          - Raspberry Pi Pico: ext_rpi_pico.md
           - RoboHAT MMI: ext_rh.md
         - Shutting Down The Python Extension Servers:
           - Performing A Clean Shutdown: shutdown.md
@@ -35,6 +37,7 @@ nav:
           - ESP-8266: esp_blocks.md
           - Picoboard: pico_blocks.md
           - Raspberry Pi: rpi_blocks.md
+          - Raspberry Pi Pico: rpi_pico_blocks.md
           - RoboHAT MM1: robohat_blocks.md
       - Tips And Techniques:
           - When In Doubt, Add A Small Delay: delay.md

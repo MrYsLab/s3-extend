@@ -11,7 +11,7 @@ and monitor the two devices.
 
 Both pymata-express and pymata_rh require a specialized
 [Firmata ](https://github.com/firmata/protocol)sketch, called
-[FirmataExpress](https://github.com/MrYsLab/FirmataExpress) to be
+[FirmataExpress,](https://github.com/MrYsLab/FirmataExpress) to be
 installed on your Arduino or RoboHAT MM1.
 
 The following steps explain how to install FirmataExpress on your
@@ -47,7 +47,7 @@ Tools/Manage Libraries and select Ultrasonic and then click Install.**
 
 ## Step 5: Compile And Upload FirmataPlus Into The Arduino
 
-Select File/Examples and from the drop-down list select FirmataExpress.
+Select File/Examples and from the drop-down list, select FirmataExpress.
 
 <img src="../images/select_firmata_express.png" > </br>
 

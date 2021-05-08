@@ -1,7 +1,7 @@
 ## The Picoboard Blocks
 
-The blocks consist of a set of HAT blocks that have a bump at the left top,
-boolean blocks that have pointed ends, and reporter blocks that are rounded in shape.
+The blocks consist of a set of HAT blocks with a bump at the left top, 
+boolean blocks that have pointed ends, and reporter blocks rounded in shape.
 
 <img src="../images/pico_blocks_en.png" >
 
@@ -38,7 +38,7 @@ below this block are executed once.
 Boolean blocks test for a specific condition and return either True or False.
 
 ### Is Button Pressed
-When the button is pressed, this blocks returns True. If the button is
+When the button is pressed, this block returns True. If the button is
 not pressed, it returns FALSE.
 
 ### Is SENSOR Less Or Greater Than A Value

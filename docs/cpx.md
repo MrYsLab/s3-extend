@@ -7,7 +7,7 @@ To monitor and control the Circuit Playground Express, a special version of Stan
 #Installation
 
 Since the Circuit Playground Express utilizes a UF2 bootloader,
-installation is quick and straightforward. To install FirmataCPx on to the
+installation is quick and straightforward. To install FirmataCPx onto the
 Express, first, click on
 [this link](https://github.com/MrYsLab/pymata-cpx/raw/master/FirmataCPxUF2/FirmataCPx.uf2)
 to download FirmataCPx.uf2.

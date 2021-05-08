@@ -7,15 +7,15 @@ shape and reporter blocks rounded in shape.
 
 ### Connecting To A Local Browser Versus A Remote Browser
 For the RoboHAT extension, you can run Scratch 3 on a local
-browser, or a browser on your PC.
+browser or a browser on your PC.
 
 For remote operation, in the Remote IP Address block,
 you must specify the IP address of the
  computer running s3rh.
 
 NOTE: It is recommended that if you wish to access a RoboHAT using
-a remote browser, that you install and use the off-line version of the
-Scratch 3 OneGPIO editor. The reason is, using an on-line version 
+a remote browser that you install and use the offline version of the
+Scratch 3 OneGPIO editor. The reason is, using an online version 
 will most likely result in a security error.
 
 ### Command Blocks
@@ -66,7 +66,7 @@ It has one parameter, a drop-down list containing all the valid Pins.
 It reports a value between 0 and 1023.
 
 #### Read MPU
-This block allows you read any of the MPU9250 registers selected in the drop-down list:
+This block allows you to read any of the MPU9250 registers selected in the drop-down list:
 
 * AX: Accelerometer X Register
 * AY: Accelerometer Y Register
@@ -83,7 +83,7 @@ This block allows you read any of the MPU9250 registers selected in the drop-dow
 * Temperature
 
 #### Read INA
-This block allows you read any of the INA219 registers selected in the drop-down list:
+This block allows you to read any of the INA219 registers selected in the drop-down list:
 
 * V: Bus Voltage
 * A: Bus Current

@@ -12,7 +12,7 @@ s3a
 <br>
 <img src="../images/s3a-1.png" >
 
-This command automatically starts the Python Banyan Backplane, and both
+This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan Arduino Gateways. It starts an automatic 5-second
 countdown timer to allow the Arduino adequate time to reset itself and start the 
 Firmata-Express sketch.
@@ -36,7 +36,7 @@ is using.
 If you wish to manually specify the COM port, use the **_-c_** command-line option
 when starting s3a.
 
-For example, if you are using Windows and the COM port you wish to use is COM6, then,
+For example, if you are using Windows and the COM port you wish to use is COM6 then,
 start s3a with the following command:
 
 ```

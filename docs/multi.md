@@ -2,20 +2,20 @@
 
 <img src="../images/multi-boards.png" >
 
-As the screen-shot above shows, it is possible to run multiple OneGPIO
+As the screenshot above shows, it is possible to run multiple OneGPIO
 extensions at the same time and have the boards interact with each
 other.
 
 This Scratch script will control the LEDs connected to an ESP-8266 and
 Raspberry Pi by monitoring the state of a switch on an Arduino.
 
-This script was run in a browser on a PC in off-line mode, allowing the
+This script was run in a browser on a PC in offline mode, allowing the
 Raspberry Pi to be controlled remotely.
 
 **NOTE: **You may run a single micro-controller or all simultaneously on a single
 computer, but only a single instance of a microcontroller may be run at a time.
 For example,
-you may run a Raspberry Pi and an Arduino simultaneously, and use one to control the
+you may run a Raspberry Pi and an Arduino simultaneously and use one to control the
 other. However, you may not run two of the same type of controller at the same.
 
 Running

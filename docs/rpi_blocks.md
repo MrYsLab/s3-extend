@@ -9,14 +9,14 @@ Pin numbers are expressed as GPIO pin numbers.
 
 ### Connecting To A Local Browser Versus A Remote Browser
 For the Raspberry Pi extension, you can run Scratch 3 on a local
-browser, or a browser on your PC.
+browser or a browser on your PC.
 
 For remote operation, you must specify the Raspberry Pi's WiFi or
 Ethernet address in the Remote IP Address block.
 
 **NOTE**: It is recommended that if you wish to access a Raspberry Pi using
-**a remote browser**, that you install and use the off-line version of the
-Scratch 3 OneGPIO editor. The reason is, using an on-line version 
+**a remote browser**, that you install and use the offline version of the
+Scratch 3 OneGPIO editor. The reason is, using an online version 
 will most likely result in a security error.
 
 ### Command Blocks
@@ -75,7 +75,7 @@ reports a value of zero or one.
 #### Read Sonar
 This block allows you to connect an HC-SR04 type device. It has two
 parameters, both containing a drop-down list of valid PINs. The
-first parameter allows you to select a trigger pin and the second an
+first parameter allows you to select a trigger pin, and the second an
 echo pin. It returns the measured distance in centimeters.
 
 <br> <br> <br>

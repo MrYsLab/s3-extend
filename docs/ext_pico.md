@@ -10,7 +10,7 @@ s3p
 <br>
 <img src="../images/s3p-1.png" >
 
-This command automatically starts the Python Banyan Backplane, and both
+This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan Picoboard Gateways.
 
 If you remove the USB cable after starting s3p, or if you have forgotten
@@ -21,7 +21,7 @@ the following:
 <img src="../images/s3p-2.png" >
 
 Here, s3p detected that the Picoboard Gateway was not running, and therefore
-shut down all of its processes.
+shut down all its processes.
 
 Visit "A Peek Under The Hood" for more information about the Backplane and Gateways.
 
