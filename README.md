@@ -14,7 +14,8 @@ Pico boards, install the server firmware. See the
   of the User's Guide.
   
 * Launch the Scratch3 Editor using either the online or offline sites described
-in the [Launch The Scratch3 Editor](Launching TheScratch 3 Editor ) section of the User's Guide.
+in the [Ready, Set, Go/Launch The Scratch3 Editor](https://mryslab.github.io/s3-extend/) 
+  section of the User's Guide.
   
 * Select your extension and start coding!.
 
