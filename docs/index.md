@@ -32,9 +32,9 @@
 <br>
 
 
-Last Updated:  May 7 2021 &nbsp; &nbsp; &nbsp; &nbsp; s3-extend v1.14 &nbsp; &nbsp; 
+Last Updated:  May 13 2021 &nbsp; &nbsp; &nbsp; &nbsp; s3-extend v1.15 &nbsp; &nbsp; 
 &nbsp;
-&nbsp;s3onegpio v1.15
+&nbsp;s3onegpio v1.16
 
 Copyright (C) 2019-2021 Alan Yorinks All Rights Reserved
 

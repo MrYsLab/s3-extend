@@ -35,7 +35,7 @@ the one shown.
 Next, open an additional terminal window and type:
 
 ```
-espgw -w True
+espgw
 ```
 
 <img src="../images/s3e-2.png" >

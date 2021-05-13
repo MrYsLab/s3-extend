@@ -37,15 +37,6 @@ a PWM value. If you use a PWM value of less than zero, it will be set to
 0 internally. If you set the value to greater than 100, it will be set
 to 100.
 
-#### Tone
-If you connect a Piezo type buzzer to a pin, this block will generate a
-tone on the pin for the frequency and duration specified. It contains
-three parameters. The first is a drop-down list of valid PINs. The
-second allows you to specify the frequency of the tone in Herz. The
-third parameter specifies the tone duration in milliseconds. If a
-value greater than 5000 is entered, the value will be set to 5000
-internally, limiting the maximum playing time to 5 seconds.
-
 #### Write Servo
 This block allows you to control the angle of a servo motor. It contains
 two parameters. The first is a
