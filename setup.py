@@ -5,7 +5,7 @@ with open('pypi_desc.md') as f:
 
 setup(
     name='s3-extend',
-    version='1.14',
+    version='1.15',
     packages=[
       's3_extend',
       's3_extend.gateways'
@@ -16,6 +16,7 @@ setup(
         'pymata_rh',
         'pymata-cpx',
         'tmx-pico-aio',
+        'telemetrix-aio'
     ],
 
     entry_points={

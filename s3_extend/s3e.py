@@ -43,7 +43,6 @@ class S3E:
         self.proc_awg = None
         self.proc_hwg = None
 
-
         self.skip_backplane = False
 
         # start backplane
@@ -185,10 +184,10 @@ class S3E:
         Start the esp_8266 gateway
         """
         if sys.platform.startswith('win32'):
-            return subprocess.Popen(['espgw', '-w', 'True'], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+            return subprocess.Popen(['espgw' ], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
                                                             subprocess.CREATE_NO_WINDOW)
         else:
-            return subprocess.Popen(['espgw', '-w', 'True'], stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+            return subprocess.Popen(['espgw' ], stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                     stdout=subprocess.PIPE)
 
 

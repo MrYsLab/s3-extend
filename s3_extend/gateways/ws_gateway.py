@@ -131,7 +131,6 @@ class WsGateway(BanyanBaseAIO):
         # start up banyan
         await self.begin()
 
-
         # wait for a connection
         try:
             data = await websocket.recv()
