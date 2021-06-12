@@ -25,7 +25,7 @@ Brazilian Portuguese and Portuguese: **Edson Sidnei Sobreira**
 
 French: **Florian Becard** And **Francois MOCQ**
 
-Chinese: **https://gasolin.idv.tw/**, **Justina Hsu**
+Chinese: **https://gasolin.idv.tw/**, **Justina Hsu**, **Henry586**
 
 Polish: **Tomasz Regdos**
 
