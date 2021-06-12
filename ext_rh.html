@@ -14,7 +14,7 @@
     
     
       
-        <title>Scratch 3 OneGPIO Extensions</title>
+        <title>RoboHAT MMI - Scratch 3 OneGPIO Extensions</title>
       
     
     
@@ -60,6 +60,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#starting-the-onegpio-server-for-robohat-mm1" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -86,7 +91,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Welcome
+              RoboHAT MMI
             
           </span>
         </div>
@@ -164,19 +169,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="index.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
         Welcome
       </a>
-      
     </li>
   
 
@@ -355,12 +352,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       <label class="md-nav__link" for="__nav_4">
         Ready, Set, Go
@@ -388,12 +387,14 @@
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" checked>
       
       <label class="md-nav__link" for="__nav_4_2">
         Starting the Python Extension Servers
@@ -481,11 +482,68 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="ext_rh.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          RoboHAT MMI
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="ext_rh.html" class="md-nav__link md-nav__link--active">
         RoboHAT MMI
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#starting-the-onegpio-server-for-robohat-mm1" class="md-nav__link">
+    Starting The OneGPIO Server For RoboHAT MM1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manually-specifying-the-com-port" class="md-nav__link">
+    Manually Specifying The COM Port
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manually-specifying-an-robohat-instance" class="md-nav__link">
+    Manually Specifying An RoboHAT Instance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -944,47 +1002,132 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#starting-the-onegpio-server-for-robohat-mm1" class="md-nav__link">
+    Starting The OneGPIO Server For RoboHAT MM1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manually-specifying-the-com-port" class="md-nav__link">
+    Manually Specifying The COM Port
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manually-specifying-an-robohat-instance" class="md-nav__link">
+    Manually Specifying An RoboHAT Instance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Welcome</h1>
+                  <h1>RoboHAT MMI</h1>
                 
-                <div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">Installation And Usage Guide</div>
-<p><br></p>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">OneGPIO Scratch 3 Extensions For</div>
-
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:2.0em">Raspberry Pi Pico, Arduino, Raspberry Pi, ESP-8266, </div>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:2.0em">Picoboard, Circuit Playground Express</div>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:2.0em">And RoboHAT MM1</div>
-
-<p><br></p>
+                <h2 id="starting-the-onegpio-server-for-robohat-mm1">Starting The OneGPIO Server For RoboHAT MM1</h2>
+<p>Power the  RoboHAT and then press and release the RoboHAT's reset button.
+<img src="../images/rh_reset.png" ></p>
+<p>Next, open a terminal window and type:</p>
+<pre><code>s3rh
+</code></pre>
 <p><br>
-<img src ="images/extensions.png"></p>
-<p align="center"></p>
-
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:1.60em">Control your favorite physical computing device using Scratch 3.</div>
-<p><br></p>
-<ul>
-<li>
-<p><strong>Windows, Mac, <em>and</em> Linux</strong>, including <strong>Raspberry Pi</strong>, are
-  supported.</p>
-</li>
-<li>
-<p><strong>Launch Scratch 3 via the internet or locally on your computer.</strong></p>
-</li>
-<li>
-<p><strong>Control your Raspberry Pi or a Raspberry Pi/RoboHAT combination either locally or from your PC.</strong></p>
-</li>
-</ul>
-<p><br>
-<br>
-<br></p>
-<p>Last Updated:  June 12 2021 &nbsp; &nbsp; &nbsp; &nbsp; s3-extend v1.15 &nbsp; &nbsp; 
-&nbsp;
-&nbsp;s3onegpio v1.16</p>
+<img src="../images/srh-1.png" ></p>
+<p>This command automatically starts the Python Banyan Backplane and both
+the Banyan WebSocket and Banyan RoboHAT Gateways. It starts an automatic 5-second
+countdown timer to allow the RoboHAT adequate time to reset itself and start the 
+Firmata-Express sketch.</p>
+<p>To learn more about the Backplane and Gateways, visit "A Peek Under The Hood"
+ for more information.</p>
+<p>After the countdown time completes, the terminal window indicates that the RoboHAT
+is initialized. You may now start Scratch 3 in your Web browser, as explained in the
+"Launching Scratch 3" section of this document.</p>
+<p><img src="../images/srh-2.png" > </p>
+<h2 id="manually-specifying-the-com-port">Manually Specifying The COM Port</h2>
+<p>The RoboHAT Gateway will automatically discover the COM port that the RoboHAT Gateway
+is using. </p>
+<p>If you wish to manually specify the COM port, use the <strong><em>-c</em></strong> command-line option
+when starting s3rh.</p>
+<p>For example, if you are using Windows and the COM port you wish to use is COM6,
+start s3rh with the following command:</p>
+<pre><code>s3rh -c COM6
+</code></pre>
+<p>For Linux or macOS, use the COM port designator specific to your operating system. 
+For example, if the COM port is /dev/ttyACM0, start s3rh with the following command:</p>
+<pre><code>s3rh -c /dev/ttyACM0
+</code></pre>
+<h2 id="manually-specifying-an-robohat-instance">Manually Specifying An RoboHAT Instance</h2>
+<p>If you are using one or more Arduino's while using the RoboHAT, you can explicitly
+tell s3rh which one to use by taking advantage of the 
+<a href="https://mryslab.github.io/pymata_rh/firmata_express/">FirmataExpress Arduino Instance Id Feature,</a></p>
+<p>You may do so using the <strong>-i</strong> command-line option:</p>
+<pre><code>s3rh -i 2
+</code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>Only use a high-quality USB cable. Verify that you correctly connected the cable to both your computer and the RoboHAT. 
+If s3rh detects an error in either the backplane or the two gateways, it will shut itself down. </p>
+<p>To troubleshoot why this may be happening, open a new terminal window and type:</p>
+<pre><code>backplane
+</code></pre>
+<p>You should see a similar output, as shown below, indicating that the
+backplane is running correctly. The IP address does not need to match
+the one shown.</p>
+<p><img src="../images/rhbackplane.png" ></p>
+<p>Next, open an additional terminal window and type:</p>
+<pre><code>rhgw
+</code></pre>
+<p><img src="../images/rhgw_success.png" ></p>
+<p>You should see a window similar to the one shown above.</p>
+<p>If you do not, make sure that you've flashed the RoboHAT with the
+FirmataExpress sketch, as explained in the "Preparing Your
+Micro-Controller" section of this document.</p>
+<p>Also, make sure that you've plugged the RoboHAT into a USB port before
+starting s3rh.</p>
+<p>Next, open a third terminal window and type:</p>
+<pre><code>wsgw -i 9005
+</code></pre>
+<p><img src="../images/wsgwrh_success.png" ></p>
+<p>You should see a window similar to the one shown above.</p>
+<p>If there are exceptions or errors in any of the terminal windows,
+<a href="https://github.com/MrYsLab/s3-extend/issues">create an issue against the s3-extend distribution</a>
+pasting any error output into the issue comment.</p>
+<p><br> <br> <br></p>
 <p>Copyright (C) 2019-2021 Alan Yorinks All Rights Reserved</p>
                 
               
@@ -1004,15 +1147,30 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
+        
+        <a href="ext_rpi_pico.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Raspberry Pi Pico" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Raspberry Pi Pico
+            </div>
+          </div>
+        </a>
+      
       
         
-        <a href="python_3_8_install.html" class="md-footer__link md-footer__link--next" aria-label="Next: Verify/Install Python 3.8" rel="next">
+        <a href="shutdown.html" class="md-footer__link md-footer__link--next" aria-label="Next: Performing A Clean Shutdown" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Verify/Install Python 3.8
+              Performing A Clean Shutdown
             </div>
           </div>
           <div class="md-footer__button md-icon">

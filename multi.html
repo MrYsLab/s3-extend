@@ -14,7 +14,7 @@
     
     
       
-        <title>Scratch 3 OneGPIO Extensions</title>
+        <title>Running Multiple OneGPIO Extensions Simultaneously - Scratch 3 OneGPIO Extensions</title>
       
     
     
@@ -60,6 +60,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#controlling-or-monitoring-one-board-with-another" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -86,7 +91,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Welcome
+              Running Multiple OneGPIO Extensions Simultaneously
             
           </span>
         </div>
@@ -164,19 +169,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="index.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
         Welcome
       </a>
-      
     </li>
   
 
@@ -721,12 +718,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
       
       <label class="md-nav__link" for="__nav_5">
         Tips And Techniques
@@ -754,11 +753,47 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="multi.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Running Multiple OneGPIO Extensions Simultaneously
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="multi.html" class="md-nav__link md-nav__link--active">
         Running Multiple OneGPIO Extensions Simultaneously
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#controlling-or-monitoring-one-board-with-another" class="md-nav__link">
+    Controlling Or Monitoring One Board With Another
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -944,47 +979,69 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#controlling-or-monitoring-one-board-with-another" class="md-nav__link">
+    Controlling Or Monitoring One Board With Another
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Welcome</h1>
+                  <h1>Running Multiple OneGPIO Extensions Simultaneously</h1>
                 
-                <div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">Installation And Usage Guide</div>
-<p><br></p>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">OneGPIO Scratch 3 Extensions For</div>
-
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:2.0em">Raspberry Pi Pico, Arduino, Raspberry Pi, ESP-8266, </div>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:2.0em">Picoboard, Circuit Playground Express</div>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:2.0em">And RoboHAT MM1</div>
-
-<p><br></p>
-<p><br>
-<img src ="images/extensions.png"></p>
-<p align="center"></p>
-
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:1.60em">Control your favorite physical computing device using Scratch 3.</div>
-<p><br></p>
-<ul>
-<li>
-<p><strong>Windows, Mac, <em>and</em> Linux</strong>, including <strong>Raspberry Pi</strong>, are
-  supported.</p>
-</li>
-<li>
-<p><strong>Launch Scratch 3 via the internet or locally on your computer.</strong></p>
-</li>
-<li>
-<p><strong>Control your Raspberry Pi or a Raspberry Pi/RoboHAT combination either locally or from your PC.</strong></p>
-</li>
-</ul>
-<p><br>
-<br>
-<br></p>
-<p>Last Updated:  June 12 2021 &nbsp; &nbsp; &nbsp; &nbsp; s3-extend v1.15 &nbsp; &nbsp; 
-&nbsp;
-&nbsp;s3onegpio v1.16</p>
+                <h2 id="controlling-or-monitoring-one-board-with-another">Controlling Or Monitoring One Board With Another</h2>
+<p><img src="../images/multi-boards.png" ></p>
+<p>As the screenshot above shows, it is possible to run multiple OneGPIO
+extensions at the same time and have the boards interact with each
+other.</p>
+<p>This Scratch script will control the LEDs connected to an ESP-8266 and
+Raspberry Pi by monitoring the state of a switch on an Arduino.</p>
+<p>This script was run in a browser on a PC in offline mode, allowing the
+Raspberry Pi to be controlled remotely.</p>
+<p><strong>NOTE: </strong>You may run a single micro-controller or all simultaneously on a single
+computer, but only a single instance of a microcontroller may be run at a time.
+For example,
+you may run a Raspberry Pi and an Arduino simultaneously and use one to control the
+other. However, you may not run two of the same type of controller at the same.</p>
+<p>Running
+two boards that use a serial link is an advanced and experimental feature and not recommended nor
+officially supported. An example would be running
+an Arduino and a Picoboard on the same computer at the same time.
+If you wish to run two boards that use a serial link,
+you may have to specify the COM port for one of the boards manually. This is done by using
+the -c option in the launcher. For example, to start the Picoboard
+extension forcing it to use COM7, you would start the launcher with:</p>
+<pre><code class="language-bash"> s3p -c com7
+</code></pre>
+<p><br> <br> <br></p>
 <p>Copyright (C) 2019-2021 Alan Yorinks All Rights Reserved</p>
                 
               
@@ -1004,15 +1061,30 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
+        
+        <a href="delay.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: When In Doubt, Add A Small Delay" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              When In Doubt, Add A Small Delay
+            </div>
+          </div>
+        </a>
+      
       
         
-        <a href="python_3_8_install.html" class="md-footer__link md-footer__link--next" aria-label="Next: Verify/Install Python 3.8" rel="next">
+        <a href="under_the_hood.html" class="md-footer__link md-footer__link--next" aria-label="Next: The OneGPIO Gateways and Launchers" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Verify/Install Python 3.8
+              The OneGPIO Gateways and Launchers
             </div>
           </div>
           <div class="md-footer__button md-icon">

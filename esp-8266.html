@@ -14,7 +14,7 @@
     
     
       
-        <title>Scratch 3 OneGPIO Extensions</title>
+        <title>ESP-8266 - Scratch 3 OneGPIO Extensions</title>
       
     
     
@@ -60,6 +60,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#esp-8266-nodemcu-installation-instructions" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -86,7 +91,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Welcome
+              ESP-8266
             
           </span>
         </div>
@@ -164,19 +169,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="index.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
         Welcome
       </a>
-      
     </li>
   
 
@@ -253,12 +250,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
       <label class="md-nav__link" for="__nav_3">
         Preparing Your Micro-Controller
@@ -298,11 +297,86 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="esp-8266.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          ESP-8266
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="esp-8266.html" class="md-nav__link md-nav__link--active">
         ESP-8266
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-arduino-ide" class="md-nav__link">
+    Installing The Arduino IDE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-the-boards-manager" class="md-nav__link">
+    Configuring The Boards Manager
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-the-telemetrix4esp8266-sketch" class="md-nav__link">
+    Install The Telemetrix4ESP8266 Sketch
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-your-network-values-in-the-sketch" class="md-nav__link">
+    Configure Your Network Values In the Sketch
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upload-the-sketch-to-the-esp-8266" class="md-nav__link">
+    Upload The Sketch To the ESP-8266
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#determine-the-ip-address-assigned-to-the-esp-8266" class="md-nav__link">
+    Determine The IP Address Assigned To The ESP-8266
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -944,47 +1018,127 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-arduino-ide" class="md-nav__link">
+    Installing The Arduino IDE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-the-boards-manager" class="md-nav__link">
+    Configuring The Boards Manager
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-the-telemetrix4esp8266-sketch" class="md-nav__link">
+    Install The Telemetrix4ESP8266 Sketch
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-your-network-values-in-the-sketch" class="md-nav__link">
+    Configure Your Network Values In the Sketch
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upload-the-sketch-to-the-esp-8266" class="md-nav__link">
+    Upload The Sketch To the ESP-8266
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#determine-the-ip-address-assigned-to-the-esp-8266" class="md-nav__link">
+    Determine The IP Address Assigned To The ESP-8266
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Welcome</h1>
-                
-                <div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">Installation And Usage Guide</div>
-<p><br></p>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:3.0em">OneGPIO Scratch 3 Extensions For</div>
-
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:2.0em">Raspberry Pi Pico, Arduino, Raspberry Pi, ESP-8266, </div>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:2.0em">Picoboard, Circuit Playground Express</div>
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:2.0em">And RoboHAT MM1</div>
-
-<p><br></p>
-<p><br>
-<img src ="images/extensions.png"></p>
-<p align="center"></p>
-
-<div style="text-align:center;color:#990033; font-family:times, serif; font-size:1.60em">Control your favorite physical computing device using Scratch 3.</div>
-<p><br></p>
-<ul>
-<li>
-<p><strong>Windows, Mac, <em>and</em> Linux</strong>, including <strong>Raspberry Pi</strong>, are
-  supported.</p>
-</li>
-<li>
-<p><strong>Launch Scratch 3 via the internet or locally on your computer.</strong></p>
-</li>
-<li>
-<p><strong>Control your Raspberry Pi or a Raspberry Pi/RoboHAT combination either locally or from your PC.</strong></p>
-</li>
-</ul>
-<p><br>
-<br>
-<br></p>
-<p>Last Updated:  June 12 2021 &nbsp; &nbsp; &nbsp; &nbsp; s3-extend v1.15 &nbsp; &nbsp; 
-&nbsp;
-&nbsp;s3onegpio v1.16</p>
+                <h1 id="esp-8266-nodemcu-installation-instructions">ESP-8266 NodeMCU Installation Instructions</h1>
+<p>The Arduino IDE is used to install the required software onto the 
+ESP-8266. </p>
+<h2 id="installing-the-arduino-ide">Installing The Arduino IDE</h2>
+<p>If you need to install the Arduino IDE on your computer, go to 
+the <a href="https://www.arduino.cc/en/software">Arduino Download page</a>
+and download and install the IDE for your computer.</p>
+<h2 id="configuring-the-boards-manager">Configuring The Boards Manager</h2>
+<p>The Arduino IDE boards manager needs to be configured to use the
+ESP-8266 Arduino Core.
+The procedure is found 
+<a href="https://arduino-esp8266.readthedocs.io/en/latest/installing.html">on this page.</a></p>
+<h2 id="install-the-telemetrix4esp8266-sketch">Install The Telemetrix4ESP8266 Sketch</h2>
+<p>To install the Telemetrix4ESP8266 sketch, from the
+Arduino IDE main menu, open <strong><em>Tools/Manage Libraries...</em></strong></p>
+<p><img src="../images/ard_lib_mgr.png" > </br></p>
+<p>In the search edit box, enter <em><strong>Telemetrix</strong></em>.</p>
+<p>Select Telemetrix4ESP8266 and press the <strong><em>Install</em></strong> button.</p>
+<p>After the installation is complete, from the Arduino main menu, select 
+File/Examples/TelemetrixEsp8266/TelemetrixEsp8266. The source code for 
+the sketch will appear in the Editor window. </p>
+<h2 id="configure-your-network-values-in-the-sketch">Configure Your Network Values In the Sketch</h2>
+<p>The sketch needs to be modified to contain your network SSID and password.</p>
+<p><img src="../images/set_network_values.png" > </br></p>
+<p>Replace "YOUR SSID" and "YOUR PASSWORD" with the values for your network.
+Make sure that double quotes are still in place for both values.</p>
+<p>Save the sketch.</p>
+<h2 id="upload-the-sketch-to-the-esp-8266">Upload The Sketch To the ESP-8266</h2>
+<p>To upload the sketch to the NodeMCU, plug a USB cable into the 
+NodeMCU and your computer, and from the Arduino IDE main menu Tools selection, 
+choose Board/Esp8266 Boards and from that menu, select the board you are using.
+In my case, I am using a NodeMCU 1.0. Next, select the Com port from the
+Tools/Port menu of the Arduino IDE.</p>
+<p>Now, click on the Upload arrow (the horizontal arrow) 
+below the Arduino IDE Main menu, and the sketch will take several seconds to
+compile and load. </p>
+<h2 id="determine-the-ip-address-assigned-to-the-esp-8266">Determine The IP Address Assigned To The ESP-8266</h2>
+<p>To determine the IP address assigned to the NodeMCU, open the Arduino IDE
+Serial Monitor (the button in the upper right of the Arduino IDE), set the
+speed to 115200, press the reset button on the NodeMCU. Within
+15 seconds, you should see a message telling you the IP address of the 
+NodeMCU. Write this value down since you will need it later when using
+the Scratch3 Editor.</p>
+<p><img src="../images/ip_address.png" > </br></p>
+<p><strong>NOTE:</strong> When you reset the NodeMCU, the onboard LED will stay lit until
+a connection is made with your router. You must wait for the LED to extinguish
+before starting the s3e script.</p>
+<p><br> <br> <br></p>
 <p>Copyright (C) 2019-2021 Alan Yorinks All Rights Reserved</p>
                 
               
@@ -1004,15 +1158,30 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
+        
+        <a href="cpx.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Circuit Playground Express" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Circuit Playground Express
+            </div>
+          </div>
+        </a>
+      
       
         
-        <a href="python_3_8_install.html" class="md-footer__link md-footer__link--next" aria-label="Next: Verify/Install Python 3.8" rel="next">
+        <a href="pico.html" class="md-footer__link md-footer__link--next" aria-label="Next: Picoboard" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Verify/Install Python 3.8
+              Picoboard
             </div>
           </div>
           <div class="md-footer__button md-icon">
