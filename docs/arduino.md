@@ -31,7 +31,7 @@ After installation, open the Arduino IDE and select Tools/Manage
 Libraries. When the Libary Manager appears, enter *FirmataExpress* in
 the search box, and click install.
  
-![](./manage_libraries.png) </br>
+![](./images/manage_libraries.png) </br>
  
 ![](./images/install_firmata_express.png)
 
@@ -41,7 +41,7 @@ FirmataExpress also requires that the
 Simões for operation. Once again, using the Arduino Library Manager and
 search for ultrasonic and find the version by Erick Simoes. Click on the
 Tools/Manage Libraries and select Ultrasonic and then click Install.**
-![](iages/Ultrasonic.png)
+![](images/Ultrasonic.png)
 
 ## Step 4: Go Into The Tools Menus and Verify The Board Type and Port
 
@@ -53,7 +53,7 @@ Select File/Examples and from the drop-down list, select FirmataExpress.
 
 Click on the upload button to compile and upload FirmataExpress to the
 Arduino.  
-![](./images/compile.png") </br>
+![](./images/compile.png) </br>
 
 ## The Arduino is now ready for use.
 
