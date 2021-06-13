@@ -1,4 +1,5 @@
 site_name: Scratch 3 OneGPIO Extensions
+site_url: https://mryslab.github.io/s3-extend/
 markdown_extensions:
     - tables
 
