@@ -1065,12 +1065,12 @@
                 
                 <h2 id="starting-the-onegpio-server-for-arduino">Starting The OneGPIO Server For Arduino</h2>
 <p>With power applied to your Arduino, press and release the Arduino's reset button.
-<img src="./images/ard_reset.png" ></p>
+<img alt="" src="../images/ard_reset.png" /></p>
 <p>Next, open a terminal window and type:</p>
 <pre><code>s3a
 </code></pre>
 <p><br>
-<img src="./images/s3a-1.png" ></p>
+<img alt="" src="../images/s3a-1.png" /></p>
 <p>This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan Arduino Gateways. It starts an automatic 5-second
 countdown timer to allow the Arduino adequate time to reset itself and start the 
@@ -1080,7 +1080,7 @@ Firmata-Express sketch.</p>
 <p>After the countdown time completes, the terminal window indicates that the Arduino
 is initialized. You may now start Scratch 3 in your Web browser, as explained in the
 "Launching Scratch 3" section of this document.</p>
-<p><img src="./images/s3a-2.png" > </p>
+<p><img alt="" src="../images/s3a-2.png" /> </p>
 <h2 id="manually-specifying-the-com-port">Manually Specifying The COM Port</h2>
 <p>The Arduino Gateway will automatically discover the COM port that the Arduino Gateway
 is using. </p>
@@ -1110,11 +1110,11 @@ If s3a detects an error in either the backplane or the two gateways, it will shu
 <p>You should see a similar output, as shown below, indicating that the
 backplane is running correctly. The IP address does not need to match
 the one shown.</p>
-<p><img src="./images/backplane.png" ></p>
+<p><img alt="" src="../images/backplane.png" /></p>
 <p>Next, open an additional terminal window and type:</p>
 <pre><code>ardgw
 </code></pre>
-<p><img src="./images/ardgw_success.png" ></p>
+<p><img alt="" src="../images/ardgw_success.png" /></p>
 <p>You should see a window similar to the one shown above.</p>
 <p>If you do not, make sure that you've flashed the Arduino with the
 FirmataExpress sketch, as explained in the "Preparing Your
@@ -1124,7 +1124,7 @@ starting s3a.</p>
 <p>Next, open a third terminal window and type:</p>
 <pre><code>wsgw
 </code></pre>
-<p><img src="./images/wsgwa_success.png" ></p>
+<p><img alt="" src="../images/wsgwa_success.png" /></p>
 <p>You should see a window similar to the one shown above.</p>
 <p>If there are exceptions or errors in any of the terminal windows,
 <a href="https://github.com/MrYsLab/s3-extend/issues">create an issue against the s3-extend distribution</a>
