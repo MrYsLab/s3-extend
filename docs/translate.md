@@ -4,7 +4,7 @@ When you select a language by clicking on the *globe* icon in the
 Scratch editor, if a translation is available for the selected language,
 the OneGPIO Scratch block text appears in that language.
 
-<img src="../images/languages.png" >
+<img src="./images/languages.png" >
 
 If translation for your selected language is not available, then the
 text will be in English.
@@ -46,10 +46,10 @@ the translations.txt file.
  Here we see the English and Brazilian Portuguese blocks for the Sonar
  block.
 
-<img src="../images/sonar_english.png" >
+<img src="./images/sonar_english.png" >
 
 
-<img src="../images/sonar_pt-br.png" >
+<img src="./images/sonar_pt-br.png" >
 
 Here is the language specification for the block in translation.txt.
 

@@ -8,7 +8,7 @@ Next, open a terminal window and type:
 s3c
 ```
 <br>
-<img src="../images/s3c-1.png" >
+<img src="./images/s3c-1.png" >
 
 This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan Circuit Playground Express Gateways.
@@ -18,7 +18,7 @@ to plug in the cable before starting s3c, you will see something similar to
 the following:
 
 <br>
-<img src="../images/s3c-2.png" >
+<img src="./images/s3c-2.png" >
 
 Here, s3c tried to start the Circuit Playground Express Gateway but detected an error
 and aborted it.
@@ -42,7 +42,7 @@ You should see a similar output, as shown below, indicating that the
 backplane is running correctly. The IP address does not need to match
 the one shown.
 
-<img src="../images/backplane.png" >
+<img src="./images/backplane.png" >
 
 Next, open an additional terminal window and type:
 
@@ -50,7 +50,7 @@ Next, open an additional terminal window and type:
 cpxgw
 ```
 
-<img src="../images/cpxgw_success.png" >
+<img src="./images/cpxgw_success.png" >
 
 You should see a window similar to the one shown above. Here, the screenshot displays
 the version of pymata-cpx and the release date of FirmataCPx.
@@ -61,7 +61,7 @@ Next, open a third terminal window and type:
 wsgw -i 9003
 ```
 
-<img src="../images/s3c-3.png" >
+<img src="./images/s3c-3.png" >
 
 You should see a window similar to the one shown above.
 

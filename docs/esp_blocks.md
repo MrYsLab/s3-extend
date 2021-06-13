@@ -1,6 +1,6 @@
 ## The ESP-8266 Blocks
 
-<img src="../images/esp_blocks.png" >
+<img src="./images/esp_blocks.png" >
 
 The blocks consist of a set of command blocks that are rectangular in
 shape and reporter blocks rounded in shape.
@@ -8,7 +8,7 @@ shape and reporter blocks rounded in shape.
 NOTE: If you select the ESP-8266 OneGPIO, a Warning Dialog will pop up,
 reminding you to enter and use the ESP-8266 IP address block. 
 
-<img src="../images/warning.png" >
+<img src="./images/warning.png" >
 
 
 ### Command Blocks
@@ -18,7 +18,7 @@ You must enter the WiFi IP address of the ESP-8266 into this block. This
 block must precede any of the other ESP-8266 blocks and should only be
 used once.
 
-<img src="../images/esp_ip.png" >
+<img src="./images/esp_ip.png" >
 
 When Scratch executes this block, the red LED on the ESP-8266 should
 turn off, indicating a successful connection.

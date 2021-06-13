@@ -35,7 +35,7 @@ If you have Python 2.7 installed, you do not need to remove it.
 If there is a checkbox to add Python 3.8 to your path during the installation 
 process, make sure it is checked.
 
-![](./images/windows_python_install.png)
+![]./images/windows_python_install.png)
 
 ### Mac Users
 

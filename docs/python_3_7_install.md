@@ -52,7 +52,7 @@ If you have Python 2.7 installed, you do not need to remove it.
 During the installation process, if there is a checkbox to add Python 3.7 to your path,
  make sure it is checked.
 
-![](./images/windows_python_install.png)
+![]./images/windows_python_install.png)
 
 ### Mac Users
 

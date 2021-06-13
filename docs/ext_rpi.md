@@ -9,7 +9,7 @@ s3r
 ```
 
 <br>
-<img src="../images/s3r-1.png" >
+<img src="./images/s3r-1.png" >
 
 This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan Raspberry Pi Gateways. 

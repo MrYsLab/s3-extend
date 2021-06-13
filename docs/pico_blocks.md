@@ -3,11 +3,11 @@
 The blocks consist of a set of HAT blocks with a bump at the left top, 
 boolean blocks that have pointed ends, and reporter blocks rounded in shape.
 
-<img src="../images/pico_blocks_en.png" >
+<img src="./images/pico_blocks_en.png" >
 
 And the blocks translated to Taiwanese.
 
-<img src="../images/pico_blocks_tw.png" >
+<img src="./images/pico_blocks_tw.png" >
 
 
 ## HAT Blocks
