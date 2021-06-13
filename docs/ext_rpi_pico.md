@@ -14,7 +14,7 @@ Next, open a terminal window and type:
 s3rp
 ```
 <br>
-<img src="./images/s3rp-1.png" >
+![](./images/s3rp-1.png)
 
 This command automatically starts the Python Banyan Backplane and
 the Banyan WebSocket, and Banyan Raspberry Pi Pico Gateways.
@@ -24,7 +24,7 @@ to plug in the cable before starting _s3rp_, you will see something similar to
 the following:
 
 <br>
-<img src="./images/s3rp-2.png" >
+![](./images/s3rp-2.png)
 
 Here, _s3rp_ tried to start the Raspberry Pi Pico Gateway but detected an error
 and aborted.
@@ -48,7 +48,7 @@ You should see a similar output, as shown below, indicating that the
 backplane is running correctly. The IP address does not need to match
 the one shown.
 
-<img src="./images/backplane.png" >
+![](./images/backplane.png)
 
 Next, open an additional terminal window and type:
 
@@ -56,7 +56,7 @@ Next, open an additional terminal window and type:
 rpgw
 ```
 
-<img src="./images/rpgw_success.png" >
+![](./images/rpgw_success.png)
 
 You should see a window similar to the one shown above. Here, the screenshot displays
 the version of tmx-pico-aio library, shown as TelemetrixRpiPicoAio, the serial
@@ -69,7 +69,7 @@ Next, open a third terminal window and type:
 wsgw -i 9006
 ```
 
-<img src="./images/s3rp-3.png" >
+![](./images/s3rp-3.png)
 
 You should see a window similar to the one shown above.
 

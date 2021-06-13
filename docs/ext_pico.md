@@ -8,7 +8,7 @@ Next, open a terminal window and type:
 s3p
 ```
 <br>
-<img src="./images/s3p-1.png" >
+![](./images/s3p-1.png)
 
 This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan Picoboard Gateways.
@@ -18,7 +18,7 @@ to plug in the cable before starting s3p, you will see something similar to
 the following:
 
 <br>
-<img src="./images/s3p-2.png" >
+![](./images/s3p-2.png)
 
 Here, s3p detected that the Picoboard Gateway was not running, and therefore
 shut down all its processes.
@@ -41,7 +41,7 @@ You should see a similar output, as shown below, indicating that the
 backplane is running correctly. The IP address does not need to match
 the one shown.
 
-<img src="./images/backplane.png" >
+![](./images/backplane.png)
 
 Next, open an additional terminal window and type:
 
@@ -49,7 +49,7 @@ Next, open an additional terminal window and type:
 pbgw
 ```
 
-<img src="./images/pbgw_success.png" >
+![](./images/pbgw_success.png)
 
 You should see a window similar to the one shown above. Here, the screenshot indicates
 that there are two active COM ports. The Picoboard Gateway checks all of the active
@@ -61,7 +61,7 @@ Next, open a third terminal window and type:
 wsgw -i 9004
 ```
 
-<img src="./images/s3p-3.png" >
+![](./images/s3p-3.png)
 
 You should see a window similar to the one shown above.
 

@@ -1,6 +1,6 @@
 ## Controlling Or Monitoring One Board With Another
 
-<img src="./images/multi-boards.png" >
+![](images/multi-boards.png)
 
 As the screenshot above shows, it is possible to run multiple OneGPIO
 extensions at the same time and have the boards interact with each

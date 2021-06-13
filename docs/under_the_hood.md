@@ -1,6 +1,6 @@
 ## Scratch 3 OneGPIO Software Components
 
-<img src="./images/s3onegpio.png">
+![](./images/s3onegpio.png)
 
 The Scratch 3 OneGPIO extensions consist of two major components. 
 

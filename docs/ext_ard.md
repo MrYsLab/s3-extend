@@ -1,7 +1,7 @@
 ## Starting The OneGPIO Server For Arduino
 
 With power applied to your Arduino, press and release the Arduino's reset button.
-<img src="./images/ard_reset.png" >
+![](./images/ard_reset.png)
 
 Next, open a terminal window and type:
 
@@ -10,7 +10,7 @@ s3a
 ```
 
 <br>
-<img src="./images/s3a-1.png" >
+![](./images/s3a-1.png)
 
 This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan Arduino Gateways. It starts an automatic 5-second
@@ -25,7 +25,7 @@ After the countdown time completes, the terminal window indicates that the Ardui
 is initialized. You may now start Scratch 3 in your Web browser, as explained in the
 "Launching Scratch 3" section of this document.
 
-<img src="./images/s3a-2.png" > 
+![](./images/s3a-2.png) 
 
 
 ## Manually Specifying The COM Port
@@ -76,7 +76,7 @@ You should see a similar output, as shown below, indicating that the
 backplane is running correctly. The IP address does not need to match
 the one shown.
 
-<img src="./images/backplane.png" >
+![](./images/backplane.png)
 
 Next, open an additional terminal window and type:
 
@@ -84,7 +84,7 @@ Next, open an additional terminal window and type:
 ardgw
 ```
 
-<img src="./images/ardgw_success.png" >
+![](./images/ardgw_success.png)
 
 You should see a window similar to the one shown above.
 
@@ -101,7 +101,7 @@ Next, open a third terminal window and type:
 wsgw
 ```
 
-<img src="./images/wsgwa_success.png" >
+![](./images/wsgwa_success.png)
 
 You should see a window similar to the one shown above.
 

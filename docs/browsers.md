@@ -26,7 +26,7 @@ about:config
 
 You should see a warning screen similar to that below.
 
- <img src="./images/ff_warning.png" > </br>
+![](./images/ff_warning.png) </br>
 
 Click on the *I accept the risk!* button.
 
@@ -41,7 +41,7 @@ properly.
 
 ### WebSocket Closed Warning
 
- <img src="./images/websock_closed.png" > </br>
+![](./images/websock_closed.png) </br>
 
 If this warning pops up, make sure that you have
 successfully started the Python code, as described in the

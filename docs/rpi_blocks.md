@@ -1,6 +1,6 @@
 ## The Raspberry Pi Blocks
 
-<img src="./images/rpi_blocks.png" >
+![](./images/rpi_blocks.png)
 
 The blocks consist of a set of command blocks that are rectangular in
 shape and reporter blocks rounded in shape.
@@ -27,13 +27,13 @@ Raspberry Pi's IP address into this block. This block
 should be executed before any of the other Raspberry Pi blocks and
 executed only once.
 
-<img src="./images/rpi_ip.png" >
+![](./images/rpi_ip.png)
 
 
 If you wish to use a local browser running on the Raspberry Pi, do not
 use the Remote IP block.
 
-<img src="./images/rpi-local.png" >
+![](./images/rpi-local.png)
 
 
 #### Write Digital

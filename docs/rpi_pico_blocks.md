@@ -1,7 +1,7 @@
 ## The Raspberry Pi Pico Blocks
 
 
-<img src="./images/rpi_pico_blocks.png" >
+![](./images/rpi_pico_blocks.png)
 
 The blocks consist of a set of command blocks that are rectangular in
 shape and reporter blocks rounded in shape.

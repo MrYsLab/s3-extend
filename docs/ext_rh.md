@@ -1,7 +1,7 @@
 ## Starting The OneGPIO Server For RoboHAT MM1
 
 Power the  RoboHAT and then press and release the RoboHAT's reset button.
-<img src="./images/rh_reset.png" >
+![](./images/rh_reset.png)
 
 Next, open a terminal window and type:
 
@@ -10,7 +10,7 @@ s3rh
 ```
 
 <br>
-<img src="./images/srh-1.png" >
+![](./images/srh-1.png)
 
 This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan RoboHAT Gateways. It starts an automatic 5-second
@@ -25,7 +25,7 @@ After the countdown time completes, the terminal window indicates that the RoboH
 is initialized. You may now start Scratch 3 in your Web browser, as explained in the
 "Launching Scratch 3" section of this document.
 
-<img src="./images/srh-2.png" > 
+![](./images/srh-2.png) 
 
 
 ## Manually Specifying The COM Port
@@ -76,7 +76,7 @@ You should see a similar output, as shown below, indicating that the
 backplane is running correctly. The IP address does not need to match
 the one shown.
 
-<img src="./images/rhbackplane.png" >
+![](./images/rhbackplane.png)
 
 Next, open an additional terminal window and type:
 
@@ -84,7 +84,7 @@ Next, open an additional terminal window and type:
 rhgw
 ```
 
-<img src="./images/rhgw_success.png" >
+![](./images/rhgw_success.png)
 
 You should see a window similar to the one shown above.
 
@@ -101,7 +101,7 @@ Next, open a third terminal window and type:
 wsgw -i 9005
 ```
 
-<img src="./images/wsgwrh_success.png" >
+![](./images/wsgwrh_success.png)
 
 You should see a window similar to the one shown above.
 

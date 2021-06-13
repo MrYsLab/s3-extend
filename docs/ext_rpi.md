@@ -9,7 +9,8 @@ s3r
 ```
 
 <br>
-<img src="./images/s3r-1.png" >
+
+![](./images/s3r-1.png)
 
 This command automatically starts the Python Banyan Backplane and both
 the Banyan WebSocket and Banyan Raspberry Pi Gateways. 
@@ -34,7 +35,7 @@ You should see a similar output, as shown below, indicating that the
 backplane is running correctly. The IP address does not need to match
 the one shown.
 
-<img src="../images/s3r-2.png" >
+![](./images/s3r-2.png)
 
 Next, open an additional terminal window and type:
 
@@ -42,7 +43,7 @@ Next, open an additional terminal window and type:
 rpigw
 ```
 
-<img src="../images/s3r-3.png" >
+![](./images/s3r-3.png)
 
 You should see a window similar to the one shown above for the ESP-8266
 Gateway when the s3e command succeeds.
@@ -57,7 +58,7 @@ Next, open a third terminal window and type:
 wsgw -i 9001
 ```
 
-<img src="../images/s3r-4.png" >
+![](./images/s3r-4.png)
 
 You should see a window similar to the one shown above for the WebSocket
 Gateway when the s3e command succeeds. 
