@@ -207,8 +207,8 @@ class RpiGateway(GatewayBase):
 
         frequency = int(payload['freq'])
         frequency = int((1000 / frequency) * 1000)
-        tone = [pigpio.pulse(1 << pin, 0, frequency),
-                pigpio.pulse(0, 1 << pin, frequency)]
+        tone = [pigpio.pulse(1 << pin, 0, frequency // 2),
+                pigpio.pulse(0, 1 << pin, frequency // 2)]
 
         self.pi.wave_add_generic(tone)
         wid = self.pi.wave_create()
