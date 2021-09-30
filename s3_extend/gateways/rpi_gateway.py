@@ -206,7 +206,10 @@ class RpiGateway(GatewayBase):
         self.pi.set_mode(pin, pigpio.OUTPUT)
 
         frequency = int(payload['freq'])
-        frequency = int((1000 / frequency) * 1000)
+        if frequency < 0:
+            frequency = 0
+        if frequency != 0:
+            frequency = int((1000 / frequency) * 1000)
         tone = [pigpio.pulse(1 << pin, 0, frequency // 2),
                 pigpio.pulse(0, 1 << pin, frequency // 2)]
 
@@ -228,7 +231,13 @@ class RpiGateway(GatewayBase):
                          "tag":”TAG”,
                           “value”: “VALUE”}
         """
-        self.pi.set_PWM_dutycycle(payload['pin'], payload['value'])
+        value = payload['value']
+        if value < 0:
+            value = 0
+        elif payload['value'] > 255:
+            value = 255
+
+        self.pi.set_PWM_dutycycle(payload['pin'], value)
 
     def servo_position(self, topic, payload):
         """
