@@ -78,7 +78,7 @@ class Esp8266Gateway(GatewayBaseAIO):
                                              process_name=process_name,
                                              )
 
-    time.sleep(.5)
+        time.sleep(.5)
 
     def init_pins_dictionary(self):
         """
