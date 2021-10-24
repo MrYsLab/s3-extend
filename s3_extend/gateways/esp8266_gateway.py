@@ -19,7 +19,6 @@ import argparse
 import asyncio
 import signal
 import sys
-import time
 
 from python_banyan.gateway_base_aio import GatewayBaseAIO
 from telemetrix_aio.telemetrix_aio import TelemetrixAIO
@@ -60,6 +59,8 @@ class Esp8266Gateway(GatewayBaseAIO):
 
         self.subscriber_list = subscriber_list
 
+        self.subscriber = None
+
         # set the event loop to be used. accept user's if provided
         self.event_loop = event_loop
 
@@ -69,6 +70,8 @@ class Esp8266Gateway(GatewayBaseAIO):
         # if user want to pass in a com port, then pass it in
         self.esp = TelemetrixAIO(autostart=False, loop=self.event_loop, com_port=None)
 
+        # the_subscriber.setsockopt(zmq.SUBSCRIBE, "abc".encode())
+        # data = await self.subscriber.recv_multipart()
         # Initialize the parent
         super(Esp8266Gateway, self).__init__(subscriber_list=subscriber_list,
                                              event_loop=self.event_loop,
@@ -78,7 +81,7 @@ class Esp8266Gateway(GatewayBaseAIO):
                                              process_name=process_name,
                                              )
 
-        time.sleep(.5)
+        # time.sleep(.5)
 
     def init_pins_dictionary(self):
         """
@@ -102,11 +105,21 @@ class Esp8266Gateway(GatewayBaseAIO):
 
     async def main(self):
         # call the inherited begin method located in banyan_base_aio
-        await self.begin()
+        await self.begin(start_loop=False)
 
+        # wait for the first message that should provide the ip address of the WifI connection
+        self.subscriber = await super(Esp8266Gateway, self).get_subscriber()
+        data = await self.subscriber.recv_multipart()
+        payload = await self.unpack(data[1])
+        await self.additional_banyan_messages(None, payload)
         # sit in an endless loop to receive protocol messages
+        # if start_loop:
+        await self.begin_receive_loop()
+        #     while True:
+        #         # await self.receive_loop()
+        #         await asyncio.sleep(.0001)
         while True:
-            await self.receive_loop()
+            await asyncio.sleep(.001)
 
     async def additional_banyan_messages(self, topic, payload):
         if payload['command'] == 'ip_address':
@@ -116,7 +129,7 @@ class Esp8266Gateway(GatewayBaseAIO):
                 self.esp.ip_port = 31335
                 self.esp.ip_address = payload['address']
                 await self.esp.start_aio()
-                await asyncio.sleep(1)
+                # await asyncio.sleep(1)
 
     # The following methods and are called
     # by the gateway base class in its incoming_message_processing
@@ -240,7 +253,7 @@ class Esp8266Gateway(GatewayBaseAIO):
         pin = payload["pin"]
 
         await self.esp.set_pin_mode_digital_input(pin, self.digital_input_callback)
-        await asyncio.sleep(0.4)
+        # await asyncio.sleep(0.4)
 
     async def set_mode_digital_input_pullup(self, topic, payload):
         """
@@ -390,6 +403,7 @@ def esp8266_gateway():
 
     # replace with the name of your class
     app = Esp8266Gateway(subscriber_list, **kw_options, event_loop=loop)
+
     try:
         loop.run_until_complete(app.main())
     except (KeyboardInterrupt, asyncio.CancelledError, RuntimeError):

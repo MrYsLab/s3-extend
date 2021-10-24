@@ -5,18 +5,18 @@ with open('pypi_desc.md') as f:
 
 setup(
     name='s3-extend',
-    version='1.19',
+    version='1.20',
     packages=[
       's3_extend',
       's3_extend.gateways'
     ],
     install_requires=[
-        'python-banyan>=3.9',
+        'python-banyan>=3.10',
         'pymata-express>=1.11',
         'pymata_rh',
         'pymata-cpx',
         'tmx-pico-aio',
-        'telemetrix-aio'
+        'telemetrix-aio>=1.8'
     ],
 
     entry_points={
