@@ -251,7 +251,7 @@ class RpiGateway(GatewayBase):
                         “position”: “POSITION”}
         """
         pin = payload['pin']
-        pulse_width = (payload['position'] * 10) + 500
+        pulse_width = (payload['position'] * 10) + 600
         self.pi.set_servo_pulsewidth(pin, pulse_width)
 
     def set_mode_analog_input(self, topic, payload):
