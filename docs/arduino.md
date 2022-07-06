@@ -25,7 +25,7 @@ and select a distribution for your operating system.
 ![](./images/arduino_ide.png)</br>
  
  
-## Step 2: Install FirmataPlus Into The IDE
+## Step 2: Install FirmataExpress Into The IDE
 
 After installation, open the Arduino IDE and select Tools/Manage
 Libraries. When the Libary Manager appears, enter *FirmataExpress* in
@@ -45,7 +45,7 @@ Tools/Manage Libraries and select Ultrasonic and then click Install.**
 
 ## Step 4: Go Into The Tools Menus and Verify The Board Type and Port
 
-## Step 5: Compile And Upload FirmataPlus Into The Arduino
+## Step 5: Compile And Upload FirmataExpress Into The Arduino
 
 Select File/Examples and from the drop-down list, select FirmataExpress.
 
