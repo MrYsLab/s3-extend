@@ -21,6 +21,7 @@
 """
 import argparse
 import signal
+import socket
 import sys
 import time
 
@@ -31,7 +32,7 @@ from python_banyan.banyan_base import BanyanBase
 class PupperGateway(BanyanBase):
 
     def __init__(self, back_plane_ip_address=None, subscriber_port='43125',
-                 publisher_port='43124', loop_time=.1, udp_port=65530):
+                 publisher_port='43124', loop_time=.1, udp_port=8830):
 
         """
         kwargs is a dictionary that will contain the following keys:
@@ -59,6 +60,7 @@ class PupperGateway(BanyanBase):
         self.publisher_port = publisher_port
         self.loop_time = loop_time
         self.udp_port = udp_port
+        self.pupper_udp_address = None
 
         # initialize the parent
         super(PupperGateway, self).__init__(back_plane_ip_address=back_plane_ip_address,
@@ -70,8 +72,12 @@ class PupperGateway(BanyanBase):
         # allow zmq connections to establish
         time.sleep(.3)
 
-        print(udp_packets['activate_mode'][0])
+        # Create a UDP socket
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.sock_address = None
 
+        # subscribe to the to_pup_gateway topic
+        self.set_subscriber_topic('to_pup_gateway')
         # start the receive loop to accept messages from Scratch
         try:
             self.receive_loop()
@@ -87,17 +93,25 @@ class PupperGateway(BanyanBase):
         :return:
         """
 
-        # When a message is received and its number is zero, finish up.
-        if payload['message_number'] == 0:
-            print(str(self.number_of_messages) + ' messages sent and received. ')
-            input('Press enter to exit.')
-            self.clean_up()
-            sys.exit(0)
-        # bump the message number and send the message out
-        else:
-            self.message_number -= 1
-            if self.message_number >= 0:
-                self.publish_payload({'message_number': self.message_number}, 'echo')
+        # if the UDP socket is not yet established look for udp ip address message
+        # for all other messages at this point just toss them until connected.
+
+        # retrieve the messages key/value pair
+        for key, value in payload.items():
+            if 'ipaddr' in key:
+                if not self.sock_address:
+                    # self.sock_address = value, self.udp_port
+                    self.sock_address = 'localhost', self.udp_port
+                return
+            else:
+                # find command in the command table and send it to the robot
+
+                # if the address was never set, just ignore the request
+                if not self.sock_address:
+                    return
+                cmd = udp_packets[key][value].encode()
+                sent = self.sock.sendto(cmd, self.sock_address)
+                print(sent)
 
 
 def echo_cmdline_client():
