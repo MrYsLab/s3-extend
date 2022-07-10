@@ -100,8 +100,7 @@ class PupperGateway(BanyanBase):
         for key, value in payload.items():
             if 'ipaddr' in key:
                 if not self.sock_address:
-                    # self.sock_address = value, self.udp_port
-                    self.sock_address = 'localhost', self.udp_port
+                    self.sock_address = value, self.udp_port
                 return
             else:
                 # find command in the command table and send it to the robot
