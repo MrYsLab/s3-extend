@@ -33,12 +33,7 @@ class S3PUP:
     It will start the backplane, pupper gateway and websocket gateway.
     """
 
-    def __init__(self, udp_port=None):
-        """
-        :param udp_port: Manually select udp port
-        """
-
-        self.udp_port = udp_port
+    def __init__(self):
 
         # psutil pids
         self.proc_bp = None
@@ -57,14 +52,16 @@ class S3PUP:
             print('backplane start failed - exiting')
             sys.exit(0)
 
+        time.sleep(.5)
         self.proc_awg = self.start_wsgw()
         if self.proc_awg:
             print('Websocket Gateway started')
-            time.sleep(1)
+
         else:
             print('WebSocket Gateway start failed - exiting')
             sys.exit(0)
 
+        time.sleep(1)
         # start pupper gateway
         self.proc_hwg = self.start_pupgw()
 
@@ -76,7 +73,7 @@ class S3PUP:
         else:
             print('Pupper Gateway start failed - exiting')
             sys.exit(0)
-
+        time.sleep(3)
         while True:
             try:
                 if not self.skip_backplane:
@@ -97,7 +94,7 @@ class S3PUP:
                     self.killall()
 
                 # allow some time between polls
-                time.sleep(1)
+                time.sleep(.1)
             except KeyboardInterrupt:
                 self.killall()
 
@@ -176,12 +173,12 @@ class S3PUP:
         Start the websocket gateway
         """
         if sys.platform.startswith('win32'):
-            return subprocess.Popen(['wsgw', '-i', '9007'],
+            return subprocess.Popen(['wsgw', '-i', '9007', '-u', '8830'],
                                     creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
                                                   |
                                                   subprocess.CREATE_NO_WINDOW)
         else:
-            return subprocess.Popen(['wsgw', '-i', '9007'],
+            return subprocess.Popen(['wsgw', '-i', '9007', '-u', '8830'],
                                     stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                     stdout=subprocess.PIPE)
 
@@ -194,9 +191,9 @@ class S3PUP:
         else:
             hwgw_start = ['pupgw']
 
-        if self.udp_port:
-            hwgw_start.append('-u')
-            hwgw_start.append(self.udp_port)
+        # if self.udp_port:
+        #     hwgw_start.append('-u')
+        #     hwgw_start.append(self.udp_port)
 
         if sys.platform.startswith('win32'):
             return subprocess.Popen(['pupgw'],
@@ -217,18 +214,19 @@ def s3pupx():
     """
      Start the s3p script
      """
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-u", dest="udp_port", default="None",
-                        help="Use this UDP port instead of default of 8830")
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument("-u", dest="udp_port", default="None",
+    #                   help="Use this UDP port instead of default of 8830")
 
-    args = parser.parse_args()
+    # args = parser.parse_args()
 
-    if args.udp_port == "None":
-        udp_port = 8830
-    else:
-        udp_port = int(args.udp_port)
+    # if args.udp_port == "None":
+    #     udp_port = "8830"
+    # else:
+    #     udp_port = int(args.udp_port)
 
-    S3PUP(udp_port=udp_port)
+    # S3PUP(udp_port=udp_port)
+    S3PUP()
 
 
 # listen for SIGINT
