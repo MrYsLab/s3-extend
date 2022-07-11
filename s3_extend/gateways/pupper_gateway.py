@@ -113,26 +113,18 @@ class PupperGateway(BanyanBase):
                 print(sent)
 
 
-def echo_cmdline_client():
+def pupper_gateway():
     parser = argparse.ArgumentParser()
-    # allow user to bypass the IP address auto-discovery.
-    # This is necessary if the component resides on a computer
-    # other than the computing running the backplane.
     parser.add_argument("-b", dest="back_plane_ip_address", default="None",
                         help="None or IP address used by Back Plane")
-    parser.add_argument("-m", dest="number_of_messages", default="10",
-                        help="Number of messages to publish")
-    # allow the user to specify a name for the component and have it shown on the console banner.
-    # modify the default process name to one you wish to see on the banner.
-    # change the default in the derived class to set the name
-    parser.add_argument("-n", dest="process_name", default="EchoCmdClient",
-                        help="Set process name in banner")
     parser.add_argument("-p", dest="publisher_port", default='43124',
                         help="Publisher IP port")
     parser.add_argument("-s", dest="subscriber_port", default='43125',
                         help="Subscriber IP port")
     parser.add_argument("-t", dest="loop_time", default=".1",
                         help="Event Loop Timer in seconds")
+    parser.add_argument("-u", dest="udp_port", default='8830',
+                        help="UDP port number")
 
     args = parser.parse_args()
 
@@ -141,11 +133,11 @@ def echo_cmdline_client():
     kw_options = {'back_plane_ip_address': args.back_plane_ip_address,
                   'publisher_port': args.publisher_port,
                   'subscriber_port': args.subscriber_port,
-                  'udp_port': args.udp_port,
+                  'udp_port': int(args.udp_port),
                   'loop_time': float(args.loop_time)}
 
     # replace with the name of your class
-    EchoCmdClient(**kw_options)
+    PupperGateway(**kw_options)
 
 
 # signal handler function called when Control-C occurs
@@ -159,8 +151,5 @@ def signal_handler(sig, frame):
 signal.signal(signal.SIGINT, signal_handler)
 signal.signal(signal.SIGTERM, signal_handler)
 
-# if __name__ == '__main__':
-#     echo_cmdline_client()
-
-z = PupperGateway()
-print('zzz')
+if __name__ == '__main__':
+    pupper_gateway()
