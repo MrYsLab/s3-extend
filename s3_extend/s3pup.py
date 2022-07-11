@@ -181,13 +181,15 @@ class S3PUP:
 
     def start_pupgw(self):
         """
-        Start the picoboard gateway
+        Start the pupper gateway
         """
         if sys.platform.startswith('win32'):
-            return subprocess.Popen(['pbgw'], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+            return subprocess.Popen(['pupgw'],
+                                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
                                                             subprocess.CREATE_NO_WINDOW)
         else:
-            return subprocess.Popen(['pbgw'], stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+            return subprocess.Popen(['pupgw'], stdin=subprocess.PIPE,
+                                    stderr=subprocess.PIPE,
                                     stdout=subprocess.PIPE)
 
 
@@ -207,7 +209,7 @@ def s3pupx():
     args = parser.parse_args()
 
     if args.udp_port == "None":
-        udp = 8830
+        udp_port = 8830
     else:
         udp_port = int(args.udp_port)
 

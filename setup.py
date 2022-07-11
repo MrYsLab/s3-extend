@@ -25,7 +25,7 @@ setup(
             's3c = s3_extend.s3c:s3cx',
             's3e = s3_extend.s3e:s3ex',
             's3p = s3_extend.s3p:s3px',
-            's3pup = s3_extend.s3pup:s3pupx'
+            's3pup = s3_extend.s3pup:s3pupx',
             's3r = s3_extend.s3r:s3rx',
             's3rh = s3_extend.s3rh:s3rhx',
             's3rp = s3_extend.s3rp:s3rpx',
@@ -33,7 +33,7 @@ setup(
             'cpxgw = s3_extend.gateways.cpx_gateway:cpx_gateway',
             'espgw = s3_extend.gateways.esp8266_gateway:esp8266_gateway',
             'pbgw = s3_extend.gateways.picoboard_gateway:picoboard_gateway',
-            'pupbw = s3_extend.gateways.pupper_gateway:pupper_gateway'
+            'pupgw = s3_extend.gateways.pupper_gateway:pupper_gateway'
             'rpigw = s3_extend.gateways.rpi_gateway:rpi_gateway',
             'rhgw = s3_extend.gateways.robohat_gateway:robohat_gateway',
             'rpgw = s3_extend.gateways.rpi_pico_gateway:rpi_pico_gateway',
