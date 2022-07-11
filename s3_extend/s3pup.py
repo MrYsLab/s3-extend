@@ -60,6 +60,7 @@ class S3PUP:
         self.proc_awg = self.start_wsgw()
         if self.proc_awg:
             print('Websocket Gateway started')
+            time.sleep(1)
         else:
             print('WebSocket Gateway start failed - exiting')
             sys.exit(0)
