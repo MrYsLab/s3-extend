@@ -64,11 +64,13 @@ class S3PUP:
             print('WebSocket Gateway start failed - exiting')
             sys.exit(0)
 
-        # start picoboard gateway
+        # start pupper gateway
         self.proc_hwg = self.start_pupgw()
+
         if self.proc_hwg:
             print('Pupper Gateway started ')
             print('To exit this program, press Control-c')
+            time.sleep(1)
 
         else:
             print('Pupper Gateway start failed - exiting')
@@ -81,13 +83,16 @@ class S3PUP:
                         self.proc_bp = None
                         print('backplane exited...')
                         self.killall()
-                if self.proc_awg.poll() is not None:
+                z = self.proc_awg.poll()
+                if not z:
                     self.proc_awg = None
                     print('Websocket Gateway exited...')
                     self.killall()
-                if self.proc_hwg.poll() is not None:
+                p = self.proc_hwg.poll
+                # if self.proc_hwg.poll() is not None:
+                if not p:
                     self.proc_hwg = None
-                    print('Picoboard Gateway exited. Is your Picoboard plugged in?')
+                    print('pupper Gateway exited.')
                     self.killall()
 
                 # allow some time between polls
@@ -183,6 +188,15 @@ class S3PUP:
         """
         Start the pupper gateway
         """
+        if sys.platform.startswith('win32'):
+            hwgw_start = ['pupgw']
+        else:
+            hwgw_start = ['pupgw']
+
+        if self.udp_port:
+            hwgw_start.append('-u')
+            hwgw_start.append(self.udp_port)
+
         if sys.platform.startswith('win32'):
             return subprocess.Popen(['pupgw'],
                                     creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
