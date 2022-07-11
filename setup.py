@@ -33,7 +33,7 @@ setup(
             'cpxgw = s3_extend.gateways.cpx_gateway:cpx_gateway',
             'espgw = s3_extend.gateways.esp8266_gateway:esp8266_gateway',
             'pbgw = s3_extend.gateways.picoboard_gateway:picoboard_gateway',
-            'pupgw = s3_extend.gateways.pupper_gateway:pupper_gateway'
+            'pupgw = s3_extend.gateways.pupper_gateway:pupper_gateway',
             'rpigw = s3_extend.gateways.rpi_gateway:rpi_gateway',
             'rhgw = s3_extend.gateways.robohat_gateway:robohat_gateway',
             'rpgw = s3_extend.gateways.rpi_pico_gateway:rpi_pico_gateway',
