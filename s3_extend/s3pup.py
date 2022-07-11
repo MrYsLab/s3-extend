@@ -97,7 +97,7 @@ class S3PUP:
                     self.killall()
 
                 # allow some time between polls
-                time.sleep(.4)
+                time.sleep(1)
             except KeyboardInterrupt:
                 self.killall()
 
@@ -176,12 +176,12 @@ class S3PUP:
         Start the websocket gateway
         """
         if sys.platform.startswith('win32'):
-            return subprocess.Popen(['wsgw', '-i', '9004'],
+            return subprocess.Popen(['wsgw', '-i', '9007'],
                                     creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
                                                   |
                                                   subprocess.CREATE_NO_WINDOW)
         else:
-            return subprocess.Popen(['wsgw', '-i', '9004'],
+            return subprocess.Popen(['wsgw', '-i', '9007'],
                                     stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                     stdout=subprocess.PIPE)
 
