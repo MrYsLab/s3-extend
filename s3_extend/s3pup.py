@@ -35,10 +35,10 @@ class S3PUP:
 
     def __init__(self, udp_port=None):
         """
-        :param com_port: Manually select serial com port
+        :param udp_port: Manually select udp port
         """
 
-        self.com_port = com_port
+        self.udp_port = udp_port
 
         # psutil pids
         self.proc_bp = None
