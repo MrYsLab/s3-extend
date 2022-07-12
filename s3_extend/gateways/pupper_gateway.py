@@ -221,8 +221,6 @@ class PupperGateway(BanyanBase):
                     return
                 cmd = udp_packets[key][value]
                 message = msgpack.packb(cmd, use_bin_type=True)
-
-                # cmd = udp_packets[key][value].encode()
                 sent = self.sock.sendto(message, self.sock_address)
                 print(sent)
 
