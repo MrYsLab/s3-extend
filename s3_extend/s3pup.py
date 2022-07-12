@@ -61,14 +61,14 @@ class S3PUP:
             print('WebSocket Gateway start failed - exiting')
             sys.exit(0)
 
-        time.sleep(1)
+        time.sleep(3)
         # start pupper gateway
         self.proc_hwg = self.start_pupgw()
 
         if self.proc_hwg:
             print('Pupper Gateway started ')
             print('To exit this program, press Control-c')
-            time.sleep(1)
+            time.sleep(3)
 
         else:
             print('Pupper Gateway start failed - exiting')
