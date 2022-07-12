@@ -21,6 +21,7 @@
 """
 import argparse
 import signal
+import msgpack
 import socket
 import sys
 import time
@@ -218,8 +219,11 @@ class PupperGateway(BanyanBase):
                 # if the address was never set, just ignore the request
                 if not self.sock_address:
                     return
-                cmd = udp_packets[key][value].encode()
-                sent = self.sock.sendto(cmd, self.sock_address)
+                cmd = udp_packets[key][value]
+                message = msgpack.packb(cmd, use_bin_type=True)
+
+                # cmd = udp_packets[key][value].encode()
+                sent = self.sock.sendto(message, self.sock_address)
                 print(sent)
 
 
