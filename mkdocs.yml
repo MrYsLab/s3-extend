@@ -14,6 +14,7 @@ nav:
         - Circuit Playground Express: cpx.md
         - ESP-8266: esp-8266.md
         - Picoboard: pico.md
+        - Pupper Robot: pupper.md
         - Raspberry Pi: rpi.md
         - Raspberry Pi Pico: rpi_pico.md
       - Ready, Set, Go:
@@ -23,6 +24,7 @@ nav:
           - Circuit Playground Express: ext_cpx.md
           - ESP-8266: ext_esp.md
           - Picoboard: ext_pico.md
+          - Pupper Robot: ext_pupper.md
           - Raspberry Pi: ext_rpi.md
           - Raspberry Pi Pico: ext_rpi_pico.md
           - RoboHAT MMI: ext_rh.md

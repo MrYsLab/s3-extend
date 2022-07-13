@@ -18,10 +18,11 @@ window for each microcontroller you wish to use. Then, enter the command for the
    
    * **s3a** - for the Arduino
    * **s3c** - for the Adafruit Circuit Playground Express
-*    **s3e** - for the ESP-8266
-*  **s3p** - for the Picoboard
+   * **s3e** - for the ESP-8266
+   * **s3p** - for the Picoboard
+   * **s3pup** - for the Pupper Robot
    * **s3r** - for the Raspberry Pi
-  * **s3rp** for the Raspberry Pi Pico
+   * **s3rp** for the Raspberry Pi Pico
    * **s3rh** - for the RoboHAT MM1
    
 **Step 4:** Start Scratch 3, select an extension and create and run
@@ -66,4 +67,4 @@ forcing it to use COM7, you would start the launcher with:
 <br> <br> <br>
 
 
-Copyright (C) 2019-2021 Alan Yorinks All Rights Reserved
+Copyright (C) 2019-2022 Alan Yorinks All Rights Reserved
