@@ -4,7 +4,7 @@ Repository, gh-pages branch.](https://github.com/MrYsLab/s3onegpio/tree/gh-pages
 
 Click on the green Clone or download button at the upper right. 
 
-<img src ="images/gh-pages.png">
+![](./images/gh-pages.png)
 
 Save the
 file and then unzip it. This will create a directory called
@@ -36,4 +36,4 @@ Go to the "Using OneGPIO Extension Blocks" section for information on block usag
 <br>
 
 
-Copyright (C) 2019-2021 Alan Yorinks All Rights Reserved
+Copyright (C) 2019-2022 Alan Yorinks All Rights Reserved
