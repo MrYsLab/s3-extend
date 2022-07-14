@@ -82,7 +82,6 @@ class S3PUP:
                             print('backplane exited...')
                             self.killall()
                 if self.proc_awg:
-                    # z = self.proc_awg.poll()
                     if self.proc_awg.poll() is not None:
                         self.proc_awg = None
                         print('Websocket Gateway exited...')
