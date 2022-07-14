@@ -52,7 +52,7 @@ class S3PUP:
             print('backplane start failed - exiting')
             sys.exit(0)
 
-        time.sleep(.5)
+        time.sleep(1)
         self.proc_awg = self.start_wsgw()
         if self.proc_awg:
             print('Websocket Gateway started')
@@ -61,37 +61,37 @@ class S3PUP:
             print('WebSocket Gateway start failed - exiting')
             sys.exit(0)
 
-        time.sleep(3)
+        time.sleep(2)
         # start pupper gateway
         self.proc_hwg = self.start_pupgw()
 
         if self.proc_hwg:
             print('Pupper Gateway started ')
             print('To exit this program, press Control-c')
-            time.sleep(3)
 
         else:
             print('Pupper Gateway start failed - exiting')
             sys.exit(0)
-        time.sleep(3)
+        time.sleep(2)
         while True:
             try:
                 if not self.skip_backplane:
-                    if self.proc_bp.poll() is not None:
-                        self.proc_bp = None
-                        print('backplane exited...')
+                    if self.proc_bp:
+                        if self.proc_bp.poll() is not None:
+                            self.proc_bp = None
+                            print('backplane exited...')
+                            self.killall()
+                if self.proc_awg:
+                    # z = self.proc_awg.poll()
+                    if self.proc_awg.poll() is not None:
+                        self.proc_awg = None
+                        print('Websocket Gateway exited...')
                         self.killall()
-                z = self.proc_awg.poll()
-                if not z:
-                    self.proc_awg = None
-                    print('Websocket Gateway exited...')
-                    self.killall()
-                p = self.proc_hwg.poll
-                # if self.proc_hwg.poll() is not None:
-                if not p:
-                    self.proc_hwg = None
-                    print('pupper Gateway exited.')
-                    self.killall()
+                if self.proc_hwg:
+                    if self.proc_hwg.poll() is not None:
+                        self.proc_hwg = None
+                        print('pupper Gateway exited.')
+                        self.killall()
 
                 # allow some time between polls
                 time.sleep(.1)
@@ -108,10 +108,11 @@ class S3PUP:
         if self.proc_bp:
             try:
                 if sys.platform.startswith('win32'):
-                    subprocess.run(['taskkill', '/F', '/t', '/PID', str(self.proc_bp.pid)],
-                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
-                                                 subprocess.CREATE_NO_WINDOW
-                                   )
+                    subprocess.run(
+                        ['taskkill', '/F', '/t', '/PID', str(self.proc_bp.pid)],
+                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                      subprocess.CREATE_NO_WINDOW
+                    )
                 else:
                     self.proc_bp.kill()
                 self.proc_bp = None
@@ -120,10 +121,11 @@ class S3PUP:
         if self.proc_awg:
             try:
                 if sys.platform.startswith('win32'):
-                    subprocess.run(['taskkill', '/F', '/t', '/pid', str(self.proc_awg.pid)],
-                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
-                                                 subprocess.CREATE_NO_WINDOW
-                                   )
+                    subprocess.run(
+                        ['taskkill', '/F', '/t', '/pid', str(self.proc_awg.pid)],
+                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                      subprocess.CREATE_NO_WINDOW
+                    )
                 else:
                     self.proc_awg.kill()
                 self.proc_awg = None
@@ -132,16 +134,17 @@ class S3PUP:
         if self.proc_hwg:
             try:
                 if sys.platform.startswith('win32'):
-                    subprocess.run(['taskkill', '/F', '/t', '/PID', str(self.proc_hwg.pid)],
-                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
-                                                 subprocess.CREATE_NO_WINDOW
-                                   )
+                    subprocess.run(
+                        ['taskkill', '/F', '/t', '/PID', str(self.proc_hwg.pid)],
+                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                      subprocess.CREATE_NO_WINDOW
+                    )
                 else:
                     self.proc_hwg.kill()
                 self.proc_hwg = None
             except:
                 pass
-        sys.exit(0)
+        # sys.exit(0)
 
     def start_backplane(self):
         """
@@ -173,7 +176,7 @@ class S3PUP:
         Start the websocket gateway
         """
         if sys.platform.startswith('win32'):
-            return subprocess.Popen(['wsgw', '-i', '9007' ],
+            return subprocess.Popen(['wsgw', '-i', '9007'],
                                     creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
                                                   |
                                                   subprocess.CREATE_NO_WINDOW)
@@ -186,19 +189,11 @@ class S3PUP:
         """
         Start the pupper gateway
         """
-        if sys.platform.startswith('win32'):
-            hwgw_start = ['pupgw']
-        else:
-            hwgw_start = ['pupgw']
-
-        # if self.udp_port:
-        #     hwgw_start.append('-u')
-        #     hwgw_start.append(self.udp_port)
 
         if sys.platform.startswith('win32'):
             return subprocess.Popen(['pupgw'],
                                     creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
-                                                            subprocess.CREATE_NO_WINDOW)
+                                                  subprocess.CREATE_NO_WINDOW)
         else:
             return subprocess.Popen(['pupgw'], stdin=subprocess.PIPE,
                                     stderr=subprocess.PIPE,
@@ -207,25 +202,15 @@ class S3PUP:
 
 def signal_handler(sig, frame):
     print('Exiting Through Signal Handler')
-    raise KeyboardInterrupt
+    # raise KeyboardInterrupt
+    sys.exit(0)
 
 
 def s3pupx():
     """
      Start the s3p script
      """
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument("-u", dest="udp_port", default="None",
-    #                   help="Use this UDP port instead of default of 8830")
 
-    # args = parser.parse_args()
-
-    # if args.udp_port == "None":
-    #     udp_port = "8830"
-    # else:
-    #     udp_port = int(args.udp_port)
-
-    # S3PUP(udp_port=udp_port)
     S3PUP()
 
 
