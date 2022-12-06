@@ -6,7 +6,7 @@
 <br>
 <div style="text-align:center;color:#990033; font-family:times, serif;font-size:1.5em">Arduino, Raspberry Pi, ESP-8266, Raspberry Pi Pico, </div>
 <div style="text-align:center;color:#990033; font-family:times, serif;font-size:1.5em">Picoboard, Circuit Playground Express, </div>
-<div style="text-align:center;color:#990033; font-family:times, serif;font-size:1.5em">RoboHAT MM1, And The Pupper Robot</div>
+<div style="text-align:center;color:#990033; font-family:times, serif;font-size:1.5em">RoboHAT MM1</div>
 
 <br>
 
