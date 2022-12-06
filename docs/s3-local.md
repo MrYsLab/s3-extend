@@ -1,6 +1,5 @@
 ## Launching Scratch 3 Offline
-First, you need to download the files. Go to the [s3onegpio GitHub 
-Repository, gh-pages branch.](https://github.com/MrYsLab/s3onegpio/tree/gh-pages)
+First, you need to download the files. Go to the [s3onegpio GitHub Repository, gh-pages branch.](https://github.com/MrYsLab/s3onegpio/tree/gh-pages)
 
 Click on the green Clone or download button at the upper right. 
 
