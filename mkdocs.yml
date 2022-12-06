@@ -39,7 +39,6 @@ nav:
           - Circuit Playground Express: cpx_blocks.md
           - ESP-8266: esp_blocks.md
           - Picoboard: pico_blocks.md
-          - Pupper Robot: pupper_blocks.md
           - Raspberry Pi: rpi_blocks.md
           - Raspberry Pi Pico: rpi_pico_blocks.md
           - RoboHAT MM1: robohat_blocks.md
