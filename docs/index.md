@@ -11,9 +11,9 @@
 <br>
 
 <br>
+<p style="text-align:center;">
 <img src ="images/extensions.png">
  
-<p align="center"></p>
 
 <div style="text-align:center;color:#990033; font-family:times, serif; font-size:1.60em">Control your favorite physical computing device using Scratch 3.</div>
 <br>
