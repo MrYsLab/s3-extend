@@ -29,4 +29,4 @@ Even though this page addresses MakeCode, the procedure for flashing a
 
 <br> <br>
 
-Copyright (C) 2019-2022 Alan Yorinks. All Rights Reserved.
+Copyright (C) 2019-2023 Alan Yorinks. All Rights Reserved.

@@ -24,6 +24,14 @@ window for each microcontroller you wish to use. Then, enter the command for the
    * **s3r** - for the Raspberry Pi
    * **s3rp** for the Raspberry Pi Pico
    * **s3rh** - for the RoboHAT MM1
+
+**Important Note For macOS Users**
+
+You may need to start the OneGPIO server using _sudo_.
+For Example:
+```angular2html
+sudo s3a
+```
    
 **Step 4:** Start Scratch 3, select an extension and create and run
 your Scratch scripts. If you are using the ESP-8266 extension, you must use 
@@ -67,4 +75,4 @@ forcing it to use COM7, you would start the launcher with:
 <br> <br> <br>
 
 
-Copyright (C) 2019-2022 Alan Yorinks All Rights Reserved
+Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved

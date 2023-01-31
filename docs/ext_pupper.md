@@ -63,4 +63,4 @@ pasting any error output into the issue comment.
 <br> <br> <br>
 
 
-Copyright (C) 2019-2022 Alan Yorinks All Rights Reserved
+Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved
