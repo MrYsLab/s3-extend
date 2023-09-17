@@ -33,7 +33,3 @@ an issue [here.](https://github.com/MrYsLab/s3-extend/issues)
 Please feel free to email me at:
 [MisterYsLab@gmail.com](mailto:MisterYsLab@gmail.com)
 
-<br> <br> <br>
-
-
-Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved

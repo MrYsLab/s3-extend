@@ -52,9 +52,4 @@ to the
  in use. For example, the Arduino uses a hardwired, USB-Serial interface
  is used. The Raspberry Pi and ESP-8266 use a WiFi connection.
 
-<br>
-<br>
-<br>
 
-
-Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved

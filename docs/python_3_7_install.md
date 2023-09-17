@@ -71,12 +71,7 @@ If Python 3.7 is not included with your distribution, you may install it
 and have it coexist with the supplied version, using the
 [*pyenv*](https://realpython.com/intro-to-pyenv/) utility.
 
-<br>
-<br>
-<br>
 
-
-Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved
 
 
 

@@ -31,7 +31,4 @@ extension forcing it to use COM7, you would start the launcher with:
  s3p -c com7
 ```
 
-<br> <br> <br>
 
-
-Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved

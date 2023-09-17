@@ -111,7 +111,5 @@ specified in milliseconds.
 This block controls the state of the red board LED.
 
 
- <br> <br> <br>
 
 
-Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved

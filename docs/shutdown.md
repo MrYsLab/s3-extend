@@ -10,11 +10,3 @@ If you forget to use Control-C and cannot restart the extension with its associa
 reboot your computer to kill the running processes.
 
 
-
-
-<br>
-<br>
-<br>
-
-
-Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved

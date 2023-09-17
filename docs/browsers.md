@@ -61,7 +61,4 @@ how to solve the issue,
 [create an issue against the s3-extend distribution](https://github.com/MrYsLab/s3-extend/issues)
 pasting any error output into the issue comment.
 
-<br> <br> <br>
 
-
-Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved

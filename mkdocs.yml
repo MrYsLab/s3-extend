@@ -1,12 +1,20 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+
 site_name: Scratch 3 OneGPIO Extensions
+repo_url: https://github.com/MrYsLab/s3-extend/
 site_url: https://mryslab.github.io/s3-extend/
+copyright: > # should remain a link to the original theme
+  Copyright &copy; 2019-2023 Alan Yorinks &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Last 
+  Modified:
+  September  
+  17, 2023<br>
 markdown_extensions:
     - tables
 
 nav:
       - Welcome: index.md
       - Preparing Your Computer:
-        - Verify/Install Python 3.7: python_3_7_install.md
+        - Verify/Install Python 3.8: python_3_8_install.md
         - Verifying/Install pip3: pip_update.md
         - Install s3-extend: s3-extend.md
       - Preparing Your Micro-Controller:
@@ -52,5 +60,13 @@ nav:
       - Need Help?:
         - Reporting Issues: issues.md
 
+theme:
+  name: 'material'
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.footer
 
-theme: 'material'
+plugins:
+  - search
+

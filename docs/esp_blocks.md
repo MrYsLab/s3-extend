@@ -61,7 +61,4 @@ parameters, both containing a drop-down list of valid PINs. The
 first parameter allows you to select a trigger pin, and the second an
 echo pin. It returns the measured distance in centimeters.
 
-<br> <br> <br>
 
-
-Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved

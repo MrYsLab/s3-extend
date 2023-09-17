@@ -59,8 +59,3 @@ If there are exceptions or errors in any of the terminal windows,
 pasting any error output into the issue comment.
 
 
-
-<br> <br> <br>
-
-
-Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved

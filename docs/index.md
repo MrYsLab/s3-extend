@@ -8,32 +8,23 @@
 <div style="text-align:center;color:#990033; font-family:times, serif;font-size:1.5em">Picoboard, Circuit Playground Express, </div>
 <div style="text-align:center;color:#990033; font-family:times, serif;font-size:1.5em">RoboHAT MM1</div>
 
-<br>
 
-<br>
+
 <p style="text-align:center;">
 <img src ="images/extensions.png">
  
 
 <div style="text-align:center;color:#990033; font-family:times, serif; font-size:1.60em">Control your favorite physical computing device using Scratch 3.</div>
-<br>
 
-* **Windows, Mac, *and* Linux**, including **Raspberry Pi**, are
-  supported.
-
-*  **Launch Scratch 3 via the internet or locally on your computer.**
-
-* **Control your Raspberry Pi or a Raspberry Pi/RoboHAT combination either locally or from your PC.**
-
-
-<br>
-<br>
-<br>
+ <ul>
+  <li>Windows, Mac, and Linux, including Raspberry Pi, are supported.</li>
+  <li>Launch Scratch 3 via the internet or locally on your computer.</li>
+  <li>Control your Raspberry Pi or a Raspberry Pi/RoboHAT combination either locally or from your PC.
+</li>
+</ul> 
 
 
-Last Updated:  Jan 31 2023 &nbsp; &nbsp; &nbsp; &nbsp; s3-extend v1.22 &nbsp; &nbsp; 
-&nbsp;
-&nbsp;s3onegpio v1.19
 
-Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved
+
+
 

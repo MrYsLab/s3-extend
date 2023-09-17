@@ -16,9 +16,3 @@ Go to the "Using OneGPIO Extension Blocks" section for information on block usag
 ![](./images/extensions.png)
 
 
-<br>
-<br>
-<br>
-
-
-Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved

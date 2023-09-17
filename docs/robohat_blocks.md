@@ -92,7 +92,4 @@ This block allows you to read any of the INA219 registers selected in the drop-d
 * Power: Power
 * Power: Power
 
-<br> <br> <br>
 
-
-Copyright (C) 2019-2023 Alan Yorinks All Rights Reserved
