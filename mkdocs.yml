@@ -4,10 +4,10 @@ site_name: Scratch 3 OneGPIO Extensions
 repo_url: https://github.com/MrYsLab/s3-extend/
 site_url: https://mryslab.github.io/s3-extend/
 copyright: > # should remain a link to the original theme
-  Copyright &copy; 2019-2023 Alan Yorinks &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Last 
+  Copyright &copy; 2019-2024 Alan Yorinks &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Last 
   Modified:
-  September  
-  17, 2023<br>
+  January 
+  18, 2024<br>
 markdown_extensions:
     - tables
 
