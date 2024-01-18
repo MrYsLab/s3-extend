@@ -1,7 +1,6 @@
 ## Installing The Python Extension Servers
 
 Follow [these instructions](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/) to create a virtual environment.
-Open a command window and type:
 
 After activating the virtual environment, open a terminal window and type:
 
