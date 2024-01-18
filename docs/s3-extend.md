@@ -1,16 +1,13 @@
 ## Installing The Python Extension Servers
 
-
+Follow [these instructions](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/) to create a virtual environment.
 Open a command window and type:
 
-```
-pip install s3-extend
-```
+After activating the virtual environment, open a terminal window and type:
 
-For Linux, you may have to use pip3:
 
 ```angular2html
-pip3 install s3-extend
+pip install s3-extend
 ```
 
 <br>
