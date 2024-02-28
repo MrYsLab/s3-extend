@@ -33,5 +33,7 @@ Japanese : **KigenHasebe**
 
 German: **christianimmler**
 
+Dutch: (For the Adafruit Playground Express) [**tivanboven**](https://github.com/tivanboven)
+
 
 
