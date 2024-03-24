@@ -92,8 +92,9 @@ class S32:
 
                 # allow some time between polls
                 time.sleep(.4)
-            except KeyboardInterrupt:
-                self.killall()
+            except Exception as e:
+                # self.killall()
+                sys.exit(0)
 
     def killall(self):
         """
@@ -137,7 +138,8 @@ class S32:
                 self.proc_hwg = None
             except:
                 pass
-        sys.exit(0)
+        # time.sleep(1)
+        # sys.exit(0)
 
     def start_backplane(self):
         """
@@ -194,7 +196,7 @@ class S32:
 
 def signal_handler(sig, frame):
     print('Exiting Through Signal Handler')
-    raise KeyboardInterrupt
+    # raise KeyboardInterrupt
 
 
 def s32ex():
