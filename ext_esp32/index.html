@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://mryslab.github.io/s3-extend/pico/">
+        <link rel="canonical" href="https://mryslab.github.io/s3-extend/ext_esp32/">
       
       
-        <link rel="prev" href="../esp-32/">
+        <link rel="prev" href="../ext_cpx/">
       
       
-        <link rel="next" href="../rpi/">
+        <link rel="next" href="../ext_esp/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Picoboard - Scratch 3 OneGPIO Extensions</title>
+        <title>ESP-32 - Scratch 3 OneGPIO Extensions</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#no-additional-files-are-required-for-the-picoboard" class="md-skip">
+        <a href="#starting-the-onegpio-server-for-the-esp-32" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Picoboard
+              ESP-32
             
           </span>
         </div>
@@ -334,19 +334,17 @@
       
   
   
-    
-  
   
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
@@ -359,7 +357,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Preparing Your Micro-Controller
@@ -450,18 +448,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../pico/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -470,7 +459,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -527,17 +515,19 @@
       
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
@@ -550,7 +540,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Ready, Set, Go
@@ -581,17 +571,19 @@
                 
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
         
           <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
             
@@ -604,7 +596,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             Starting the Python Extension Servers
@@ -655,9 +647,27 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../ext_esp32/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    ESP-32
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -666,6 +676,38 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#starting-the-onegpio-server-for-the-esp-32" class="md-nav__link">
+    Starting The OneGPIO Server For The ESP-32
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1494,8 +1536,28 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#starting-the-onegpio-server-for-the-esp-32" class="md-nav__link">
+    Starting The OneGPIO Server For The ESP-32
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1513,10 +1575,47 @@
   
 
 
-<h1 id="no-additional-files-are-required-for-the-picoboard">No Additional Files Are Required For The Picoboard</h1>
-<p>Make sure that you have installed s3-extend on your computer,
-as explained in the Preparing Your Computer section of this document.</p>
-<p>You may skip to the next section.</p>
+  <h1>ESP-32</h1>
+
+<h2 id="starting-the-onegpio-server-for-the-esp-32">Starting The OneGPIO Server For The ESP-32</h2>
+<p>Apply power to the ESP-32.</p>
+<p><strong>Note:</strong> For the following discussion, s3-extend was installed in a virtual 
+environment,
+and the screenshots below 
+reflect this.</p>
+<p>Next, open a terminal window and type:</p>
+<pre><code>s32
+</code></pre>
+<p><br>
+<img alt="" src="../images/s32-1.png" /></p>
+<p>This command automatically starts the Python Banyan Backplane, 
+the Banyan WebSocket Gateway, and the Banyan ESP-32 Gateway. </p>
+<p>You may now start Scratch 3 in your Web browser, as explained in this 
+document's "Launching Scratch 3" section.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>If the command window does not look similar to the one above, 
+open a new terminal and type:</p>
+<pre><code>backplane
+</code></pre>
+<p>A similar output, as shown below, indicates that the backplane is running correctly. 
+The IP address does not need to match the one shown. The IP address does not need to match
+the one shown.</p>
+<p><img alt="" src="../images/backplane3.png" /></p>
+<p>Next, open an additional terminal window and type:</p>
+<pre><code>espgw
+</code></pre>
+<p><img alt="" src="../images/s32-2.png" /></p>
+<p>You should see a window similar to the one shown above for the ESP-32
+Gateway when the s3e command succeeds.</p>
+<p>Next, open a third terminal window and type:</p>
+<pre><code>wsgw -i 9007
+</code></pre>
+<p><img alt="" src="../images/s32-3.png" /></p>
+<p>You should see a window similar to the one shown above for the WebSocket
+Gateway when the <em>wsgw</em> command succeeds. </p>
+<p>If there are exceptions or errors in any terminal window,
+<a href="https://github.com/MrYsLab/s3-extend/issues">create an issue against the s3-extend distribution,</a>
+pasting any error output into the issue comment.</p>
 
 
 
@@ -1538,7 +1637,7 @@ as explained in the Preparing Your Computer section of this document.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../esp-32/" class="md-footer__link md-footer__link--prev" aria-label="Previous: ESP-32" rel="prev">
+          <a href="../ext_cpx/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Circuit Playground Express" rel="prev">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1548,20 +1647,20 @@ as explained in the Preparing Your Computer section of this document.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                ESP-32
+                Circuit Playground Express
               </div>
             </div>
           </a>
         
         
           
-          <a href="../rpi/" class="md-footer__link md-footer__link--next" aria-label="Next: Raspberry Pi" rel="next">
+          <a href="../ext_esp/" class="md-footer__link md-footer__link--next" aria-label="Next: ESP-8266" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Raspberry Pi
+                ESP-8266
               </div>
             </div>
             <div class="md-footer__button md-icon">

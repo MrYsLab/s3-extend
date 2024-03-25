@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://mryslab.github.io/s3-extend/pico/">
+        <link rel="canonical" href="https://mryslab.github.io/s3-extend/esp-32/">
       
       
-        <link rel="prev" href="../esp-32/">
+        <link rel="prev" href="../esp-8266/">
       
       
-        <link rel="next" href="../rpi/">
+        <link rel="next" href="../pico/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Picoboard - Scratch 3 OneGPIO Extensions</title>
+        <title>ESP-32 - Scratch 3 OneGPIO Extensions</title>
       
     
     
@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#no-additional-files-are-required-for-the-picoboard" class="md-skip">
+        <a href="#esp-32-nodemcu-installation-instructions" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Picoboard
+              ESP-32
             
           </span>
         </div>
@@ -430,26 +430,6 @@
                 
   
   
-  
-    <li class="md-nav__item">
-      <a href="../esp-32/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ESP-32
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -461,7 +441,100 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    ESP-32
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    ESP-32
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-arduino-ide" class="md-nav__link">
+    Installing The Arduino IDE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-the-boards-manager" class="md-nav__link">
+    Configuring The Boards Manager
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-the-telemetrix4esp32-sketch" class="md-nav__link">
+    Install The Telemetrix4ESP32 Sketch
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-your-network-values-in-the-sketch" class="md-nav__link">
+    Configure Your Network Values In the Sketch
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upload-the-sketch-to-the-esp-32" class="md-nav__link">
+    Upload The Sketch To the ESP-32
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#determine-the-ip-address-assigned-to-the-esp-32" class="md-nav__link">
+    Determine The IP Address Assigned To The ESP-32
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pico/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -470,7 +543,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1497,6 +1569,56 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installing-the-arduino-ide" class="md-nav__link">
+    Installing The Arduino IDE
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-the-boards-manager" class="md-nav__link">
+    Configuring The Boards Manager
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-the-telemetrix4esp32-sketch" class="md-nav__link">
+    Install The Telemetrix4ESP32 Sketch
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-your-network-values-in-the-sketch" class="md-nav__link">
+    Configure Your Network Values In the Sketch
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upload-the-sketch-to-the-esp-32" class="md-nav__link">
+    Upload The Sketch To the ESP-32
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#determine-the-ip-address-assigned-to-the-esp-32" class="md-nav__link">
+    Determine The IP Address Assigned To The ESP-32
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1513,10 +1635,52 @@
   
 
 
-<h1 id="no-additional-files-are-required-for-the-picoboard">No Additional Files Are Required For The Picoboard</h1>
-<p>Make sure that you have installed s3-extend on your computer,
-as explained in the Preparing Your Computer section of this document.</p>
-<p>You may skip to the next section.</p>
+<h1 id="esp-32-nodemcu-installation-instructions">ESP-32 NodeMCU Installation Instructions</h1>
+<p>The Arduino IDE is used to install the required software onto the 
+ESP-32. </p>
+<h2 id="installing-the-arduino-ide">Installing The Arduino IDE</h2>
+<p>If you need to install the Arduino IDE on your computer, go to 
+the <a href="https://www.arduino.cc/en/software">Arduino Download page</a>
+and download and install the IDE for your computer.</p>
+<h2 id="configuring-the-boards-manager">Configuring The Boards Manager</h2>
+<p>The Arduino IDE boards manager must be configured to use the
+ESP-32 Arduino Core.
+The procedure is found 
+<a href="https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html">on this page.</a></p>
+<h2 id="install-the-telemetrix4esp32-sketch">Install The Telemetrix4ESP32 Sketch</h2>
+<p>To install the Telemetrix4Esp32 sketch, from the
+Arduino IDE main menu, open <strong><em>Tools/Manage Libraries...</em></strong></p>
+<p>The following screenshot is from version 2 of the Arduino IDE:</p>
+<p><img alt="" src="../images/ard_lib_mgr2.png" /> </br></p>
+<p>In the search edit box, enter <em><strong>Telemetrix</strong></em>.</p>
+<p>Select Telemetrix4Esp32 and press the <strong><em>Install</em></strong> button.</p>
+<p>After the installation is complete, from the Arduino main menu, 
+select File/Examples/Telemetrix4Esp32/Telemetrix4Esp32WIFI. 
+The sketch's source code will appear in the Editor window.</p>
+<h2 id="configure-your-network-values-in-the-sketch">Configure Your Network Values In the Sketch</h2>
+<p>The sketch must be modified to contain your network SSID and password.</p>
+<p><img alt="" src="../images/set_network_values2.png" /> </br></p>
+<p>Replace "YOUR_NETWORK_SSID" and "YOUR_NETWORK_PASSWORD" with the values for your network.
+Make sure that double quotes are still in place for both values.</p>
+<p>Save the sketch.</p>
+<h2 id="upload-the-sketch-to-the-esp-32">Upload The Sketch To the ESP-32</h2>
+<p>To upload the sketch to the NodeMCU, plug a USB cable into the 
+NodeMCU and your computer, and from the Arduino IDE main menu Tools selection, 
+choose Board/esp32, and from that menu, select the board you are using.
+In my case, I am using a DoIt NodeMCU 1.0. Next, select the Com port from the
+Tools/Port menu of the Arduino IDE.</p>
+<p>Now, click on the Upload arrow (the horizontal arrow) below the Arduino IDE Main menu.
+The sketch will take several seconds to compile and load.</p>
+<h2 id="determine-the-ip-address-assigned-to-the-esp-32">Determine The IP Address Assigned To The ESP-32</h2>
+<p>To determine the IP address assigned to the NodeMCU, open the Arduino IDE 
+Serial Monitor (the button in the upper right of the Arduino IDE), set the speed to 
+115200, and press the reset button on the NodeMCU. Within 15 seconds, 
+you should see a message telling you the NodeMCU's IP address. 
+Write this value down since you will need it later when using the Scratch3 Editor.</p>
+<p><img alt="" src="../images/ip_address2.png" /> </br></p>
+<p><strong>NOTE:</strong> When you reset the NodeMCU, the onboard LED will stay lit until
+a connection is made with your router. You must wait for the LED to extinguish
+before starting the s32 script.</p>
 
 
 
@@ -1538,7 +1702,7 @@ as explained in the Preparing Your Computer section of this document.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../esp-32/" class="md-footer__link md-footer__link--prev" aria-label="Previous: ESP-32" rel="prev">
+          <a href="../esp-8266/" class="md-footer__link md-footer__link--prev" aria-label="Previous: ESP-8266" rel="prev">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1548,20 +1712,20 @@ as explained in the Preparing Your Computer section of this document.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                ESP-32
+                ESP-8266
               </div>
             </div>
           </a>
         
         
           
-          <a href="../rpi/" class="md-footer__link md-footer__link--next" aria-label="Next: Raspberry Pi" rel="next">
+          <a href="../pico/" class="md-footer__link md-footer__link--next" aria-label="Next: Picoboard" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Raspberry Pi
+                Picoboard
               </div>
             </div>
             <div class="md-footer__button md-icon">

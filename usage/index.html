@@ -430,6 +430,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../esp-32/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESP-32
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../pico/" class="md-nav__link">
         
   
@@ -655,6 +675,26 @@
   
   <span class="md-ellipsis">
     Circuit Playground Express
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ext_esp32/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESP-32
   </span>
   
 
@@ -1001,6 +1041,26 @@
   
   <span class="md-ellipsis">
     Circuit Playground Express
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../esp_32_blocks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ESP-32
   </span>
   
 
@@ -1506,14 +1566,14 @@
 and your physical computing device, it is time to try things out.</p>
 <p>Here is a brief recommended procedure for using Scratch 3 with your
 physical computing projects:</p>
-<p><strong>Step 1:</strong> With the power disconnected from your micro-controller, attach
-the sensors and actuators to the micro-controller. <strong>Never</strong> add or
-remove sensors or actuators with power applied - you may permanently
-damage your micro-controller.</p>
+<p><strong>Step 1:</strong> With the power disconnected from your microcontroller, 
+attach the sensors and actuators to it. Never add or remove sensors or 
+actuators with power applied—you may permanently damage your microcontroller.</p>
 <p><strong>Step 2:</strong> Apply power to the micro-controller.</p>
 <p><strong>Step 3:</strong> Start the OneGPIO server code by opening a terminal 
 window for each microcontroller you wish to use. Then, enter the command for the specific micro-controller:</p>
 <ul>
+<li><strong>s32</strong> - for the ESP-32</li>
 <li><strong>s3a</strong> - for the Arduino</li>
 <li><strong>s3c</strong> - for the Adafruit Circuit Playground Express</li>
 <li><strong>s3e</strong> - for the ESP-8266</li>
@@ -1529,13 +1589,11 @@ For Example:</p>
 <pre><code class="language-angular2html">sudo s3a
 </code></pre>
 <p><strong>Step 4:</strong> Start Scratch 3, select an extension and create and run
-your Scratch scripts. If you are using the ESP-8266 extension, you must use 
-the <strong>ESP-8266 Connect IP Address</strong> block 
-to connect to the ESP-8266. When successfully connected, 
-the red LED on the ESP-8266
-NodeMCU is extinguished.</p>
+your Scratch scripts. If you are using the ESP-8266 or ESP032 extension, you must use 
+the <strong>Connect IP Address</strong> block 
+to connect to the ESP-8266 or ESP032. </p>
 <p><strong>Step 5:</strong> To power down, dismiss the OneGPIO server by going to the
-window opened in step 3 and pressing Control-C. You may need to do this
+window opened in step 3 and pressing Control-C. You may may need to do this
 twice. Finally, dismiss the Web Browser tab running
 Scratch 3. <strong>SPECIAL NOTE:</strong> Please use Control-C before dismissing the window.
 If you dismiss the window without pressing Control-C first, the next time you start
@@ -1552,8 +1610,8 @@ other. However, you may not run two of the same type of controllers at the same.
 two boards that use a serial link is an advanced and experimental feature and not recommended nor
 officially supported. An example would be running
 an Arduino and a Picoboard on the same computer at the same time.
-If you wish to run two boards that use a serial link, you may have
-to specify the COM port for one of the boards manually. This is done by using 
+If you wish to run two boards that use a serial link, you may have to manually 
+specify the COM port for one of the boards.  This is done by using 
 the -c option in the launcher. For example, to start the Picoboard extension 
 forcing it to use COM7, you would start the launcher with:</p>
 <pre><code class="language-bash"> s3p -c com7
@@ -1619,7 +1677,7 @@ forcing it to use COM7, you would start the launcher with:</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2019-2024 Alan Yorinks &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Last  Modified: March   5, 2024<br>
+      Copyright &copy; 2019-2024 Alan Yorinks &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Last  Modified: March   24, 2024 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For Software Versions: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s3-extend: 1.30 &nbsp;&nbsp;&nbsp; s3onegpio 1.30
 
     </div>
   
