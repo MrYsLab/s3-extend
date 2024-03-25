@@ -1,29 +1,27 @@
-## The ESP-8266 Blocks
+## The ESP-32 Blocks
 
-![](./images/esp_blocks.png)
+![](./images/esp_32_blocks.png)
 
 The blocks consist of a set of command blocks that are rectangular in
 shape and reporter blocks rounded in shape.
 
-NOTE: When you select the ESP-8266 OneGPIO extension in the Scratch Editor, a Warning 
+NOTE: When you select the ESP-32 OneGPIO extension in the Scratch Editor, a Warning 
 Dialog 
 will pop up,
-reminding you to enter and use the ESP-8266 IP address block. 
+reminding you to enter and use the ESP-32 IP address block. 
 
-![](./images/warning.png)
+![](./images/warning_32.png)
 
 
 ### Command Blocks
 
-#### ESP-8266 IP Address
-You must enter the WiFi IP address of the ESP-8266 into this block. This
-block must precede the other ESP-8266 blocks and should only be
+#### ESP-32 IP Address
+You must enter the WiFi IP address of the ESP-32 into this block. This
+block must precede the other ESP-32 blocks and should only be
 used once.
 
-![](./images/esp_ip.png)
+![](./images/esp_32_ip.png)
 
-When Scratch executes this block, the red LED on the ESP-8266 should
-turn off, indicating a successful connection.
 
 #### Write Digital
 This block allows you to select a pin and set its output to either a one

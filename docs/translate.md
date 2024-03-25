@@ -16,7 +16,7 @@ as well.
 
 ### Providing A Translation
 
-To provide a translation for the Arduino, ESP-8266, and Raspberry Pi
+To provide a translation for the Arduino, ESP-32, ESP-8266, and Raspberry Pi
 extensions, you simply update the
 [translate.txt file.](https://github.com/MrYsLab/s3onegpio/blob/master/translations/translations.txt)
 For the Picoboard, you update the

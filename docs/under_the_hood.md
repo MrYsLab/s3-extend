@@ -50,6 +50,6 @@ to the
  The transport mechanism used between the Hardware Gateway and its
  associated micro-controller varies, depending upon the micro-controller
  in use. For example, the Arduino uses a hardwired, USB-Serial interface
- is used. The Raspberry Pi and ESP-8266 use a WiFi connection.
+ is used. The Raspberry Pi, ESP-32, and ESP-8266 use a WiFi connection.
 
 

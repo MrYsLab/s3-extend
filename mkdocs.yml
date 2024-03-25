@@ -7,7 +7,8 @@ copyright: > # should remain a link to the original theme
   Copyright &copy; 2019-2024 Alan Yorinks &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  Last 
   Modified:
   March  
-  5, 2024<br>
+  24, 2024
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For Software Versions: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; s3-extend: 1.30 &nbsp;&nbsp;&nbsp; s3onegpio 1.30
 markdown_extensions:
     - tables
 
@@ -21,6 +22,7 @@ nav:
         - Arduino And RoboHAT MM1: arduino.md
         - Circuit Playground Express: cpx.md
         - ESP-8266: esp-8266.md
+        - ESP-32: esp-32.md
         - Picoboard: pico.md
         - Raspberry Pi: rpi.md
         - Raspberry Pi Pico: rpi_pico.md
@@ -29,6 +31,7 @@ nav:
         - Starting the Python Extension Servers:
           - Arduino: ext_ard.md
           - Circuit Playground Express: ext_cpx.md
+          - ESP-32: ext_esp32.md
           - ESP-8266: ext_esp.md
           - Picoboard: ext_pico.md
           - Raspberry Pi: ext_rpi.md
@@ -43,6 +46,7 @@ nav:
         - Using OneGPIO Extension Blocks:
           - Arduino: ard_blocks.md
           - Circuit Playground Express: cpx_blocks.md
+          - ESP-32: esp_32_blocks.md
           - ESP-8266: esp_blocks.md
           - Picoboard: pico_blocks.md
           - Raspberry Pi: rpi_blocks.md
