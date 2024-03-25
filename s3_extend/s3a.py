@@ -75,7 +75,8 @@ class S3A:
             print('Arduino Gateway started.')
             seconds = 5
             while seconds >= 0:
-                print('\rPlease wait ' + str(seconds) + ' seconds for Arduino to initialize...', end='')
+                print('\rPlease wait ' + str(
+                    seconds) + ' seconds for Arduino to initialize...', end='')
                 time.sleep(1)
                 seconds -= 1
             print()
@@ -105,8 +106,8 @@ class S3A:
 
                 # allow some time between polls
                 time.sleep(.4)
-            except KeyboardInterrupt:
-                self.killall()
+            except Exception as e:
+                sys.exit(0)
 
     def killall(self):
         """
@@ -117,10 +118,11 @@ class S3A:
         if self.proc_bp:
             try:
                 if sys.platform.startswith('win32'):
-                    subprocess.run(['taskkill', '/F', '/t', '/PID', str(self.proc_bp.pid)],
-                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
-                                                 subprocess.CREATE_NO_WINDOW
-                                   )
+                    subprocess.run(
+                        ['taskkill', '/F', '/t', '/PID', str(self.proc_bp.pid)],
+                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                      subprocess.CREATE_NO_WINDOW
+                        )
                 else:
                     self.proc_bp.kill()
                 self.proc_bp = None
@@ -129,10 +131,11 @@ class S3A:
         if self.proc_awg:
             try:
                 if sys.platform.startswith('win32'):
-                    subprocess.run(['taskkill', '/F', '/t', '/pid', str(self.proc_awg.pid)],
-                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
-                                                 subprocess.CREATE_NO_WINDOW
-                                   )
+                    subprocess.run(
+                        ['taskkill', '/F', '/t', '/pid', str(self.proc_awg.pid)],
+                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                      subprocess.CREATE_NO_WINDOW
+                        )
                 else:
                     self.proc_awg.kill()
                 self.proc_awg = None
@@ -141,16 +144,17 @@ class S3A:
         if self.proc_hwg:
             try:
                 if sys.platform.startswith('win32'):
-                    subprocess.run(['taskkill', '/F', '/t', '/PID', str(self.proc_hwg.pid)],
-                                   creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
-                                                 subprocess.CREATE_NO_WINDOW
-                                   )
+                    subprocess.run(
+                        ['taskkill', '/F', '/t', '/PID', str(self.proc_hwg.pid)],
+                        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                      subprocess.CREATE_NO_WINDOW
+                        )
                 else:
                     self.proc_hwg.kill()
                 self.proc_hwg = None
             except:
                 pass
-        sys.exit(0)
+        # sys.exit(0)
 
     def start_backplane(self):
         """
@@ -215,7 +219,7 @@ class S3A:
 
 def signal_handler(sig, frame):
     print('Exiting Through Signal Handler')
-    raise KeyboardInterrupt
+    # raise KeyboardInterrupt
 
 
 def s3ax():
@@ -237,7 +241,8 @@ def s3ax():
         arduino_instance_id = int(args.arduino_instance_id)
 
     if com_port and arduino_instance_id:
-        raise RuntimeError('Both com_port arduino_instance_id were set. Only one is allowed')
+        raise RuntimeError(
+            'Both com_port arduino_instance_id were set. Only one is allowed')
 
     S3A(com_port=com_port, arduino_instance_id=args.arduino_instance_id)
 

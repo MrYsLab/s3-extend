@@ -92,8 +92,8 @@ class S3E:
 
                 # allow some time between polls
                 time.sleep(.4)
-            except KeyboardInterrupt:
-                self.killall()
+            except Exception as e:
+                sys.exit(0)
 
     def killall(self):
         """
@@ -137,7 +137,7 @@ class S3E:
                 self.proc_hwg = None
             except:
                 pass
-        sys.exit(0)
+        # sys.exit(0)
 
     def start_backplane(self):
         """
@@ -193,7 +193,7 @@ class S3E:
 
 def signal_handler(sig, frame):
     print('Exiting Through Signal Handler')
-    raise KeyboardInterrupt
+    # raise KeyboardInterrupt
 
 
 def s3ex():
