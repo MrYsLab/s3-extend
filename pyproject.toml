@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages]
+find = { }  # Scan the project directory with the default parameters
+
+[project]
+name = "s3-extend"
+version = "1.30"
+
+
+
+
+authors = [
+    { name = "Alan Yorinks", email = "MisterYsLab@gmail.com" },
+]
+
+description = "Scratch3 Extension Servers"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "AGPL-3.0-or-later" }
+
+keywords = ['Scratch', ' Extensions', 'Python']
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Environment :: Other Environment',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Education',
+    'Operating System :: OS Independent',
+    'Topic :: Software Development :: Libraries :: Python Modules'
+]
+
+dependencies = [
+    'python-banyan>=3.10',
+    'pymata-express>=1.11',
+    'pymata-rh',
+    'pymata-cpx',
+    'tmx-pico-aio',
+    'telemetrix-aio>=1.8',
+    'telemetrix-esp32'
+]
+
+[project.scripts]
+s3a = 's3_extend.s3a:s3ax'
+s3c = 's3_extend.s3c:s3cx'
+s3e = 's3_extend.s3e:s3ex'
+s32 = 's3_extend.s32:s32ex'
+s3p = 's3_extend.s3p:s3px'
+s3r = 's3_extend.s3r:s3rx'
+s3rh = 's3_extend.s3rh:s3rhx'
+s3rp = 's3_extend.s3rp:s3rpx'
+ardgw = 's3_extend.gateways.arduino_gateway:arduino_gateway'
+cpxgw = 's3_extend.gateways.cpx_gateway:cpx_gateway'
+espgw = 's3_extend.gateways.esp8266_gateway:esp8266_gateway'
+esp32gw = 's3_extend.gateways.esp32_gateway:esp32_gateway'
+pbgw = 's3_extend.gateways.picoboard_gateway:picoboard_gateway'
+rpigw = 's3_extend.gateways.rpi_gateway:rpi_gateway'
+rhgw = 's3_extend.gateways.robohat_gateway:robohat_gateway'
+rpgw = 's3_extend.gateways.rpi_pico_gateway:rpi_pico_gateway'
+wsgw = 's3_extend.gateways.ws_gateway:ws_gateway'
+
+
