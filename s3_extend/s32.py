@@ -14,30 +14,29 @@
  along with this library; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 """
+
 import atexit
+import psutil
 import signal
 import subprocess
 import sys
 import time
 
-import psutil
-
-
 # import webbrowser
 
 
-class S3RP:
+class S32:
     """
-    This class starts the Banyan server to support the Scratch 3 OneGPIO Raspberry Pi
-    extension for local mode. That means the browser and components are all executing
-    on a single RPi.
+    This class starts the Banyan server to support the Scratch 3 OneGPIO ESP-8266
+    extension.
 
-    It will start the backplane, Raspberry Pi gateway and websocket gateway.
+    It will start the backplane, ESP-8266 gateway and websocket gateway.
+    The wait for IP address flag (-w) is set.
     """
 
     def __init__(self):
         """
-        Prepare for launching the rpi extension
+        Launch the esp extension
         """
 
         self.proc_bp = None
@@ -62,14 +61,14 @@ class S3RP:
             print('WebSocket Gateway start failed - exiting')
             sys.exit(0)
 
-        # start rpi gateway
-        self.proc_hwg = self.start_rp_gw()
+        # start esp gateway
+        self.proc_hwg = self.start_esp32gw()
         if self.proc_hwg:
-            print('RPi Pico Gateway started ')
+            print('ESP-32 Gateway started ')
             print('To exit this program, press Control-c')
 
         else:
-            print('RPi Gateway start failed - exiting')
+            print('ESP-32 Gateway start failed - exiting')
             sys.exit(0)
 
         atexit.register(self.killall)
@@ -88,19 +87,20 @@ class S3RP:
                     self.killall()
                 if self.proc_hwg.poll() is not None:
                     self.proc_hwg = None
-                    print('RPi Pico Gateway exited.')
+                    print('ESP-8266 Gateway exited.')
                     self.killall()
 
                 # allow some time between polls
                 time.sleep(.4)
             except Exception as e:
+                # self.killall()
                 sys.exit(0)
 
     def killall(self):
         """
         Kill all running processes
         """
-
+        
         # check for missing processes
         if self.proc_bp:
             try:
@@ -138,6 +138,7 @@ class S3RP:
                 self.proc_hwg = None
             except:
                 pass
+        # time.sleep(1)
         # sys.exit(0)
 
     def start_backplane(self):
@@ -170,24 +171,26 @@ class S3RP:
         Start the websocket gateway
         """
         if sys.platform.startswith('win32'):
-            return subprocess.Popen(['wsgw', '-i', '9006'],
+            return subprocess.Popen(['wsgw', '-i', '9007'],
                                     creationflags=subprocess.CREATE_NEW_PROCESS_GROUP
                                                   |
                                                   subprocess.CREATE_NO_WINDOW)
         else:
-            return subprocess.Popen(['wsgw', '-i', '9006'],
+            return subprocess.Popen(['wsgw', '-i', '9007'],
                                     stdin=subprocess.PIPE, stderr=subprocess.PIPE,
                                     stdout=subprocess.PIPE)
 
-    def start_rp_gw(self):
+    def start_esp32gw(self):
         """
-        Start the rpi pico gateway
+        Start the esp_8266 gateway
         """
         if sys.platform.startswith('win32'):
-            return subprocess.Popen(['rpgw'], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
-                                                             subprocess.CREATE_NO_WINDOW)
+            return subprocess.Popen(['esp32gw'],
+                                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP |
+                                                            subprocess.CREATE_NO_WINDOW)
         else:
-            return subprocess.Popen(['rpgw'], stdin=subprocess.PIPE, stderr=subprocess.PIPE,
+            return subprocess.Popen(['esp32gw'], stdin=subprocess.PIPE,
+                                    stderr=subprocess.PIPE,
                                     stdout=subprocess.PIPE)
 
 
@@ -196,12 +199,10 @@ def signal_handler(sig, frame):
     # raise KeyboardInterrupt
 
 
-def s3rpx():
-    """
-    Start the extension
-    :return:
-    """
-    S3RP()
+def s32ex():
+
+    # instantiate
+    S32()
 
 
 # listen for SIGINT
@@ -210,4 +211,4 @@ signal.signal(signal.SIGTERM, signal_handler)
 
 if __name__ == '__main__':
     # replace with name of function you defined above
-    s3rpx()
+    s32ex()
