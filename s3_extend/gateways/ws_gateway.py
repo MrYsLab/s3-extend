@@ -29,7 +29,7 @@ import logging
 import pathlib
 import signal
 import sys
-import websockets
+import websockets.asyncio
 
 from python_banyan.banyan_base_aio import BanyanBaseAIO
 
