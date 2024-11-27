@@ -66,7 +66,7 @@ class WsGateway(BanyanBaseAIO):
         self.log = log
         self.event_loop = event_loop
 
-        # a kludge to shutdown the socket on control C
+        # a kludge to shut down the socket on control C
         self.wsocket = None
 
         if self.log:
@@ -117,7 +117,6 @@ class WsGateway(BanyanBaseAIO):
                 self.event_loop.stop()
                 self.event_loop.close()
                 sys.exit(0)
-
 
     async def wsg(self, websocket, path):
         """
@@ -174,7 +173,8 @@ class WsGateway(BanyanBaseAIO):
             except (websockets.exceptions.ConnectionClosed, TypeError):
                 # remove the entry from active_sockets
                 # using a list comprehension
-                self.active_sockets = [entry for entry in self.active_sockets if websocket not in entry]
+                self.active_sockets = [entry for entry in self.active_sockets if
+                                       websocket not in entry]
                 break
 
             await self.publish_payload(data, publisher_topic)
@@ -196,7 +196,8 @@ class WsGateway(BanyanBaseAIO):
                     await pub_socket.close()
 
         if 'timestamp' in payload:
-            timestamp = datetime.datetime.fromtimestamp(payload['timestamp']).strftime('%Y-%m-%d %H:%M:%S')
+            timestamp = datetime.datetime.fromtimestamp(payload['timestamp']).strftime(
+                '%Y-%m-%d %H:%M:%S')
             payload['timestamp'] = timestamp
 
         ws_data = json.dumps(payload)
@@ -235,7 +236,7 @@ def ws_gateway():
                                                                 "from_microbit_gateway"
                                                                 "from_picoboard_gateway"
                                                                 "from_cpx_gateway",
-                                                                nargs='+',
+                        nargs='+',
                         help="A space delimited list of topics")
     parser.add_argument("-i", dest="server_ip_port", default="9000",
                         help="Set the WebSocket Server IP Port number")
@@ -276,7 +277,8 @@ def ws_gateway():
     if sys.platform == 'win32':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-    loop = asyncio.get_event_loop()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
 
     try:
         WsGateway(subscription_list, **kw_options, event_loop=loop)
@@ -288,11 +290,9 @@ def ws_gateway():
         sys.exit(0)
 
 
-
 def signal_handler(sig, frame):
     print('Exiting Through Signal Handler')
     raise KeyboardInterrupt
-
 
 
 # listen for SIGINT
