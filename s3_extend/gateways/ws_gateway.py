@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 """
- This is the Python Banyan GUI that communicates with
- the Raspberry Pi Banyan Gateway
+ Web Socket Gateway
 
- Copyright (c) 2019 Alan Yorinks All right reserved.
+ Copyright (c) 2019-2024 Alan Yorinks All right reserved.
 
  Python Banyan is free software; you can redistribute it and/or
  modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -29,7 +28,7 @@ import logging
 import pathlib
 import signal
 import sys
-import websockets.asyncio
+import websockets
 
 from python_banyan.banyan_base_aio import BanyanBaseAIO
 
@@ -66,7 +65,7 @@ class WsGateway(BanyanBaseAIO):
         self.log = log
         self.event_loop = event_loop
 
-        # a kludge to shut down the socket on control C
+        # a kludge to shutdown the socket on control C
         self.wsocket = None
 
         if self.log:
