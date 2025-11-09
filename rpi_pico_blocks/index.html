@@ -1917,35 +1917,37 @@
 
 <h2 id="the-raspberry-pi-pico-blocks">The Raspberry Pi Pico Blocks</h2>
 <p><img alt="" src="../images/rpi_pico_blocks.png" /></p>
-<p>The blocks consist of a set of command blocks that are rectangular in
-shape and reporter blocks rounded in shape.</p>
+<p>The blocks consist of a set of rectangular command blocks and 
+rounded reporter blocks.</p>
 <h3 id="command-blocks">Command Blocks</h3>
 <h4 id="write-digital">Write Digital</h4>
-<p>This block allows you to select a pin and set its output to either a one
-or zero. It has two parameters. The first is a drop-down list of valid
-PINs. The second parameter is the output value.
-It also is a drop-down list and contains the values zero and one.</p>
+<p>This block allows you to select a pin and set its output to either 1 or 0. 
+It has two 
+parameters. The first is a drop-down list of valid
+PINs. The second parameter is a drop-down list that 
+allows you to select either 0 or 1.</p>
 <p><strong>NOTE:</strong> Pin 25 controls the board LED.</p>
 <h4 id="write-pwm">Write PWM</h4>
-<p>This block allows you to select a pin and set its PWM output to be a
+<p>This block allows you to select a pin and set its PWM output to a
 value between 0 and 100%. It has two parameters. The first is a
 drop-down list of valid PINs. The second parameter allows you to fill in
-a PWM value. If you use a PWM value of less than zero, it will be set to
-0 internally. If you set the value to greater than 100, it will be set
+a PWM value. If you use a PWM value of less than 0, it will be internally set to 0.
+If 
+you set the value to greater than 100, it will be set
 to 100.</p>
 <p><strong>NOTE:</strong> Pin 25 controls the board LED.</p>
 <h4 id="write-servo">Write Servo</h4>
 <p>This block allows you to control the angle of a servo motor. It contains
 two parameters. The first is a
 drop-down list of valid PINs. The second specifies
-the angle in degrees. The value is limited to be between 0 and 180.</p>
+the angle in degrees. The value is limited to the range of 0 to 180.</p>
 <h3 id="reporter-blocks">Reporter Blocks</h3>
 <h4 id="read-digital">Read Digital</h4>
-<p>This block allows you to read the current state of a digital input pin.
-It has two parameters, a drop-down list containing all the valid GPIO pins
-and a parameter
-to enable or disable the pull-up resistor on the Pico GPIO pin. It
-reports the raw value of zero or one.</p>
+<p>This block allows you to read the current state of a digital input pin and
+reports the
+raw input value as either zero or one.</p>
+<p>The internal pull-up resistor for the pin is automatically enabled when using
+this block.</p>
 <h4 id="read-analog">Read Analog</h4>
 <p>This block allows you to read the current state of an analog input pin identified
 by its ADC number.</p>
@@ -1978,8 +1980,9 @@ by its ADC number.</p>
 <p>It has one parameter, a drop-down list containing all the ADC Pins.
 It reports a value between 0 and 4095. </p>
 <h4 id="read-sonar">Read Sonar</h4>
-<p>This block allows you to connect an HC-SR04 type device. It has two
-parameters, both containing a drop-down list of valid PINs. The
+<p>This block enables you to connect an HC-SR04-type device. It has two 
+parameters, both 
+of which contain a drop-down list of valid PINs. The
 first parameter allows you to select a trigger pin, and the second an
 echo pin. It returns the measured distance in centimeters.</p>
 
