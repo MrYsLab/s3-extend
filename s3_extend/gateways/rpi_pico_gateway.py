@@ -236,15 +236,10 @@ class RpiPicoGateway(GatewayBaseAIO):
         :param payload: {"command": "set_mode_digital_input", "pin": “PIN”, "tag":”TAG” }
         """
         pin = payload["pin"]
-        pull = payload["pull"]
         # self.pins_dictionary[pin][
         #     GatewayBaseAIO.PIN_MODE] = GatewayBaseAIO.DIGITAL_INPUT_MODE
-        if pull == '^':
-            await self.pico.set_pin_mode_digital_input_pullup(pin,
+        await self.pico.set_pin_mode_digital_input_pullup(pin,
                                                    callback=self.digital_input_callback)
-        else:
-            await self.pico.set_pin_mode_digital_input(pin,
-                                                              callback=self.digital_input_callback)
 
     async def set_mode_digital_input_pullup(self, topic, payload):
         """
