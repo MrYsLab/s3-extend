@@ -436,7 +436,8 @@ def rpi_pico_gateway():
     if sys.platform == 'win32':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-    loop = asyncio.get_event_loop()
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
 
     # replace with the name of your class
     app = RpiPicoGateway(subscriber_list, **kw_options, event_loop=loop)
