@@ -1,6 +1,5 @@
 ## The Raspberry Pi Pico Blocks
 
-
 ![](./images/rpi_pico_blocks.png)
 
 The blocks consist of a set of rectangular command blocks and 
